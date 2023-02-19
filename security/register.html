@@ -1,0 +1,93 @@
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        <div class="alert alert-success" role="alert" ng-if="message != ''">
+                            <i>{{message}}</i>
+                          </div>
+                          <div class="alert alert-danger" role="alert"ng-if="error != ''">
+                              <i>{{error}}</i>
+                          </div>
+                        <form class="user" name="formRegister">
+                            <div class="form-group">
+                                <input ng-change="register.searchUsername()" ng-model="register.item.username" name="username" ng-minlength="3"
+                                ng-required="true" class="form-control p-2 px-3 rounded-pill" type="text"
+                                placeholder="Enter Username">
+                                    <span class="text-danger" ng-show="formRegister.username.$error.required">
+                                        Please enter username!
+                                    </span>
+                                    <span class="text-danger" ng-show="formRegister.username.$error.minlength">
+                                        Enter Username have length more than 3!
+                                    </span>
+                                    <span class="text-danger" ng-show="register.isUsername == true">
+                                        This username is already registered
+                                    </span>
+                            </div>
+                            <div class="form-group">
+                                <input ng-change="register.searchEmail()" ng-model="register.item.email" name="email" ng-pattern="/^\S+@\S+\.\S+$/"
+                                ng-required="true" class="form-control p-2 px-3 rounded-pill" type="text"
+                                placeholder="Enter Email">
+                                    <span class="text-danger" ng-show="formRegister.email.$error.required">
+                                        Please enter email!
+                                    </span>
+                                    <span class="text-danger" ng-show="!formRegister.email.$error.required&&formRegister.email.$error.pattern">
+                                        Please enter email correctly!
+                                    </span>
+                                    <span class="text-danger" ng-show="register.isEmail == true">
+                                        This email is already registered
+                                    </span>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input ng-model="register.item.password" type="password" ng-minlength="5"
+                                        class="form-control form-control-user" id="exampleInputPassword" ng-required="true"
+                                        placeholder="Password">
+                                        <span class="text-danger"
+                                        ng-show="formRegister.confirmPassword.$error.required">
+                                        Please enter password confirm!
+                                    </span>
+                                    <span class="text-danger" ng-show="formRegister.username.$error.minlength">
+                                        Please enter password have length more than 5!
+                                    </span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input ng-model="register.item.confirmPassword"
+                                        compare-to="register.item.password" name="confirmPassword" ng-required="true"
+                                        class="form-control form-control-user" type="password"
+                                        placeholder="Repeat Password">
+                                    <span class="text-danger"
+                                        ng-show="formRegister.confirmPassword.$error.required">
+                                        Please enter password confirm!
+                                    </span>
+                                    <span class="text-danger d-block"
+                                        ng-show="formRegister.confirmPassword.$error.compareTo">
+                                        Passwords don't match!
+                                    </span>
+                                </div>
+                            </div>
+                            <button ng-click="register.registerController()" ng-disabled="formRegister.$invalid || register.isEmail == true || register.isUsername == true" class="btn btn-primary btn-user btn-block">
+                                Register Account
+                            </button>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="#!/security/forgot-password">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" href="login.html">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
