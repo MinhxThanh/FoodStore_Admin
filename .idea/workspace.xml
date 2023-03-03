@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9a95fe0-e79b-45d3-857f-55fe44515eac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PRO_UPGRADE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blank.html" beforeDir="false" afterPath="$PROJECT_DIR$/blank.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buttons.html" beforeDir="false" afterPath="$PROJECT_DIR$/buttons.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cards.html" beforeDir="false" afterPath="$PROJECT_DIR$/cards.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charts.html" beforeDir="false" afterPath="$PROJECT_DIR$/charts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/sb-admin-2.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/sb-admin-2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/sb-admin-2.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/sb-admin-2.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customUser.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/forgot-password.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tables.html" beforeDir="false" afterPath="$PROJECT_DIR$/tables.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities-animation.html" beforeDir="false" afterPath="$PROJECT_DIR$/utilities-animation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities-border.html" beforeDir="false" afterPath="$PROJECT_DIR$/utilities-border.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities-color.html" beforeDir="false" afterPath="$PROJECT_DIR$/utilities-color.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities-other.html" beforeDir="false" afterPath="$PROJECT_DIR$/utilities-other.html" afterDir="false" />
-    </list>
+    <list default="true" id="d88d5d12-792d-422f-a7b5-603f1a043a50" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,28 +17,29 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2LwmYIhguixmTlEWoW3G2e6iY1v" />
+  <component name="ProjectId" id="2LwjlW7tu0zprUwih1fQjHOz453" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.vendoring.notification.had.been.shown": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.vendoring.notification.had.been.shown&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/leminhthanh/Desktop/Project Graduation/FoodStore_Admin&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
-      <module name="new" />
+      <module name="FoodStore_Admin" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
       <kind value="FILE" />
@@ -70,7 +48,7 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
-      <module name="new" />
+      <module name="FoodStore_Admin" />
       <working_directory value="$PROJECT_DIR$" />
       <go_parameters value="-i" />
       <kind value="DIRECTORY" />
@@ -83,12 +61,14 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a9a95fe0-e79b-45d3-857f-55fe44515eac" name="Changes" comment="" />
-      <created>1676790565475</created>
+      <changelist id="d88d5d12-792d-422f-a7b5-603f1a043a50" name="Changes" comment="" />
+      <created>1676789190129</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1676790565475</updated>
-      <workItem from="1676790568443" duration="307000" />
+      <updated>1676789190129</updated>
+      <workItem from="1676789195439" duration="1668000" />
+      <workItem from="1677836817171" duration="216000" />
+      <workItem from="1677837062895" duration="63000" />
     </task>
     <servers />
   </component>

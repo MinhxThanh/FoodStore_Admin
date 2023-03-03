@@ -53,6 +53,16 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/category">
+                    <i class="fas fa-tasks"></i>
+                    <span>Categories Management</span></a>
+            </li>
+            <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/authority">
+                    <i class="fab fa-autoprefixer"></i>
+                    <span>Authorities Management</span></a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -432,6 +442,8 @@
     <!-- AngularJS Controller-->
     <script src="security/security-controller.js"></script>
     <script src="home/home-controller.js"></script>
+    <script src="category/category-controller.js"></script>
+    <script src="authority/authority-ctrl.js"></script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
