@@ -37,6 +37,10 @@ app.config(function ($routeProvider){
             templateUrl: "category/index.html?" + Math.random(),
             controller: "category-controller"
         })
+        .when("/coupon", {
+            templateUrl: "coupon/index.html?" + Math.random(),
+            controller: "coupon-controller"
+        })
         .when("/authority", {
             templateUrl: "authority/index.html?" + Math.random(),
             controller: "authority-controller"

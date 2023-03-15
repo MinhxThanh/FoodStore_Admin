@@ -59,6 +59,11 @@
                     <span>Categories Management</span></a>
             </li>
             <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/coupon">
+                    <i class="fas fa-tasks"></i>
+                    <span>Coupons Management</span></a>
+            </li>
+            <li ng-if="username != null" class="nav-item">
                 <a class="nav-link" href="/#!/authority">
                     <i class="fab fa-autoprefixer"></i>
                     <span>Authorities Management</span></a>
@@ -443,6 +448,9 @@
     <script src="security/security-controller.js"></script>
     <script src="home/home-controller.js"></script>
     <script src="category/category-controller.js"></script>
+
+    <script src="coupon/coupon-controller.js"></script>
+    
     <script src="authority/authority-ctrl.js"></script>
 
     <!-- Bootstrap core JavaScript-->

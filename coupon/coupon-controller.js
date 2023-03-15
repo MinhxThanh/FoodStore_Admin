@@ -1,6 +1,7 @@
-app.controller('category-controller', function ($scope, $http, $window) {
+app.controller('coupon-controller', function ($scope, $http, $window) {
     $scope.form = {
         isDisplay: true,
+        isFixed: true,
         createDate: new Date(),
         createBy: sessionStorage.getItem('username')
     }
@@ -9,60 +10,86 @@ app.controller('category-controller', function ($scope, $http, $window) {
     $scope.message = ""
     $scope.error = ""
 
-    $scope.category = {
+    $scope.coupon = {
+
         itemDelete: {},
+
         create(){
             let item = angular.copy($scope.form)
             console.log("item: ", item)
-            $http.post(`http://localhost:8080/rest/category/create`, item).then(resp =>{
+            $http.post(`http://localhost:8080/rest/coupon/create`, item).then(resp =>{
                 $scope.items.push(resp.data)
                 this.reset()
                 console.log("category1", resp.data)
-                $scope.message = "Create category successfully!"
+                $scope.message = "Create coupon successfully!"
             }).catch(err => {
-                $scope.error = "Error create category!"
+                $scope.error = "Error create coupon!"
                 console.log("create error:", err)
             })
             this.liveToastBtn()
         },
         update(){
             let item = angular.copy($scope.form)
-            $http.put(`http://localhost:8080/rest/category/update`, item).then(resp =>{
+
+            $http.put(`http://localhost:8080/rest/coupon/update`, item).then(resp =>{
                 let index = $scope.items.findIndex(item => item.id == resp.data.id)
                 $scope.items[index] = item
                 this.reset()
-                $scope.message = "Update category successfully!"
-            }).catch(err => $scope.error = "Error Update category!")
+                $scope.message = "Update coupon successfully!"
+                $window.location.reset()
+            }).catch(err => $scope.error = "Error coupon category!")
             this.liveToastBtn()
         },
         clickDelete(item){
             this.itemDelete = item
         },
         confirmDelete() {
-            $http.delete(`http://localhost:8080/rest/category/delete/${this.itemDelete.id}`).then(resp =>{
-                let index = $scope.items.findIndex(item => item.id == item.id)
+            $http.delete(`http://localhost:8080/rest/coupon/delete/${this.itemDelete.id}`).then(resp =>{
+                let index = $scope.items.findIndex(item => item.id == this.itemDelete.id)
                 $scope.items.splice(index, 1)
                 this.reset()
-                $scope.message = "Delete category successfully!"
-            }).catch(err => $scope.error = "Error Delete category!")
+                $scope.message = "Delete coupon successfully!"
+            }).catch(err => $scope.error = "Error coupon category!")
             this.liveToastBtn()
         },
-        edit(category){
+        edit(coupon){
             this.reset()
+            $scope.form= {}
             let item = {
-                id: category.id,
-                name: category.name,
-                description: category.description,
-                isDisplay: category.isDisplay = 'Yes' ? true:false,
-                createDate: category.createDate,
-                createBy: category.user.username
+                id: coupon.id,
+                name: coupon.name,
+                description: coupon.description,
+                // isDisplay: coupon.isDisplay = 'Yes' ? true:false,
+                isDisplay: coupon.isDisplay,
+
+               
+                createDate: coupon.createDate,
+                
+                createBy: coupon.user.username,
+
+                amount: coupon.amount,
+                // name: coupon.code,
+
+                endDate: new Date(coupon.endDate), // can format
+
+                foodLimit: coupon.foodLimit,
+                isFixed: coupon.isFixed ,
+                startDate: new Date(coupon.startDate),
+
+                status: coupon.status,
+                userLimit: coupon.userLimit
+
             }
-            console.log("isDisplay: ", category.isDisplay)
+            console.log("isDisplay: ", coupon.isDisplay)
+
+            console.log('12',item)
+
             $scope.form = angular.copy(item)
         },
         reset(){
             $scope.form = {
                 isDisplay: true,
+                isFixed: true,
                 createDate: new Date(),
                 createBy: sessionStorage.getItem('username')
             }
@@ -107,43 +134,8 @@ app.controller('category-controller', function ($scope, $http, $window) {
         }
     }
 
-    $scope.imageUpload = function (event) {
-        var files = event.target.files;
-
-        for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-            var reader = new FileReader();
-            reader.onload = $scope.imageIsLoaded;
-            reader.readAsDataURL(file);
-        }
-        $scope.imageChanged(files)
-       
-    }
-
-    $scope.imageIsLoaded = function (e) {
-        $scope.$apply(function () {
-            $scope.img = e.target.result;            
-        });
-    }
-
-    $scope.imageChanged = function (files){
-        let dataImage = new FormData()
-        dataImage.append('file', files[0])
-        $http.post('http://localhost:8080/rest/upload/images/categories', dataImage, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
-        }).then(resp =>{
-            $scope.form.image = resp.data.name
-            console.log("name image: ", resp.data.name)
-            console.log("name image: ", $scope.form.image)
-        }).catch(err =>{
-            $scope.error = "The field file exceeds its maximum permitted size of 1048576 bytes!"
-            console.log('Error', err)
-        })
-    }
-
     $scope.initialize = function (){
-        $http.get(`http://localhost:8080/rest/category/getAll`).then(resp =>{
+        $http.get(`http://localhost:8080/rest/coupon/getAll`).then(resp =>{
             $scope.items = resp.data
             console.log('list: ', resp.data)
         })
