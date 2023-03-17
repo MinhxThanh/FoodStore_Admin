@@ -1,0 +1,65 @@
+<div class="row">
+	<div class="text-center">
+	<table class="table">
+		
+	  <thead>
+	    <tr>
+	      <th scope="col">Image</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Category</th>
+	      <th scope="col">Price</th>
+	      <th scope="col">Quantity Limit</th>
+	      <th scope="col">Quantity Sell</th>
+	      <th scope="col">View Count</th>
+	      <th scope="col">Description</th>
+	      <th scope="col">Create Date</th>
+	      <th scope="col">Display</th>
+	      <th scope="col">Creator</th>
+	      <th scope="col">
+	      <a>
+	      	<a class="btn btn-primary" href="/#!/createFood">Create</a>
+	      </a>
+	      </th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		
+		<tr ng-repeat="f in items| limitTo: pager.size : pager.size*pager.page">
+	      <td class="icon">
+	      	<img class="resize" alt="" data-ng-src="/img/logo-customer.png">
+			<!-- {{f.imageName}}	 -->
+	      </td>
+	      <td>{{f.name}}</td>
+	      <td>
+			{{f.category}}
+		</td>
+	      <td><p>{{f.price}}</p> vnd</td>
+	      <td>{{f.quantityLimit}}</td>
+	      <td>{{f.quantitySell}}</td>
+	      <td>{{f.viewCount}}</td>
+	      <td>{{f.description}}</td>
+	      <td>{{f.createDate | date:'dd/MM/yyyy'}}</td>
+	      <td>{{f.display ? 'Hoạt động':'Trạng thái'}}</td>
+	      <td>{{f.displayName}}</td>
+	      <td>
+			<button class="btn btn-success mb-2" ng-click="food.edit(f)"><i class="far fa-edit"></i></button> 
+		</td>
+	    </tr>
+	  </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" ng-click="pager.first()"><i class="fa-solid fa-backward-fast"></i> First</a></li>
+        <li class="page-item"><a class="page-link" ng-click="pager.prev()"><i class="fa-solid fa-backward-step"></i> Previous</a></li>
+        <li class="page-item">
+            <button class="btn btn-outline-info">{{pager.page + 1}} of {{pager.count}}</button>
+        </li>
+        <li class="page-item"><a class="page-link" ng-click="pager.next()"><i class="fa-solid fa-forward-step"></i> Next</a></li>
+        <li class="page-item"><a class="page-link" ng-click="pager.last()"><i class="fa-solid fa-forward-fast"></i> Last</a></li>
+    </ul>
+</nav>
+
+
+</div>
+</div>

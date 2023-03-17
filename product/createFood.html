@@ -1,0 +1,84 @@
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+    <div class="mb-3 text-center">
+      Create Food
+    </div>
+    <form action="">
+    <div class="mb-3">
+        <label>Name</label>
+      <input required type="text" ng-model="form.name" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+      
+    </div>
+    <div class="mb-3">
+        <label>Price</label>
+      <input required type="number" ng-model="form.price" class="form-control" id="exampleFormControlInput1" placeholder="Price">
+    </div>
+    <div class="mb-3 text-center">  
+      <input required class="form-control-file" type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" />
+      <img class="thumb m-2 rounded w-50" ng-src="{{img}}" />
+  </div>
+    <div class="form-group">
+      <label for="otherName">Create Date</label>
+      <input required ng-model="form.createDate | date: 'dd/MM/yyyy'" class="form-control " aria-describedby="otherNameHid">
+  </div>
+    <div class="mb-3">
+      <label for="otherName">QuantityLimit</label>
+      <input required type="number" ng-model="form.quantityLimit" class="form-control" id="exampleFormControlInput1" placeholder="Quantity Limit">
+    </div>
+    <div class="mb-3">
+      <label for="otherName">QuantitySell</label>
+      <input required type="number" ng-model="form.quantitySell" class="form-control" id="exampleFormControlInput1" placeholder="Quantity Sell">
+    </div>
+    <!-- khi set hidden thi truong k hoat dong -->
+    <div class="mb-3">
+      <input type="hidden" value="0" ng-model="form.viewCount" class="form-control" id="exampleFormControlInput1" placeholder="View Count">
+    </div>
+    <div class="form-group ">
+      <label for="otherName">Category {{listCategories.id}}</label>
+      <select required multiple="multiple" ng-model="listCategories.id" ng-options="c.id as c.name for c in categories"
+              class="form-control" id="selectCategories" ng-change="updateSelect(listCategories)">
+      </select>
+      <ul class="d-flex px-0" ng-if="listCategoriesChose != null">
+          <li ng-repeat="cate in listCategoriesChose" class="rounded list-group-item p-0 m-1" style="background-color: #e4e4e4; border: 1px rgb(88, 88, 88) solid;">
+              <button ng-click="deleteCategory(cate.id, form.id)" class="rounded-start border-0" style="border-right: 2px black solid !important;"><span>x</span></button>
+              <span class="mx-2">{{cate.name}}</span>
+          </li>
+      </ul>
+      <script>
+          $(document).ready(function() {
+              $('#selectCategories').select2({
+                  placeholder: 'Please select category!',
+                  multiple: true
+              })
+          })
+      </script>
+  </div>
+  <div class="form-check mt-3">
+    <label>Display: </label>
+    <div class="form-check form-check-inline">
+        <input ng-model="form.display" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+               ng-value="false" checked>
+        <label class="form-check-label" for="inlineRadio1">No</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input ng-model="form.display" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+               ng-value="true">
+        <label class="form-check-label" for="inlineRadio2">Yes</label>
+    </div>
+
+</div>
+    <div class="mb-3">
+    <label>Description</label>
+     <textarea required ng-model="form.description" class="form-control" placeholder="Leave a Description here" id="floatingTextarea2" style="height: 100px"></textarea>
+    </div>
+    <div class="mb-3">
+    </div>
+    <div class="card-footer text-muted text-center">
+      <button ng-click="create()" class="btn btn-outline-primary">Create</button>
+      <button ng-click="reset()" class="btn btn-outline-info">Reset</button>
+  </div>
+</form>
+    </div>
+    <div class="col-2"></div>
+    </div>

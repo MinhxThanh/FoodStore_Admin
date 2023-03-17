@@ -1,0 +1,23 @@
+.resize {
+    width: 60px;
+    height: auto;
+}
+
+.resize {
+    width: 60px;
+    height: auto;
+}
+.ml{
+    margin-left: 20%;
+}
+.flex-container {
+    display: flex;
+  }
+  
+  .flex-container > div {
+    background-color: #f1f1f1;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    color: #333;
+  }
