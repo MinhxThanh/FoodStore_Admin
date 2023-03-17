@@ -45,6 +45,22 @@ app.config(function ($routeProvider){
             templateUrl: "authority/index.html?" + Math.random(),
             controller: "authority-controller"
         })
+        .when("/category", {
+            templateUrl: "category/index.html?" + Math.random(),
+            controller: "category-controller"
+        })
+        .when("/food", {
+            templateUrl: "product/index.html?" + Math.random(),
+            controller: "foods-controller"
+        })
+        .when("/edit", {
+            templateUrl: "product/edit.html?" + Math.random(),
+            controller: "foods-controller"
+        })
+        .when("/createFood", {
+            templateUrl: "product/createFood.html?" + Math.random(),
+            controller: "foods-controller"
+        })
         .otherwise({
             templateUrl: "/404.html?" + Math.random(),
             controller: 'home-controller'
