@@ -61,18 +61,17 @@ app.controller('coupon-controller', function ($scope, $http, $window) {
                 description: coupon.description,
                 // isDisplay: coupon.isDisplay = 'Yes' ? true:false,
                 isDisplay: coupon.isDisplay,
-
                
                 createDate: coupon.createDate,
                 
                 createBy: coupon.user.username,
 
-                amount: coupon.amount,
+                percentCoupon: coupon.percentCoupon,
                 // name: coupon.code,
 
                 endDate: new Date(coupon.endDate), // can format
 
-                foodLimit: coupon.foodLimit,
+                amountMoneyCoupon: coupon.amountMoneyCoupon,
                 isFixed: coupon.isFixed ,
                 startDate: new Date(coupon.startDate),
 

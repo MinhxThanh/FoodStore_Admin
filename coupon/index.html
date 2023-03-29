@@ -31,16 +31,17 @@
                 <input ng-model="form.userLimit" class="form-control" id="userLimit"
                     placeholder="Enter user limit!"></input>
             </div>
+            
             <div class="mb-3">
-                <label for="foodLimit" class="form-label">Food Limit</label>
-                <input ng-model="form.foodLimit" class="form-control" id="foodLimit"
-                    placeholder="Enter food limit!"></input>
+                <label for="amountMoneyCoupon" class="form-label">Amount Money Coupon</label>
+                <input ng-model="form.amountMoneyCoupon" class="form-control" id="amountMoneyCoupon"
+                    placeholder="Enter AmountMoney Coupon !" type="number"></input>
             </div>
 
 
             <div class="mb-3">
-                <label for="amount" class="form-label">Amount</label>
-                <input ng-model="form.amount" class="form-control" id="amount" placeholder="Enter amount!"></input>
+                <label for="percentCoupon" class="form-label">Percent Coupon</label>
+                <input ng-model="form.percentCoupon" class="form-control" id="percentCoupon" placeholder="Enter Percent Coupon!" type="number"></input>
             </div>
 
             <div class="mb-3">
@@ -84,7 +85,7 @@
                     placeholder="StartDate">
             </div>
             <div class="mb-3">
-                <label for="startDate" class="form-label">Start day</label>
+                <label for="startDate" class="form-label">End day</label>
                 <input ng-model="form.endDate" type="date" class="form-control" id="endDate">
             </div>
 
@@ -115,8 +116,8 @@
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">User Limit</th>
-                    <th scope="col">Food Limit</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Percent Coupon</th>
+                    <th scope="col">Money Coupon</th>
                     <th scope="col">Start day</th>
                     <th scope="col">End day</th>
                     <th scope="col" class="text-center">Create by</th>
@@ -130,8 +131,8 @@
                     <td class="text-center">{{c.id}}</td>
                     <td class="text-center">{{c.name}}</td>
                     <td class="text-center">{{c.userLimit}}</td>
-                    <td class="text-center">{{c.foodLimit}}</td>
-                    <td class="text-center">{{c.amount}}</td>
+                    <td class="text-center">{{c.percentCoupon}}%</td>
+                    <td class="text-center">{{c.amountMoneyCoupon}}k VND</td>
                     <td class="text-center">{{c.startDate | date:'dd-MM-yyyy'}}</td>
                     <td class="text-center">{{c.endDate | date:'dd-MM-yyyy'}}</td>
                     <td class="text-center">{{c.user.fullname}}</td>
