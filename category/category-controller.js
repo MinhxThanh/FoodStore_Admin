@@ -57,6 +57,7 @@ app.controller('category-controller', function ($scope, $http, $window) {
                 createDate: category.createDate,
                 createBy: category.user.username
             }
+            $scope.img = category.imageName
             console.log("isDisplay: ", category.isDisplay)
             $scope.form = angular.copy(item)
         },
@@ -129,7 +130,7 @@ app.controller('category-controller', function ($scope, $http, $window) {
     $scope.imageChanged = function (files){
         let dataImage = new FormData()
         dataImage.append('file', files[0])
-        $http.post('http://localhost:8080/rest/upload/images/categories', dataImage, {
+        $http.post('http://localhost:8080/rest/upload/firebase', dataImage, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         }).then(resp =>{
