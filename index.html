@@ -10,6 +10,8 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Dashboard</title>
+     <!-- gg chart -->
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- angularJS -->
     <script src="js/angular.min.js"></script>
@@ -63,6 +65,33 @@
                     <i class="fas fa-tasks"></i>
                     <span>Coupons Management</span></a>
             </li>
+
+            
+            <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/blog">
+                    <i class="fas fa-tasks"></i>
+                    <span>Blog Management</span></a>
+            </li>
+
+            <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/customer">
+                    <i class="fas fa-tasks"></i>
+                    <span>Customer Management</span></a>
+            </li>
+
+            <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/review">
+                    <i class="fas fa-tasks"></i>
+                    <span>Review Management</span></a>
+            </li>
+
+            <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/report">
+                    <i class="fas fa-tasks"></i>
+                    <span>Report Management</span></a>
+            </li>
+
+            
             <li ng-if="username != null" class="nav-item">
                 <a class="nav-link" href="/#!/authority">
                     <i class="fab fa-autoprefixer"></i>
@@ -448,12 +477,14 @@
     <script src="security/security-controller.js"></script>
     <script src="home/home-controller.js"></script>
     <script src="category/category-controller.js"></script>
-
+    <script src="blog/blog-controller.js"></script>
     <script src="coupon/coupon-controller.js"></script>
-    
+    <script src="customer/customer-controller.js"></script>
     <script src="authority/authority-ctrl.js"></script>
     <script src="product/foods-controller.js"></script>
-
+    <script src="review/review-controller.js"></script>
+    
+    <script src="report/report-controller.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

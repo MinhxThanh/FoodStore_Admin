@@ -1,21 +1,20 @@
 const app = angular.module('adminApp', ['ngRoute', 'ngAnimate'])
-app.controller('mainController', function($scope, $location, $window){
+app.controller('mainController', function ($scope, $location, $window) {
     $scope.username = sessionStorage.getItem('username')
     $scope.avatar = sessionStorage.getItem('avatar')
 
-    $scope.logout = function(){
+    $scope.logout = function () {
         sessionStorage.removeItem('username')
         $scope.username = ''
         $window.location.reload();
         location.href = "index.html"
     }
-
-    $scope.isActive = function(url){
-       return url === $location.path()
+        $scope.isActive = function(url){
+        return url === $location.path()
     }
 })
 
-app.config(function ($routeProvider){
+app.config(function ($routeProvider) {
     $routeProvider
         .when("/home", {
             templateUrl: "home/index.html?" + Math.random(),
@@ -61,6 +60,23 @@ app.config(function ($routeProvider){
             templateUrl: "product/createFood.html?" + Math.random(),
             controller: "foods-controller"
         })
+        .when("/blog", {
+            templateUrl: "blog/index.html?" + Math.random(),
+            controller: "blog-controller"
+        })
+        .when("/customer", {
+            templateUrl: "customer/index.html?" + Math.random(),
+            controller: "customer-controller"
+        })
+        .when("/review", {
+            templateUrl: "review/index.html?" + Math.random(),
+            controller: "review-controller"
+        })
+        .when("/report", {
+            templateUrl: "report/index.html?" + Math.random(),
+            controller: "report-controller"
+        })
+
         .otherwise({
             templateUrl: "/404.html?" + Math.random(),
             controller: 'home-controller'
@@ -71,29 +87,29 @@ app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }]);
 
-app.factory('sessionInjector', function() {  
+app.factory('sessionInjector', function () {
     var sessionInjector = {
-        request: function(config) {
-            config.headers['Authorization'] = 'Bearer '+ sessionStorage.getItem('accessToken');
+        request: function (config) {
+            config.headers['Authorization'] = 'Bearer ' + sessionStorage.getItem('accessToken');
             return config;
         }
     };
     return sessionInjector;
 });
 
-var compareTo = function() {
+var compareTo = function () {
     return {
         require: "ngModel",
         scope: {
             otherModelValue: "=compareTo"
         },
-        link: function(scope, element, attributes, ngModel) {
+        link: function (scope, element, attributes, ngModel) {
 
-            ngModel.$validators.compareTo = function(modelValue) {
+            ngModel.$validators.compareTo = function (modelValue) {
                 return modelValue == scope.otherModelValue;
             };
 
-            scope.$watch("otherModelValue", function() {
+            scope.$watch("otherModelValue", function () {
                 ngModel.$validate();
             });
         }

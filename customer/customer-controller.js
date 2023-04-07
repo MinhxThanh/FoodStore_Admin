@@ -1,7 +1,7 @@
-app.controller('coupon-controller', function ($scope, $http, $window) {
+app.controller('customer-controller', function ($scope, $http, $window) {
     $scope.form = {
         isDisplay: true,
-        isFixed: true,
+        gender: true,
         createDate: new Date(),
         createBy: sessionStorage.getItem('username')
     }
@@ -10,83 +10,75 @@ app.controller('coupon-controller', function ($scope, $http, $window) {
     $scope.message = ""
     $scope.error = ""
 
-    $scope.coupon = {
-
+    $scope.customer = {
         itemDelete: {},
-
-        create(){
+        create() {
             let item = angular.copy($scope.form)
-            
             console.log("item: ", item)
-            $http.post(`http://localhost:8080/rest/coupon/create`, item).then(resp =>{
+            $http.post(`http://localhost:8080/rest/customer/create`, item).then(resp => {
+                //lấy id của customer vừa tạo=> tạo
                 $scope.items.push(resp.data)
                 this.reset()
                 console.log("category1", resp.data)
-                $scope.message = "Create coupon successfully!"
+                $scope.message = "Create customer successfully!"
             }).catch(err => {
-                $scope.error = "Error create coupon!"
+                $scope.error = "Error create customer!"
                 console.log("create error:", err)
             })
             this.liveToastBtn()
         },
-        update(){
+        update() {
             let item = angular.copy($scope.form)
 
-            $http.put(`http://localhost:8080/rest/coupon/update`, item).then(resp =>{
+            $http.put(`http://localhost:8080/rest/customer/update`, item).then(resp => {
                 let index = $scope.items.findIndex(item => item.id == resp.data.id)
                 $scope.items[index] = item
                 this.reset()
-                $scope.message = "Update coupon successfully!"
+                $scope.message = "Update customer successfully!"
                 $window.location.reset()
-            }).catch(err => $scope.error = "Error coupon category!")
+            }).catch(err => $scope.error = "Error customer category!")
             this.liveToastBtn()
         },
-        clickDelete(item){
+        clickDelete(item) {
             this.itemDelete = item
         },
         confirmDelete() {
-            $http.delete(`http://localhost:8080/rest/coupon/delete/${this.itemDelete.id}`).then(resp =>{
+            $http.delete(`http://localhost:8080/rest/customer/delete/${this.itemDelete.id}`).then(resp => {
                 let index = $scope.items.findIndex(item => item.id == this.itemDelete.id)
                 $scope.items.splice(index, 1)
                 this.reset()
-                $scope.message = "Delete coupon successfully!"
-            }).catch(err => $scope.error = "Error coupon category!")
+                $scope.message = "Delete customer successfully!"
+            }).catch(err => $scope.error = "Error customer category!")
             this.liveToastBtn()
         },
-        edit(coupon){
+        edit(customer) {
+
+            // alert("Hello! I am an alert box!" + customer.isDisplay);
+
             this.reset()
-            $scope.form= {}
+
+            $scope.form = {}
             let item = {
-                id: coupon.id,
-                name: coupon.name,
-                description: coupon.description,
-                // isDisplay: coupon.isDisplay = 'Yes' ? true:false,
-                isDisplay: coupon.isDisplay,
-               
-                createDate: coupon.createDate,
+                email: customer.email,
+                createDate: new Date(customer.createDate), // can format
+                avatar: customer.avatar,
+                birthday: new Date(customer.birthday),
+                firstName: customer.firstName,
+                fullname: customer.fullname,
+                lastName: customer.lastName,
+                gender: customer.gender,
+
+                isDisplay: customer.isDisplay,
                 
-                createBy: coupon.user.username,
-
-                percentCoupon: coupon.percentCoupon,
-                // name: coupon.code,
-
-                endDate: new Date(coupon.endDate), // can format
-
-                amountMoneyCoupon: coupon.amountMoneyCoupon,
-                isFixed: coupon.isFixed ,
-                startDate: new Date(coupon.startDate),
-
-                status: coupon.status,
-                userLimit: coupon.userLimit
-
+                password: customer.password,
+                rememberToken: customer.rememberToken,
+                status: customer.status,
             }
-            console.log("isDisplay: ", coupon.isDisplay)
-
-            console.log('12',item)
-
+            // console.log("isDisplay: ", customer.isDisplay)
+            // console.log('12',item)
             $scope.form = angular.copy(item)
         },
-        reset(){
+        reset() {
             $scope.form = {
                 isDisplay: true,
                 isFixed: true,
@@ -97,7 +89,7 @@ app.controller('coupon-controller', function ($scope, $http, $window) {
             $scope.message = ""
             $scope.error = ""
         },
-        liveToastBtn(){
+        liveToastBtn() {
             var lastMessage = document.querySelector('.toast:last-child');
             new window.bootstrap.Toast(lastMessage).show();
         }
@@ -106,16 +98,16 @@ app.controller('coupon-controller', function ($scope, $http, $window) {
     $scope.pager = {
         page: 0,
         size: 10,
-        get count(){
+        get count() {
             return Math.ceil(1.0 * $scope.items.length / this.size)
         },
-        get length(){
+        get length() {
             return $scope.items.length
         },
-        first(){
+        first() {
             this.page = 0
         },
-        last(){
+        last() {
             this.page = this.count - 1
         },
         next() {
@@ -126,16 +118,16 @@ app.controller('coupon-controller', function ($scope, $http, $window) {
         },
         incrementLimit(up) {
             if (up) {
-              (this.page <= ($scope.items.length - this.size)) ? this.page += 10: this.page = 0;
+                (this.page <= ($scope.items.length - this.size)) ? this.page += 10 : this.page = 0;
             } else {
-              this.page > 10 ? this.page -= 10 : this.page = 0;
-        
+                this.page > 10 ? this.page -= 10 : this.page = 0;
+
             }
         }
     }
 
-    $scope.initialize = function (){
-        $http.get(`http://localhost:8080/rest/coupon/getAll`).then(resp =>{
+    $scope.initialize = function () {
+        $http.get(`http://localhost:8080/rest/customer/getAll`).then(resp => {
             $scope.items = resp.data
             console.log('list: ', resp.data)
         })
