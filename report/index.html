@@ -3,6 +3,7 @@
 
     <div class="left_body col-lg-12 col-sm-12 border rounded p-3">
         <h2 class="text-center my-3">Report Management</h2>
+
         <div class="my-2 mx-5">
             <div class="alert alert-success" role="alert" ng-if="message != ''">
                 <i>{{message}}</i>
@@ -12,60 +13,151 @@
             </div>
         </div>
 
+        <div class="row" style="padding: 20px;">
+            <div class="card text-white  mb-4 col-3"
+                style="max-width: 25rem; margin-right: 10px;background-color:#17A2B8;">
+                <div class="card-body">
+                    <h2 class="card-title" style="font-weight: bolder;">{{sum_money| number:0}} VND</h2>
 
-        <nav>
-            <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home"
-                    type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
-                <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button"
-                    role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-                <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact" type="button"
-                    role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                    <i class="fas fa-fw fa-cog"></i>
+
+                    <p class="card-text">Tong doanh thu.</p>
+                    <div class="alert text-center col-12"
+                        style="background-color:#1591A5 ;height: 50px;border-radius: 0 0 5px 5px; bottom: -60px;">
+                        <a href="#" class="text-white col-4 ">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+
+
             </div>
-        </nav>
+            <div class="card text-white  mb-4 col-3"
+                style="max-width: 25rem;margin-right: 10px;background-color:#28A745 ">
+                <div class="card-body">
+                    <h2 class="card-title" style="font-weight: bolder;">{{sum_order}} Don hang</h2>
+                    <i class="fas fa-fw fa-cog"></i>
+                    <p class="card-text">So luong don hang</p>
+                    <div class="alert text-center col-12"
+                        style="background-color:#24963E ;height: 50px;border-radius: 0 0 5px 5px; bottom: -60px;">
+                        <a href="#!order" class="text-white col-4 ">Xem chi tiết <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-white  mb-4 col-3"
+                style="max-width: 25rem;margin-right: 10px; background-color:#FFC107 ">
+
+                <div class="card-body" style="height: 260px;">
+                    <h2 class="card-title" style="font-weight: bolder;">{{sum_food.length}}</h2>
+                    <i class="fas fa-fw fa-cog"></i>
+                    <p class="card-text">So luong san pham</p>
+
+                    <div class="alert text-center col-12"
+                        style="background-color:#E5AD06 ;height: 50px;border-radius: 0 0 5px 5px; bottom: -60px;">
+                        <a href="#!product" class="text-white col-4 ">Xem chi tiết <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
 
 
+                </div>
+            </div>
+            <div class="card text-white  mb-4 col-3"
+                style="max-width: 25rem;margin-right: 10px; background-color:#DC3545 ">
+                <div class="card-body" style="height: 260px;">
+                    <h2 class="card-title" style="font-weight: bolder;">{{sum_customer.length}}</h2>
+                    <i class="fas fa-fw fa-cog"></i>
+                    <p class="card-text">so luong khach hang</p>
+                    <div class="alert text-center col-12"
+                        style="background-color:#C6303E ;height: 50px;border-radius: 0 0 5px 5px; bottom: -60px;">
+                        <a href="#!account" class="text-white col-4 ">Xem chi tiết <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
 
-        <div class="tab-content" id="nav-tabContent" style="background-color: aqua;">
 
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                djasdjasklj
+                </div>
+
             </div>
 
-            <div class="tab-pane " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" >
-                <div id="chart_div" style="width:100%; max-width:1600px; height:500px; " ></div>
+
+
+            <div class="col-12">
+                <nav>
+                    <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home"
+                            type="button" role="tab" aria-controls="nav-home" aria-selected="true">Doanh thu tháng</button>
+
+                        <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile"
+                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Thống kê khách hàng</button>
+
+                        <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact"
+                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Doanh thu sản phẩm</button>
+
+                        <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact2"
+                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Doanh thu theo loại</button>
+                    </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- report1 -->
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div id="chart_div1" style="width:100%; max-width:1600px; height:500px;  overflow: hidden">
+                        </div>
+                        <div id="table_div"></div>
+
+                    </div>
+                    <!-- report2 -->
+                    <div class="tab-pane " id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="row" style="margin-top: 40px; background-color: white;">
+                            <div id="dashboard_div" class="col-7">
+                                <div id="filter_div"></div>
+                                <div id="chart_div"></div>
+                            </div>
+
+                            <!-- them nhieu thi phai sua height-->
+                            <div id="table_div_cus" class="col-4" style="height: 200px; margin: 30px;">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- report3 -->
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+                        <div id="curve_chart_product"></div>
+                        
+                        
+                        <div id="table_div_product"></div>
+                    </div>
+                    <!-- report4 -->
+                    <div class="tab-pane fade" id="nav-contact2" role="tabpanel" aria-labelledby="nav-contact-tab2">
+                        <div id="chart_div_brand"></div>
+                        <div id="table_div_brand"></div>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-               
-                .123..style=" overflow: hidden"
-            
-            </div>
-            
         </div>
 
-    </div>
 
-</div>
-
-
-<!-- Notification -->
-<div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
-    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
-        <div class="toast-header">
-            <img src="/img/logo.png" class="rounded mr-2" alt="logo" width="30%">
-            <strong class="mr-auto">Notification SUNFOOD</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            <div class="alert alert-success" role="alert" ng-if="message != ''">
-                {{message}}
+        <!-- Notification -->
+        <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+            <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true"
+                data-delay="5000">
+                <div class="toast-header">
+                    <img src="/img/logo.png" class="rounded mr-2" alt="logo" width="30%">
+                    <strong class="mr-auto">Notification SUNFOOD</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    <div class="alert alert-success" role="alert" ng-if="message != ''">
+                        {{message}}
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-if="error != ''">
+                        {{error}}
+                    </div>
+                </div>
             </div>
-            <div class="alert alert-danger" role="alert" ng-if="error != ''">
-                {{error}}
-            </div>
         </div>
-    </div>
-</div>
