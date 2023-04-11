@@ -1,0 +1,144 @@
+<div class="col-2"></div>
+<div class="col-8">
+    <div class="mb-3 text-center">
+      Edit Food
+    </div>
+    <div class="mb-3">
+      <!-- <input type="file" name="image" class="form-control" id="exampleFormControlInput1" > -->
+    </div>
+    <div class="mb-3">
+        <label>Name</label>
+      <input type="text" ng-model="form.name" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+    </div>
+    <div class="mb-3">
+        <label>Price</label>
+      <input type="number" ng-model="form.price" class="form-control" id="exampleFormControlInput1" placeholder="Price">
+    </div>
+    <div class="mb-3">
+      <label for="otherName">Quantity Limit</label>
+      <input type="number" ng-model="form.quantityLimit" class="form-control" id="exampleFormControlInput1" placeholder="Quantity Limit">
+    </div>
+    <div class="mb-3">
+      <label for="otherName">Quantity Sell</label>
+      <input type="number" ng-model="form.quantitySell" class="form-control" id="exampleFormControlInput1" placeholder="Quantity Sell">
+    </div>
+    <div class="mb-3">
+      <label>Description</label>
+       <textarea ng-model="form.description" class="form-control" placeholder="Leave a Description here" id="floatingTextarea2" style="height: 100px"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="otherName">Create By</label>
+        <input readonly type="text" ng-model="form.user.username" class="form-control" id="exampleFormControlInput1" >
+      </div>
+      <div class="form-group">
+        <label for="otherName">Create Date</label>
+        <input readonly type="text"ng-model="form.createDate | date: 'dd/MM/yyyy'" class="form-control " aria-describedby="otherNameHid">
+      </div>
+    <div class="mb-3">
+      <!-- <input type="hidden" value="0" ng-model="form.viewCount" class="form-control" id="exampleFormControlInput1" > -->
+    </div>
+
+ <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+  Choose Categories
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Choose Categories</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Categories Name </th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="(index,ca) in category">
+              <th scope="row">{{index +1}} </th>
+              <td>{{ca.name}} </td>
+              <td class="text-center">
+                <input type="checkbox"
+                ng-checked="category_of(ca)" 
+                ng-click="category_changed(ca, form.id)"
+                 >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <div class="form-check mt-3">
+    <label>Display: </label>
+    <div class="form-check form-check-inline">
+        <input ng-model="form.display" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+               ng-value="false" checked>
+        <label class="form-check-label" for="inlineRadio1">No</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input ng-model="form.display" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+               ng-value="true">
+        <label class="form-check-label" for="inlineRadio2">Yes</label>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+  Choose Image
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Insert image</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleInputPassword1">Image Name</label>
+          <input type="text" ng-model="images.imageName" class="form-control" id="exampleInputPassword1">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mb-3" class="">  
+  <img src="{{images.imageName}}" alt="" class="mb-3">
+  <div ng-click="deleteImage(i)" class="container box col-3" ng-repeat="i in imageMapping">
+    <img ng-if="!i.deleted" class="mb-3" width="300" height="300" alt="" src="{{i.imageName}}">
+    <div class="overlay">
+      <div class="text"><i class="fa fa-trash" aria-hidden="true"></i></div>
+    </div>
+  </div>
+</div>
+    
+<div class="card-footer text-muted ">
+  <button ng-click="food.update()" class="btn btn-outline-success">
+    Update
+</button>
+  <button ng-click="reset()" class="btn btn-outline-info">Reset</button>
+</div>
+    </div>
+
+

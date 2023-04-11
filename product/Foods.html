@@ -1,0 +1,88 @@
+<div class="row border d-flex justify-content-center">
+	<div class="col-8 mb-2">
+		<input ng-model="searchByName" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	</div>
+	<div class="form-group col-4 mt-2">
+		<label for="otherName">Create Date</label>
+		<input type="date"ng-model="createDate"
+    ng-change="selectCreateDate(createDate)"
+     class="form-control " aria-describedby="otherNameHid">
+	  </div>
+	<div class="text-center">
+	<table class="table">
+		
+	  <thead>
+	    <tr>
+	      <th scope="col">Name</th>
+	      <th scope="col">Price</th>
+		  <th scope="col">Quantity Limit</th>
+		  <th scope="col">Quantity Sell</th>
+	      <th scope="col">Description</th>
+	      <th scope="col">Create Date</th>
+	      <th scope="col">Display</th>
+	      <th scope="col">Creator</th>
+	      <th scope="col">
+	      <a>
+	      	<a class="btn btn-primary" 
+			  href="/#!/createFood" >Create</a>
+	      </a>
+	      </th>
+	    </tr>
+	  </thead>
+	  <tbody>
+		
+		<tr ng-repeat="f in items| limitTo: pager.size : pager.size*pager.page|filter: searchByName | filter: selectedOption">
+	      
+	      <td>{{f.name}} </td>
+		<td><p>{{f.price | number:0}}</p>  vnd</td>
+	      <td>{{f.quantityLimit}}</td>
+		  <td>{{f.quantitySell}}</td>
+		  <td>{{f.description}}</td>
+	      <td>{{f.createDate}}</td>
+	      <td>	
+			{{f.display ? 'Hoạt động':'Trạng thái'}}</td>
+	      <td>{{f.user.username}}</td>
+	      <td>
+			<button class="btn btn-success mb-2" ng-click="edit(f);findImageNameByFoodId(f.id)"><i class="far fa-edit"></i></button>  
+			
+		</td>
+	</tr>
+	  </tbody>
+</table>
+<nav aria-label="Page navigation example">
+
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" ng-click="pager.first()"><i class="fa-solid fa-backward-fast"></i> First</a></li>
+        <li class="page-item"><a class="page-link" ng-click="pager.prev()"><i class="fa-solid fa-backward-step"></i> Previous</a></li>
+        <li class="page-item">
+            <button class="btn btn-outline-info">{{pager.page + 1}} of {{pager.count}}</button>
+        </li>
+        <li class="page-item"><a class="page-link" ng-click="pager.next()"><i class="fa-solid fa-forward-step"></i> Next</a></li>
+        <li class="page-item"><a class="page-link" ng-click="pager.last()"><i class="fa-solid fa-forward-fast"></i> Last</a></li>
+    </ul>
+</nav>
+
+
+</div>
+</div>
+
+<!-- Notification -->
+<div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+      <div class="toast-header">
+        <img src="/img/logo.png" class="rounded mr-2" alt="logo" width="30%">
+        <strong class="mr-auto">Notification SUNFOOD</strong>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+            <div class="alert alert-success" role="alert" ng-if="message != ''">
+                {{message}}
+            </div>
+            <div class="alert alert-danger" role="alert" ng-if="error != ''">
+                {{error}}
+            </div>
+      </div>
+    </div>
+  </div>

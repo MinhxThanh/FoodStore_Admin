@@ -56,6 +56,26 @@ app.config(function ($routeProvider) {
             templateUrl: "product/edit.html?" + Math.random(),
             controller: "foods-controller"
         })
+        .when("/edit", {
+            templateUrl: "product/edit.html?" + Math.random(),
+            controller: "foods-controller"
+        })
+        .when("/createDiscount", {
+            templateUrl: "discount/create.html?" + Math.random(),
+            controller: "discount-controller"
+        })
+        .when("/edit", {
+            templateUrl: "discount/edit.html?" + Math.random(),
+            controller: "discount-controller"
+        })
+        .when("/discount", {
+            templateUrl: "discount/index.html?" + Math.random(),
+            controller: "discount-controller"
+        })
+        .when("/order", {
+            templateUrl: "order/order.html?" + Math.random(),
+            controller: "order-controller"
+        })
         .when("/createFood", {
             templateUrl: "product/createFood.html?" + Math.random(),
             controller: "foods-controller"

@@ -30,6 +30,10 @@
     <!-- tiny form -->
     <script src="https://cdn.tiny.cloud/1/n5qfm0ek1666hud9m5yywbz7p0morh00e2lsq7uvvselg9da/tinymce/6/tinymce.min.js" ></script>
 
+    <link rel="stylesheet" href="/product/Foods.css">
+    <link rel="stylesheet" href="/discount/discount.css">    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
 </head>
 
 <body ng-app="adminApp" ng-controller="mainController" id="page-top">
@@ -99,7 +103,21 @@
                     <i class="fab fa-autoprefixer"></i>
                     <span>Authorities Management</span></a>
             </li>
-
+            <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/food">
+                    <i class="fas fa-tasks"></i>
+                    <span>Foods</span></a>
+            </li>
+            <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/discount">
+                    <i class="fas fa-tasks"></i>
+                    <span>Discount</span></a>
+            </li>
+            <li ng-if="username != null" class="nav-item">
+                <a class="nav-link" href="/#!/order">
+                    <i class="fas fa-tasks"></i>
+                    <span>Orders</span></a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -483,6 +501,9 @@
     <script src="coupon/coupon-controller.js"></script>
     <script src="customer/customer-controller.js"></script>
     <script src="authority/authority-ctrl.js"></script>
+    <script src="product/foods-controller.js"></script>
+    <script src="discount/discount-controller.js"></script>
+    <script src="order/order-controller.js"></script>
     <!-- <script src="product/foods-controller.js"></script> -->
     <script src="review/review-controller.js"></script>
     
