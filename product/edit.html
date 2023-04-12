@@ -1,0 +1,67 @@
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Choose Categories</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Categories Name </th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="(index,ca) in category">
+              <th scope="row">{{index +1}} </th>
+              <td>{{ca.name}} </td>
+              <td class="text-center">
+                <input type="checkbox" ng-checked="category_of(ca)" ng-click="category_changed(ca, form.id)">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notification -->
+<div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+    <div class="toast-header">
+      <img src="/img/logo.png" class="rounded mr-2" alt="logo" width="30%">
+      <strong class="mr-auto">Notification SUNFOOD</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+          <div class="alert alert-success" role="alert" ng-if="message != ''">
+              {{message}}
+          </div>
+          <div class="alert alert-danger" role="alert" ng-if="error != ''">
+              {{error}}
+          </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="mb-3" class="">
+  <img src="{{images.imageName}}" alt="" class="mb-3">
+  <div ng-click="deleteImage(i)" class="container box col-3" ng-repeat="i in imageMapping">
+    <img ng-if="!i.deleted" class="mb-3" width="300" height="300" alt="" src="{{i.imageName}}">
+    <div class="overlay">
+      <div class="text"><i class="fa fa-trash" aria-hidden="true"></i></div>
+    </div>
+  </div>
+</div> -->

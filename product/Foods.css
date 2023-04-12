@@ -1,0 +1,63 @@
+.resize {
+    width: 60px;
+    height: auto;
+}
+.icon {
+  width: 250px;
+  height: 180px
+}
+.ml{
+    margin-left: 20%;
+}
+.flex-container {
+    display: flex;
+  }
+  
+  .flex-container > div {
+    background-color: #f1f1f1;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    color: #333;
+  }
+  .border{
+    padding: 15px;
+    border-style: none;
+}
+/* box hover */
+.box {
+  position: relative;
+  display: inline-block;
+}
+
+.box img {
+  width: 100%;
+  height: auto;
+}
+
+.box .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.5s ease;
+  background-color: rgba(178, 174, 174, 0.8);
+}
+
+.box:hover .overlay {
+  opacity: 1;
+}
+
+.box .text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}

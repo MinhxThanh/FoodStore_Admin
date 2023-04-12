@@ -13,47 +13,42 @@
             </div>
         </div>
 
-        <div class="row" style="padding: 20px;">
-            <div class="card text-white  mb-4 col-3"
-                style="max-width: 25rem; margin-right: 10px;background-color:#17A2B8;">
-                <div class="card-body">
-                    <h2 class="card-title" style="font-weight: bolder;">{{sum_money| number:0}} VND</h2>
+        <div class="row justify-content-around" style="padding: 20px;">
+            
+            <div class="card text-white mb-4 col-4 mr-2"
+                style="background-color:#17A2B8;">
+                <div class="card-body text-center">
+                    <h4 class="card-text my-4">TỔNG DOANH THU</h4>
 
-                    <i class="fas fa-fw fa-cog"></i>
+                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-money-bill-wave-alt"></i> {{sum_money| number:0}} VND</h2>
 
-                    <p class="card-text">Tong doanh thu.</p>
-                    <div class="alert text-center col-12"
-                        style="background-color:#1591A5 ;height: 50px;border-radius: 0 0 5px 5px; bottom: -60px;">
+                    <div class="alert text-center col-12 mt-5"
+                        style="background-color:#1591A5 ;height: 50px;border-radius: 0 0 5px 5px;">
                         <a href="#" class="text-white col-4 ">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-
-
-
             </div>
             <div class="card text-white  mb-4 col-3"
                 style="max-width: 25rem;margin-right: 10px;background-color:#28A745 ">
-                <div class="card-body">
-                    <h2 class="card-title" style="font-weight: bolder;">{{sum_order}} Don hang</h2>
-                    <i class="fas fa-fw fa-cog"></i>
-                    <p class="card-text">So luong don hang</p>
-                    <div class="alert text-center col-12"
-                        style="background-color:#24963E ;height: 50px;border-radius: 0 0 5px 5px; bottom: -60px;">
+                <div class="card-body text-center">
+                    <h5 class="card-text my-4">SỐ LƯỢNG ĐƠN HÀNG</h5>
+                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-cart-arrow-down"></i> {{sum_order}} Orders</h2>
+                    <div class="alert text-center col-12 mt-5"
+                        style="background-color:#24963E ;height: 50px;border-radius: 0 0 5px 5px;">
                         <a href="#!order" class="text-white col-4 ">Xem chi tiết <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="card text-white  mb-4 col-3"
+            <div class="card text-white  mb-4 col-4"
                 style="max-width: 25rem;margin-right: 10px; background-color:#FFC107 ">
 
-                <div class="card-body" style="height: 260px;">
-                    <h2 class="card-title" style="font-weight: bolder;">{{sum_food.length}}</h2>
-                    <i class="fas fa-fw fa-cog"></i>
-                    <p class="card-text">So luong san pham</p>
+                <div class="card-body text-center">
+                    <h4 class="card-text my-4">SỐ LƯỢNG FOOD ĐÃ ĐĂNG</h4>
+                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-utensils"></i> {{sum_food.length}} Foods</h2>
 
-                    <div class="alert text-center col-12"
-                        style="background-color:#E5AD06 ;height: 50px;border-radius: 0 0 5px 5px; bottom: -60px;">
+                    <div class="alert text-center col-12 mt-5"
+                        style="background-color:#E5AD06 ;height: 50px;border-radius: 0 0 5px 5px">
                         <a href="#!product" class="text-white col-4 ">Xem chi tiết <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -61,14 +56,13 @@
 
                 </div>
             </div>
-            <div class="card text-white  mb-4 col-3"
+            <div class="card text-white  mb-4 col-5"
                 style="max-width: 25rem;margin-right: 10px; background-color:#DC3545 ">
-                <div class="card-body" style="height: 260px;">
-                    <h2 class="card-title" style="font-weight: bolder;">{{sum_customer.length}}</h2>
-                    <i class="fas fa-fw fa-cog"></i>
-                    <p class="card-text">so luong khach hang</p>
-                    <div class="alert text-center col-12"
-                        style="background-color:#C6303E ;height: 50px;border-radius: 0 0 5px 5px; bottom: -60px;">
+                <div class="card-body text-center">
+                    <h4 class="card-text my-4">SỐ LƯỢNG KHÁCH HÀNG</h4>
+                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-users"></i> {{sum_customer.length}} Peoples</h2>
+                    <div class="alert text-center col-12 mt-5"
+                        style="background-color:#C6303E ;height: 50px;border-radius: 0 0 5px 5px">
                         <a href="#!account" class="text-white col-4 ">Xem chi tiết <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>

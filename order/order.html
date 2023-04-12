@@ -1,0 +1,124 @@
+<div class="row border">
+	<div class="col-8">
+			<input ng-model="searchByName" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	</div>
+	<div class="col-4">
+		<select class="custom-select" ng-init="selectOption = paymentmethod[0]" 	
+        ng-model="selectOption" ng-options="i as i.name for i in paymentmethod" 
+        ng-change="optionChanged(selectOption)"
+		>
+		<option value="" >All</option>
+		</select>
+	</div>
+	<div class="form-group col-4 mt-2">
+		<label for="otherName">Order Date</label>
+		<input type="date"ng-model="orderDate"
+    ng-change="selectOrderDate(orderDate)"
+     class="form-control " aria-describedby="otherNameHid">
+	  </div>
+	  <div class="form-group col-4 mt-2">
+		<label for="otherName">Shipped Date</label>
+		<input type="date" ng-model="shippedDate" id="selectedDate" 
+    ng-change="selectShippedDate(shippedDate)"
+    class="form-control " aria-describedby="otherNameHid">
+	  </div>
+	  <table class="table">
+		<thead>
+		  <tr>
+      <th scope="col">Customer Email</th>
+			<th scope="col">Paymentmethod</th>
+			<th scope="col">Shipmethod</th>
+			<th scope="col">Order Date</th>
+			<th scope="col">Shipped Date</th>
+			<th scope="col">Customer Phone</th>
+			<th scope="col">Customer Address</th>
+      <th scope="col">Price</th>
+			<th scope="col">Coupon Name</th>
+			<th scope="col">Status</th>
+			<th scope="col">Display</th>
+			<th scope="col">
+				
+			</th>
+		  </tr>
+		</thead>
+		<tbody>
+            <!-- | filter: searchByName|  filter: selectedOption| limitTo: pager.size : pager.size*pager.page  -->
+		  <tr ng-repeat="o in order| filter:selectedOption
+      | filter: searchByName|filter: o.orderDate| limitTo: pager.size : pager.size*pager.page" 
+      >
+			<td >
+			  {{o.customer.email}}
+			</td>
+			<td>{{o.paymentmethod.name}}</td>
+			<td>{{o.shipmethod.name}}</td>
+			<td>{{o.orderDate | date: 'dd-MM-yyyy'}}</td>
+			<td>{{o.shippedDate | date: 'dd-MM-yyyy'}}</td>
+			<td>{{o.customerPhoneAddress.phone}}</td>
+			<td>{{o.customerPhoneAddress.address}}</td>
+      <td>{{o.price}} </td>
+      <td>{{o.coupon.name}} </td>
+			<td>
+                <p ng-if="o.status == 1">Đang xử lý</p>
+                <p ng-if="o.status ==2">Đã nhận đơn</p>
+                <p ng-if="o.status ==3">Đang vận hàng</p>
+                <p ng-if="o.status ==4">Đã giao hàng</p>
+                <p ng-if="o.status ==5">Hủy đơn</p>
+            </td>
+			      <td>{{o.display}} </td>
+            <td>
+                <!-- Button trigger modal -->
+<button ng-click="findById(o)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+    Edit Status 
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Choose Status {{byId.status}} id: {{byId.id}} </h5>
+          <button ng-click="reloadPage()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body ml">
+
+            <table class="table">
+                <tbody>
+                  <tr ng-repeat="ca in nameStatus">
+                    <td>{{ca.name}} </td>
+                    <td class="text-center">
+                      <input type="radio"
+                      ng-checked="nameStatus_of(byId.status,ca)"
+                      ng-click="statusChange(o)"
+                      ng-model="$parent.selectedStatus"
+                      value="{{ca}}"
+                      ng-change="updateStatus(ca,byId)"
+                       >
+                       
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+  </div>
+            </td>
+          </tbody>
+          </table>
+          <div class="col-12">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" ng-click="pager.first()"><i class="fa-solid fa-backward-fast"></i> First</a></li>
+                <li class="page-item"><a class="page-link" ng-click="pager.prev()"><i class="fa-solid fa-backward-step"></i> Previous</a></li>
+                <li class="page-item">
+                  <button class="btn btn-outline-info">{{pager.page + 1}} of {{pager.count}}</button>
+                </li>
+                <li class="page-item"><a class="page-link" ng-click="pager.next()"><i class="fa-solid fa-forward-step"></i> Next</a></li>
+                <li class="page-item"><a class="page-link" ng-click="pager.last()"><i class="fa-solid fa-forward-fast"></i> Last</a></li>
+              </ul>
+            </nav>
+            </div>
+  
+</div>

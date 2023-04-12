@@ -1,0 +1,227 @@
+
+<div class="row border">
+	<div class="col-8">
+			<input ng-model="searchByName" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	</div>
+	<div class="col-4">
+		<select class="custom-select" ng-init="discountSelected = items[0]" 	
+        ng-model="selectedOption" ng-options="i as i.name for i in items" 
+		ng-change="selectedName(selectedOption)"
+		>
+		<option value="" >All</option>
+		</select>
+	</div>
+	<div class="form-group col-4 mt-2">
+		<label for="otherName">Create Date</label>
+		<input type="date"ng-model="createDate"
+		ng-change="selectedCreateDate(createDate)"
+		class="form-control " aria-describedby="otherNameHid">
+	  </div>
+	  <div class="form-group col-4 mt-2">
+		<label for="otherName">Start Date</label>
+		<input type="date" ng-model="startDate"
+		ng-change="selectedStartDate(startDate)" id="selectedDate" 
+		class="form-control " aria-describedby="otherNameHid">
+	  </div>
+	  <div class="form-group col-4 mt-2">
+		<label for="otherName">End Date</label>
+		<input type="date" ng-model="endDate" 
+		ng-change="selectedEndDate(endDate)" class="form-control " aria-describedby="otherNameHid">
+	  </div>
+	  <table class="table">
+		<thead>
+		  <tr>
+			<th scope="col">Name</th>
+			<th scope="col">Percent Discount</th>
+			<th scope="col">Create Date</th>
+			<th scope="col">Start Date</th>
+			<th scope="col">End Date</th>
+			<th scope="col">Fixed</th>
+			<th scope="col">Display</th>
+			<th scope="col">Create By</th>
+			<th scope="col">
+				<a class="btn btn-primary" href="/#!/createDiscount">Create</a>
+			</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr ng-repeat="d in items| filter: searchByName|filter: selectedOption| limitTo: pager.size : pager.size*pager.page" >
+			<td >
+				<!-- <img class="resize" alt="" data-ng-src="/product/images/{{f.imageName}}"> -->
+			  {{d.name}}
+			</td>
+			<td>{{d.percentDiscount}} </td>
+			<td>{{d.createDate}}</td>
+			<td>{{d.startDate}}</td>
+			<td>{{d.endDate}}</td>
+			<td>
+			  {{d.fixed ?'Fixed':'Not Fixed'}}
+			</td>
+			<td>
+				{{d.display ?'Hoạt động':'Kết thúc'}}
+			</td>
+			<td>{{d.user.username}}</td>
+			<td>
+				<a class="text-white"><button class="btn btn-success mb-2" ng-click="edit(d)"><i class="far fa-edit" ></i></button> </a>
+				<a class="text-white"><button class="btn btn-danger mb-2" ng-click="delete(d)"><i class="fa fa-times" ></i></button> </a>
+				
+				<button ng-click="viewDiscount(d)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+					View
+				  </button>
+				  
+				  <!-- Modal -->
+				  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <h5 class="modal-title" id="exampleModalLabel">View Detail Discount</h5>
+						  <button ng-click="load()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						  </button>
+						</div>
+						<div class="modal-body">
+							<table class="table-borderless text-left">
+								<thead>
+								  <tr>
+									<th >Id</th>
+									<td>{{discountId.id}} </td>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<th>Name </th>
+									<td>{{discountId.name}} </td>
+								  </tr>
+								  <tr>
+									<th>Id Food</th>
+									<td>{{discountId.food.id}} </td>
+								  </tr>
+								  <tr>
+									<th>Name Food</th>
+									<td>{{discountId.food.name}} </td>
+								  </tr>
+								  <tr>
+									<th>Fixed </th>
+									<td>
+										<div class="custom-control custom-switch" >
+											<input type="checkbox" class="custom-control-input" id="customSwitch1" 
+											name="pair1"
+											ng-click="fixedChange(discountId)"
+											ng-model="discountId.fixed" checked>
+											<label class="custom-control-label" for="customSwitch1">{{discountId.fixed}}</label>
+										  </div>
+										</td>
+								  </tr>
+								  <tr>
+									<th>Display </th>
+									<td>
+										<div class="custom-control custom-switch" >
+											<input type="checkbox" class="custom-control-input" id="customSwitch2" 
+											name="pair2"
+											ng-click="displayChange(discountId)"
+											ng-model="discountId.display" checked>
+											<label class="custom-control-label" for="customSwitch2">{{discountId.display}}</label>
+										  </div>
+										</td>
+								  </tr>
+								  <tr>
+									<th>Create Date</th>
+									<td>{{discountId.createDate}} </td>
+								  </tr>
+								  <tr>
+									<th>Create Date</th>
+									<td>{{discountId.endDate}} </td>
+								  </tr>
+								  <tr>
+									<th>Create Date</th>
+									<td>{{discountId.startDate}} </td>
+								  </tr>
+								  <tr>
+									<th>Percent Discount</th>
+									<td>{{discountId.percentDiscount}} </td>
+								  </tr>
+								  <tr>
+									<th>Creator</th>
+									<td>{{discountId.user.username}} </td>
+								  </tr>
+								  <tr>
+									<th>Image</th>
+									<td ng-repeat="im in imageFoodId" class="container box col-6">
+										<img class="mb-3" alt="" src="{{im.imageName}}">
+									</td>
+								  </tr> 
+								</tbody>
+							  </table>
+						</div>
+					  </div>
+					</div>
+				  </div>
+
+				  <button ng-click="findAllFood(d)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+					Discount Setings
+				  </button>
+				  
+				  <!-- Modal -->
+				  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+					  <div class="modal-content">
+						<div class="modal-header ">
+						  <h3 class="modal-title" id="exampleModalLabel">Settings Discount For</h3>
+						  <button ng-click="reloadPage()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						  </button>
+						</div>
+						<div class="modal-body">
+							<table class="table text-center">
+								<thead>
+								  <tr>
+									<th>Choose </th>
+									<th >Name Food</th>
+									<th>Price </th>
+									<th>Image </th>
+								  </tr>
+								</thead>
+								<tbody>
+										<!-- <tr ng-repeat="d in items"> -->
+								  <tr ng-repeat="f in foods">
+											
+									<td><input type="checkbox" aria-label="Checkbox for following text input"
+										ng-checked="isChecked(f)"
+										ng-click="discount_changed(f)"
+										> </td>
+									<td>{{f.name}} </td>
+									<td>{{f.price}} </td>
+									<td ng-repeat="im in imageByFoodId[f.id]" class="container box col-3">
+										<img class="mb-3" alt="" src="{{im.imageName}}"
+										>
+									</td>
+								  </tr>
+
+								<!-- </tr> -->
+
+								</tbody>
+							  </table>
+						</div>
+					  </div>
+					</div>
+				  </div>
+		 </td>
+		  </tr>
+		</tbody>
+  </table>
+
+  <div class="col-12">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a class="page-link" ng-click="pager.first()"><i class="fa-solid fa-backward-fast"></i> First</a></li>
+			<li class="page-item"><a class="page-link" ng-click="pager.prev()"><i class="fa-solid fa-backward-step"></i> Previous</a></li>
+			<li class="page-item">
+				<button class="btn btn-outline-info">{{pager.page + 1}} of {{pager.count}}</button>
+			</li>
+			<li class="page-item"><a class="page-link" ng-click="pager.next()"><i class="fa-solid fa-forward-step"></i> Next</a></li>
+			<li class="page-item"><a class="page-link" ng-click="pager.last()"><i class="fa-solid fa-forward-fast"></i> Last</a></li>
+		</ul>
+	</nav>
+  </div>
+  
+</div>

@@ -1,0 +1,12 @@
+#gsearch{
+    height: 15px;
+}
+.border{
+    padding: 15px;
+    border-style: none;
+}
+table, tr, td, th{
+    padding: 10px;
+    margin: auto;   
+    border: none;  
+    }

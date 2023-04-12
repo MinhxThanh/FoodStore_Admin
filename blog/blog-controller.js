@@ -180,6 +180,7 @@ app.controller('blog-controller', function ($scope, $http, $window) {
                 viewCount: 1,
                 status: 1
             }
+            $scope.imageBlog.images = []
             tinymce.get("myTextarea").setContent("<p></p>")
             this.itemDelete = {}
             $scope.message = ""

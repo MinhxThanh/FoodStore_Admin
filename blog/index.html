@@ -81,8 +81,8 @@
                 </div>
             </form>
             <div class="text-center my-3 my-5">
-                <button ng-click="blog.create()" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Create</button>
-                <button ng-click="blog.update()" class="btn btn-outline-success"><i class="fas fa-edit"></i> Update</button>
+                <button ng-disabled="form.id != null"  ng-click="blog.create()" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Create</button>
+                <button ng-disabled="form.id == null" ng-click="blog.update()" class="btn btn-outline-success"><i class="fas fa-edit"></i> Update</button>
                 <!-- <button ng-click="blog.delete(form.id)" class="btn btn-outline-danger">Delete</button> -->
                 <button ng-click="blog.reset()" class="btn btn-outline-info"><i class="fas fa-redo-alt"></i> Reset</button>
             </div>

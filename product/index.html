@@ -1,0 +1,128 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" id="navItem" role="presentation">
+    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab"
+      aria-controls="home" aria-selected="true">List Food</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab"
+      aria-controls="profile" aria-selected="false">Edit </button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <p ng-include="'product/table.html'"></p>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="col-10 container-fluid border-top-0 border rounded">
+      <div class="mb-3 text-center h3 pt-4 text-uppercase">
+        Edit Food
+        <hr>
+      </div>
+
+      <div class="mb-3 row mt-5">
+        <div class="col-8">
+          <div class="mb-3">
+            <label>Name</label>
+            <input type="text" ng-model="form.name" class="form-control" id="exampleFormControlInput1"
+              placeholder="Name">
+          </div>
+          <div class="mb-3">
+            <label>Price (VND)</label>
+            <input type="number" ng-model="form.price" class="form-control" id="exampleFormControlInput1"
+              placeholder="Price">
+          </div>
+          <div class="mb-3">
+            <label>Description</label>
+            <textarea id="foodDescription"></textarea>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="mb-3">
+            <label for="otherName">Quantity Limit</label>
+            <input type="number" ng-model="form.quantityLimit" class="form-control" id="exampleFormControlInput1"
+              placeholder="Quantity Limit">
+          </div>
+          <div class="mb-3">
+            <label for="otherName">Quantity Sell</label>
+            <span class="form-control">{{form.quantitySell}}</span>
+          </div>
+          <div class="mb-3">
+            <label for="otherName">Create By</label>
+            <span class="form-control">{{form.createBy}}</span>
+          </div>
+          <div class="form-group">
+            <label for="otherName">Create Date</label>
+            <span class="form-control">{{form.createDate | date: 'dd/MM/yyyy'}}</span>
+          </div>
+          <div class="form-check mt-3 p-0">
+            <label>Display: </label>
+            <div class="form-check form-check-inline">
+              <input ng-model="form.display" class="form-check-input" type="radio" name="inlineRadioOptions"
+                id="inlineRadio2" ng-value="true">
+              <label class="form-check-label" for="inlineRadio2">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input ng-model="form.display" class="form-check-input" type="radio" name="inlineRadioOptions"
+                id="inlineRadio1" ng-value="false" checked>
+              <label class="form-check-label" for="inlineRadio1">No</label>
+            </div>
+          </div>
+          <button ng-disabled="form.id == null" ng-click="getListCategories()" type="button" class="btn btn-primary mt-3" data-toggle="modal"
+            data-target="#staticBackdrop">
+            <i class="fas fa-list"></i> Add Categories
+          </button>
+        </div>
+      </div>
+      <hr>
+      <div class="my-lg-4">
+        <div class="text-muted text-center">
+          <button ng-disabled="form.id != null" ng-click="food.create()" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Create</button>
+          <button ng-disabled="form.id == null" ng-click="food.update()" class="btn btn-outline-success"><i class="fas fa-edit"></i> Update
+          </button>
+          <button ng-click="reset()" class="btn btn-outline-info"><i class="fas fa-redo-alt"></i> Reset</button>
+        </div>
+      </div>
+      <hr>
+      <hr>
+      <div class="mb-3 text-center my-5">
+        <label class="btn btn-outline-success px-5 py-2" for="uploadImage"><i class="far fa-images"></i> Add
+          Image</label>
+        <input ng-disabled="form.id == null" id="uploadImage" class="form-control-file" type='file' ng-model-instant
+          onchange="angular.element(this).scope().imageUpload(event)" style="display: none;" />
+        <div class="row container-fluid">
+          <div ng-repeat="image in imageFood.images" class="card border-0 mt-3 mr-3"
+            style="width: 18rem; background-color: #f8f9fc;">
+            <img ng-src="{{image.imageName}}" class="card-img-top" alt="image">
+            <button ng-click="imageFood.deleteImage(image)" class="btn btn-danger w-100 rounded-0"><i
+                class="fas fa-trash"></i> Delete</button>
+            <span ng-if="$first" class="h4 text-danger font-weight-bold border" style="margin-top: -50%;"><i
+                class="fas fa-star"></i> Image Main</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Notification -->
+      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+          <div class="toast-header">
+            <img src="/img/logo.png" class="rounded mr-2" alt="logo" width="30%">
+            <strong class="mr-auto">Notification SUNFOOD</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            <div class="alert alert-success" role="alert" ng-if="message != ''">
+              {{message}}
+            </div>
+            <div class="alert alert-danger" role="alert" ng-if="error != ''">
+              {{error}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" ng-include="'product/edit.html'"></div>
+    </div>
+  </div>
