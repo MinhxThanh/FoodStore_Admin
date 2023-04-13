@@ -37,18 +37,18 @@ app.controller('review-controller', function ($scope, $http, $window) {
         //     }).catch(err => $scope.error = "Error blog category!")
         //     this.liveToastBtn()
         // },
-        // clickDelete(item){
-        //     this.itemDelete = item
-        // },
-        // confirmDelete() {
-        //     $http.delete(`http://localhost:8080/rest/blog/delete/${this.itemDelete.id}`).then(resp =>{
-        //         let index = $scope.items.findIndex(item => item.id == this.itemDelete.id)
-        //         $scope.items.splice(index, 1)
-        //         this.reset()
-        //         $scope.message = "Delete blog successfully!"
-        //     }).catch(err => $scope.error = "Error blog category!")
-        //     this.liveToastBtn()
-        // },
+        clickDelete(item){
+            this.itemDelete = item
+        },
+        confirmDelete() {
+            $http.delete(`http://localhost:8080/rest/review/delete/${this.itemDelete.id}`).then(resp =>{
+                let index = $scope.items.findIndex(item => item.id == this.itemDelete.id)
+                $scope.items.splice(index, 1)
+                this.reset()
+                $scope.message = "Delete blog successfully!"
+            }).catch(err => $scope.error = "Error blog category!")
+            this.liveToastBtn()
+        },
         edit(review){
             this.reset()
             $scope.form= {}
@@ -62,8 +62,6 @@ app.controller('review-controller', function ($scope, $http, $window) {
                 viewCount: blog.viewCount,
                 createDate: new Date(blog.createDate), // can format
                 status: blog.status,
-
-
 
 
                 // <th scope="row">{{$index + 1}}</th>
@@ -84,8 +82,6 @@ app.controller('review-controller', function ($scope, $http, $window) {
 
                 //     <td class="text-center">{{c.isDisplay?'No':'Yes'}}</td>
             }
-            console.log("isDisplay: ", blog.isDisplay)
-            // console.log('12',item)
             $scope.form = angular.copy(item)
         },
         reset(){

@@ -103,7 +103,9 @@
             <div class="text-center my-3 mt-4">
                 <button ng-click="coupon.create()" class="btn btn-outline-primary">Create</button>
                 <button ng-click="coupon.update()" class="btn btn-outline-success">Update</button>
-                <button ng-click="coupon.delete(form.id)" class="btn btn-outline-danger">Delete</button>
+                <!-- <button ng-click="coupon.delete(form.id)" class="btn btn-outline-danger">Delete</button> -->
+
+                <button ng-click="coupon.clickDelete(form)" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-danger">Delete</button>
                 <button ng-click="coupon.reset()" class="btn btn-outline-info">Reset</button>
             </div>
         </form>
@@ -138,7 +140,7 @@
                     <th scope="col">Money Coupon</th>
                     <th scope="col">Start day</th>
                     <th scope="col">End day</th>
-                    <th scope="col" class="text-center">Create by</th>
+                    <!-- <th scope="col" class="text-center">Create by</th> -->
                     <th scope="col" class="text-center">Is display</th>
                     <th scope="col"></th>
                 </tr>
@@ -153,7 +155,7 @@
                     <td class="text-center">{{c.amountMoneyCoupon}}k VND</td>
                     <td class="text-center">{{c.startDate | date:'dd-MM-yyyy'}}</td>
                     <td class="text-center">{{c.endDate | date:'dd-MM-yyyy'}}</td>
-                    <td class="text-center">{{c.user.fullname}}</td>
+                    <!-- <td class="text-center">{{c.user.fullname}}</td> -->
 
                     <td class="text-center">{{c.isDisplay?'Yes':'No'}}</td>
 

@@ -35,16 +35,16 @@ app.controller('customer-controller', function ($scope, $http, $window) {
                 $scope.items[index] = item
                 this.reset()
                 $scope.message = "Update customer successfully!"
-                $window.location.reset()
-            }).catch(err => $scope.error = "Error customer category!")
+                $window.reset()
+            }).catch(err => $scope.error = "Error customer update!")
             this.liveToastBtn()
         },
         clickDelete(item) {
             this.itemDelete = item
         },
         confirmDelete() {
-            $http.delete(`http://localhost:8080/rest/customer/delete/${this.itemDelete.id}`).then(resp => {
-                let index = $scope.items.findIndex(item => item.id == this.itemDelete.id)
+            $http.delete(`http://localhost:8080/rest/customer/delete/${this.itemDelete.email}`).then(resp => {
+                let index = $scope.items.findIndex(item => item.email == this.itemDelete.email)
                 $scope.items.splice(index, 1)
                 this.reset()
                 $scope.message = "Delete customer successfully!"
@@ -52,11 +52,7 @@ app.controller('customer-controller', function ($scope, $http, $window) {
             this.liveToastBtn()
         },
         edit(customer) {
-
-            // alert("Hello! I am an alert box!" + customer.isDisplay);
-
             this.reset()
-
             $scope.form = {}
             let item = {
                 email: customer.email,
@@ -82,6 +78,7 @@ app.controller('customer-controller', function ($scope, $http, $window) {
             $scope.form = {
                 isDisplay: true,
                 isFixed: true,
+                gender: true,
                 createDate: new Date(),
                 createBy: sessionStorage.getItem('username')
             }

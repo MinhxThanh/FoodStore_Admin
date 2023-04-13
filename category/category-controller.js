@@ -17,12 +17,9 @@ app.controller('category-controller', function ($scope, $http, $window) {
             $http.post(`http://localhost:8080/rest/category/create`, item).then(resp =>{
                 $scope.items.push(resp.data)
                 this.reset()
-                console.log("category1", resp.data)
+                // console.log("category1", resp.data)
                 $scope.message = "Create category successfully!"
-            }).catch(err => {
-                $scope.error = "Error create category!"
-                console.log("create error:", err)
-            })
+            }).catch(err => $scope.error = "Error create category!")
             this.liveToastBtn()
         },
         update(){

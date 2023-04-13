@@ -14,8 +14,7 @@
         <form>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input ng-model="form.email"  type="text" class="form-control" id="email"
-                    placeholder="Email">
+                <input ng-model="form.email" type="text" class="form-control" id="email" placeholder="Email">
             </div>
 
             <div class="mb-3">
@@ -33,13 +32,13 @@
             <div class="mb-3">
                 <label for="fullname" class="form-label"> Fullname </label>
                 <input ng-model="form.fullname" class="form-control" id="fullname"
-                    placeholder="Enter fullname limit!"></input>
+                    placeholder="Enter fullname !"></input>
             </div>
 
             <div class="mb-3">
                 <label for="lastName" class="form-label">LastName</label>
                 <input ng-model="form.lastName" class="form-control" id="lastName"
-                    placeholder="Enter lastName limit!"></input>
+                    placeholder="Enter lastName !"></input>
             </div>
 
 
@@ -48,13 +47,13 @@
             <div class="mb-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label mr-3" for="Gender">Gender</label>
-                    <input ng-model="form.gender" ng-value="true" type="radio" name="Gender"
-                        id="inlineRadio1" value="option1" checked>
+                    <input ng-model="form.gender" ng-value="true" type="radio" name="Gender" id="inlineRadio1"
+                        value="option1" checked>
                     <label class="form-check-label" for="Gender">Nam</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input ng-model="form.gender" ng-value="false" class="form-check-input" type="radio"
-                        name="Gender" id="Gender" value="Gender">
+                    <input ng-model="form.gender" ng-value="false" class="form-check-input" type="radio" name="Gender"
+                        id="Gender" value="Gender">
                     <label class="form-check-label" for="Gender">Nu</label>
                 </div>
             </div>
@@ -99,7 +98,7 @@
 
             </div>
 
-    
+
             <div class="mb-3">
                 <label for="createDate" class="form-label">Create day</label>
                 <input ng-model="form.createDate" type="date" class="form-control" id="createDate">
@@ -110,12 +109,31 @@
             <div class="text-center my-3 mt-4">
                 <button ng-click="customer.create()" class="btn btn-outline-primary">Create</button>
                 <button ng-click="customer.update()" class="btn btn-outline-success">Update</button>
-                <button ng-click="customer.delete(form.id)" class="btn btn-outline-danger">Delete</button>
+
+                <!-- <button ng-click="customer.delete(form.email)" class="btn btn-outline-danger">Delete</button> -->
+
+                <button ng-click="customer.clickDelete(form)" data-toggle="modal" data-target="#exampleModal"
+                    class="btn btn-outline-danger">Delete</button>
+
                 <button ng-click="customer.reset()" class="btn btn-outline-info">Reset</button>
             </div>
         </form>
     </div>
     <div class="right_body col-lg-8 col-sm-12">
+        <!-- tim kiem -->
+        <div class="row">
+            <div class="col-8">
+                <input ng-model="searchByName" class="form-control mr-sm-2" type="search" placeholder="Search"
+                    aria-label="Search">
+            </div>
+            <!-- <div class="col-4">
+                <select class="custom-select" ng-init="discountSelected = items[0]" ng-model="selectedOption"
+                    ng-options="i as i.gender for i in items" ng-change="selectedName(selectedOption)">
+                    <option value="">All</option>
+                </select>
+            </div> -->
+        </div>
+
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -136,7 +154,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="c in items | limitTo: pager.size : pager.page">
+                <tr ng-repeat="c in items | filter: searchByName|filter: selectedOption| limitTo: pager.size : pager.page">
                     <th scope="row">{{$index + 1}}</th>
                     <td class="text-center">{{c.email}}</td>
                     <!-- <td class="text-center">{{c.firstName}}</td>
@@ -182,11 +200,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                Do you want delete this coupon name <i>{{coupon.itemDelete.name}}</i>?
+                Do you want delete this Customer name <i>{{customer.itemDelete.email}}</i>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button ng-click="coupon.confirmDelete()" type="button" class="btn btn-outline-danger"
+                <button ng-click="customer.confirmDelete()" type="button" class="btn btn-outline-danger"
                     data-dismiss="modal">Yes</button>
             </div>
         </div>
