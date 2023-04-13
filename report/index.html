@@ -13,14 +13,14 @@
             </div>
         </div>
 
-        <div class="row justify-content-around" style="padding: 20px;">
-            
-            <div class="card text-white mb-4 col-4 mr-2"
-                style="background-color:#17A2B8;">
+        <div class="row " style="padding: 20px;">
+
+            <div class="card text-white mb-4 col-3" style="background-color:#17A2B8;">
                 <div class="card-body text-center">
                     <h4 class="card-text my-4">TỔNG DOANH THU</h4>
 
-                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-money-bill-wave-alt"></i> {{sum_money| number:0}} VND</h2>
+                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-money-bill-wave-alt"></i>
+                        {{sum_money| number:0}} VND</h2>
 
                     <div class="alert text-center col-12 mt-5"
                         style="background-color:#1591A5 ;height: 50px;border-radius: 0 0 5px 5px;">
@@ -29,10 +29,11 @@
                 </div>
             </div>
             <div class="card text-white  mb-4 col-3"
-                style="max-width: 25rem;margin-right: 10px;background-color:#28A745 ">
+                style="background-color:#28A745 ">
                 <div class="card-body text-center">
                     <h5 class="card-text my-4">SỐ LƯỢNG ĐƠN HÀNG</h5>
-                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-cart-arrow-down"></i> {{sum_order}} Orders</h2>
+                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-cart-arrow-down"></i>
+                        {{sum_order}} Orders</h2>
                     <div class="alert text-center col-12 mt-5"
                         style="background-color:#24963E ;height: 50px;border-radius: 0 0 5px 5px;">
                         <a href="#!order" class="text-white col-4 ">Xem chi tiết <i
@@ -40,12 +41,13 @@
                     </div>
                 </div>
             </div>
-            <div class="card text-white  mb-4 col-4"
-                style="max-width: 25rem;margin-right: 10px; background-color:#FFC107 ">
+            <div class="card text-white  mb-4 col-3"
+                style="background-color:#FFC107 ">
 
                 <div class="card-body text-center">
                     <h4 class="card-text my-4">SỐ LƯỢNG FOOD ĐÃ ĐĂNG</h4>
-                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-utensils"></i> {{sum_food.length}} Foods</h2>
+                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-utensils"></i>
+                        {{sum_food.length}} Foods</h2>
 
                     <div class="alert text-center col-12 mt-5"
                         style="background-color:#E5AD06 ;height: 50px;border-radius: 0 0 5px 5px">
@@ -56,11 +58,12 @@
 
                 </div>
             </div>
-            <div class="card text-white  mb-4 col-5"
-                style="max-width: 25rem;margin-right: 10px; background-color:#DC3545 ">
+            <div class="card text-white  mb-4 col-3"
+                style="background-color:#DC3545 ">
                 <div class="card-body text-center">
                     <h4 class="card-text my-4">SỐ LƯỢNG KHÁCH HÀNG</h4>
-                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-users"></i> {{sum_customer.length}} Peoples</h2>
+                    <h2 class="card-title" style="font-weight: bolder;"><i class="fas fa-users"></i>
+                        {{sum_customer.length}} Peoples</h2>
                     <div class="alert text-center col-12 mt-5"
                         style="background-color:#C6303E ;height: 50px;border-radius: 0 0 5px 5px">
                         <a href="#!account" class="text-white col-4 ">Xem chi tiết <i
@@ -78,16 +81,20 @@
                 <nav>
                     <div class="nav nav-pills nav-fill" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home"
-                            type="button" role="tab" aria-controls="nav-home" aria-selected="true">Doanh thu tháng</button>
+                            type="button" role="tab" aria-controls="nav-home" aria-selected="true">Doanh thu
+                            tháng</button>
 
                         <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile"
-                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Thống kê khách hàng</button>
+                            type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Thống kê khách
+                            hàng</button>
 
                         <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact"
-                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Doanh thu sản phẩm</button>
+                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Doanh thu sản
+                            phẩm</button>
 
                         <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact2"
-                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Doanh thu theo loại</button>
+                            type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Doanh thu theo
+                            loại</button>
                     </div>
                 </nav>
 
@@ -109,7 +116,7 @@
 
                             <!-- them nhieu thi phai sua height-->
                             <div id="table_div_cus" class="col-4" style="height: 200px; margin: 30px;">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -117,8 +124,8 @@
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 
                         <div id="curve_chart_product"></div>
-                        
-                        
+
+
                         <div id="table_div_product"></div>
                     </div>
                     <!-- report4 -->

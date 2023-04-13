@@ -12615,4 +12615,99 @@ body.sidebar-toggled footer.sticky-footer {
   display: block;
   height: 0;
   overflow-y: hidden;
+}#table_div_category,
+#table_div,
+#table_div_brand,
+#table_div_product,
+#table_div_cus {
+  font-family: 'Roboto-Bold';
+  font-weight: bold;
+  color: black;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#table_div_category td,
+#table_div_category th,
+#table_div td,
+#table_div th,
+#table_div_brand td,
+#table_div_brand th,
+#table_div_product td,
+#table_div_product th,
+#table_div_cus th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table_div_brand tr:nth-child(even) {
+  background-color: white;
+}
+
+#table_div_product tr:nth-child(even) {
+  background-color: #c3bfbf;
+}
+
+#table_div tr:nth-child(even) {
+  background-color: #c3bfbf;
+}
+
+#table_div_category tr:nth-child(even) {
+  background-color: white;
+}
+
+#table_div tr:hover {
+  background-color: #ddd;
+}
+
+#table_div_brand tr:hover {
+  background-color: #ddd;
+}
+
+#table_div_product tr:hover {
+  background-color: #ddd;
+}
+
+#table_div_cus tr:hover {
+  background-color: #ddd;
+}
+
+#table_div_category tr:hover {
+  background-color: #ddd;
+}
+
+#table_div_cus tr:nth-child(even) {
+  background-color: #c3bfbf;
+}
+
+#table_div_category tbody td,
+#table_div tbody td,
+#table_div_brand tbody td,
+#table_div_product tbody td,
+#table_div_cus tbody td{
+  background: white;
+  border: 0;
+  font-size: 20px;
+  margin: 5px 0;
+  text-align:  center;
+}
+
+#table_div tbody td:first-child{
+  text-align: start;
+}
+
+#table_div_category th,
+#table_div th,
+#table_div_brand th,
+#table_div_product th,
+#table_div_cus th {
+  font-family: 'Roboto-Bold';
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  font-size: 22px;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  border: 0;
+  background: #FF8118;
 }
