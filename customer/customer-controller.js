@@ -35,7 +35,7 @@ app.controller('customer-controller', function ($scope, $http, $window) {
                 $scope.items[index] = item
                 this.reset()
                 $scope.message = "Update customer successfully!"
-                // $window.reset()
+                $window.reset()
             }).catch(err => $scope.error = "Error customer update!")
             this.liveToastBtn()
         },
@@ -108,14 +108,10 @@ app.controller('customer-controller', function ($scope, $http, $window) {
             this.page = this.count - 1
         },
         next() {
-            this.page++
-            if (this.page >= this.count)
-                this.first()
+            this.incrementLimit(true)
         },
         prev() {
-            this.page--
-            if (this.page < 0)
-                this.last()
+            this.incrementLimit(false)
         },
         incrementLimit(up) {
             if (up) {
