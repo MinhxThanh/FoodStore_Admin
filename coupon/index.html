@@ -21,6 +21,14 @@
                 <input ng-model="form.name" type="text" class="form-control" id="nameCoupon"
                     placeholder="Enter name coupon here!">
             </div>
+
+            <div class="mb-3">
+                <label for="code" class="form-label">Code</label>
+                <input ng-model="form.code" type="text" class="form-control" id="code"
+                    placeholder="Enter code coupon here!">
+            </div>
+
+
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea ng-model="form.description" class="form-control" id="description"
@@ -31,7 +39,7 @@
                 <input ng-model="form.userLimit" class="form-control" id="userLimit"
                     placeholder="Enter user limit!"></input>
             </div>
-            
+
             <div class="mb-3">
                 <label for="amountMoneyCoupon" class="form-label">Amount Money Coupon</label>
                 <input ng-model="form.amountMoneyCoupon" class="form-control" id="amountMoneyCoupon"
@@ -41,7 +49,8 @@
 
             <div class="mb-3">
                 <label for="percentCoupon" class="form-label">Percent Coupon</label>
-                <input ng-model="form.percentCoupon" class="form-control" id="percentCoupon" placeholder="Enter Percent Coupon!" type="number"></input>
+                <input ng-model="form.percentCoupon" class="form-control" id="percentCoupon"
+                    placeholder="Enter Percent Coupon!" type="number"></input>
             </div>
 
             <div class="mb-3">
@@ -105,28 +114,42 @@
                 <button ng-click="coupon.update()" class="btn btn-outline-success">Update</button>
                 <!-- <button ng-click="coupon.delete(form.id)" class="btn btn-outline-danger">Delete</button> -->
 
-                <button ng-click="coupon.clickDelete(form)" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-danger">Delete</button>
+                <button ng-click="coupon.clickDelete(form)" data-toggle="modal" data-target="#exampleModal"
+                    class="btn btn-outline-danger">Delete</button>
                 <button ng-click="coupon.reset()" class="btn btn-outline-info">Reset</button>
             </div>
         </form>
     </div>
     <div class="right_body col-lg-8 col-sm-12">
         <div class="row">
+            <div class="dataTables_length d-flex mt-2" id="dataTable_length">
+                <label class="d-flex">Show
+                    <select ng-model="pager.size" name="dataTable_length" aria-controls="dataTable"
+                        class="custom-select custom-select-sm form-control form-control mx-1 mt-n1">
+                        <option ng-value="5">5</option>
+                        <option ng-value="10">10</option>
+                        <option ng-value="25">25</option>
+                        <option ng-value="50">50</option>
+                        <option ng-value="100">100</option>
+                    </select>
+                    entries</label>
+            </div>
+
             <div class="col-6">
                 <input ng-model="searchByName" class="form-control mr-sm-2" type="search" placeholder="Search"
                     aria-label="Search">
             </div>
-            <div class="col-4">
-                <!-- ng-options="i as i.id for i in items"
+            <!-- <div class="col-4">
+                ng-options="i as i.id for i in items"
             ng-init="discountSelected = items[0]" 
             ng-options="i as i.id for i in items"
-            -->
+           
                 <select class="custom-select" ng-model="selectedId" ng-options="i as i.id for i in items">
 
                     <option ng-value="">all</option>
-                    <!-- <option ng-repeat="i in items" ng-value="i.id"> {{i.title}}</option> -->
+                    <option ng-repeat="i in items" ng-value="i.id"> {{i.title}}</option>
                 </select>
-            </div>
+            </div> -->
         </div>
 
         <table class="table table-striped table-hover">
@@ -135,21 +158,24 @@
                     <th scope="col">#</th>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
+                    <!-- <th scope="col">Code</th> -->
                     <th scope="col">User Limit</th>
                     <th scope="col">Percent Coupon</th>
                     <th scope="col">Money Coupon</th>
                     <th scope="col">Start day</th>
                     <th scope="col">End day</th>
-                    <!-- <th scope="col" class="text-center">Create by</th> -->
+                    
                     <th scope="col" class="text-center">Is display</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="c in items | limitTo: pager.size : pager.page | filter: searchByName | filter: selectedId ">
+                <tr
+                    ng-repeat="c in items | limitTo: pager.size : pager.size*pager.page | filter: searchByName | filter: selectedId ">
                     <th scope="row">{{$index + 1}}</th>
                     <td class="text-center">{{c.id}}</td>
                     <td class="text-center">{{c.name}}</td>
+                    <!-- <td class="text-center">{{c.code}}</td> -->
                     <td class="text-center">{{c.userLimit}}</td>
                     <td class="text-center">{{c.percentCoupon}}%</td>
                     <td class="text-center">{{c.amountMoneyCoupon}}k VND</td>

@@ -17,11 +17,11 @@
                 <input ng-model="form.email" type="text" class="form-control" id="email" placeholder="Email">
             </div>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="avatar" class="form-label">Avatar</label>
                 <input ng-model="form.avatar" type="text" class="form-control" id="avatar"
                     placeholder="Enter avatar here!">
-            </div>
+            </div> -->
 
             <div class="mb-3">
                 <label for="firstName" class="form-label">FirstName</label>
@@ -122,6 +122,21 @@
     <div class="right_body col-lg-8 col-sm-12">
         <!-- tim kiem -->
         <div class="row">
+
+            <div class="dataTables_length d-flex mt-2" id="dataTable_length">
+                <label class="d-flex">Show
+                    <select ng-model="pager.size" name="dataTable_length" aria-controls="dataTable"
+                        class="custom-select custom-select-sm form-control form-control mx-1 mt-n1">
+                        <option ng-value="5">5</option>
+                        <option ng-value="10">10</option>
+                        <option ng-value="25">25</option>
+                        <option ng-value="50">50</option>
+                        <option ng-value="100">100</option>
+                    </select>
+                    entries</label>
+            </div>
+
+
             <div class="col-8">
                 <input ng-model="searchByName" class="form-control mr-sm-2" type="search" placeholder="Search"
                     aria-label="Search">
@@ -154,7 +169,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="c in items | filter: searchByName|filter: selectedOption| limitTo: pager.size : pager.page">
+                <tr ng-repeat="c in items | filter: searchByName|filter: selectedOption| limitTo: pager.size : pager.size*pager.page ">
                     <th scope="row">{{$index + 1}}</th>
                     <td class="text-center">{{c.email}}</td>
                     <!-- <td class="text-center">{{c.firstName}}</td>
