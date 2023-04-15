@@ -181,8 +181,8 @@
                     <td class="text-center">{{c.createDate | date:'dd-MM-yyyy'}}</td>
                     <td class="text-center">{{c.isDisplay?'Yes':'No'}}</td>
                     <td class="text-end">
-                        <button ng-click="customer.edit(c)"><i class="far fa-edit"></i></button> -
-                        <button ng-click="customer.clickDelete(c)" data-toggle="modal" data-target="#exampleModal"><i
+                        <button class="btn btn-success mb-2" ng-click="customer.edit(c)"><i class="far fa-edit"></i></button> -
+                        <button class="btn btn-warning" ng-click="customer.clickDelete(c)" data-toggle="modal" data-target="#exampleModal"><i
                                 class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>
