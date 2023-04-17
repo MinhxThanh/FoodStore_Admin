@@ -16,7 +16,6 @@ app.controller('discount-controller', function ($scope, $http, $window, $route) 
     $scope.foodIdById = {}
     $scope.foodDiscount = {}
     $scope.allDiscount = []
-    $scope.discountIdCurrent = {}
 
     $scope.form = {
         fixed: true,
@@ -44,83 +43,137 @@ app.controller('discount-controller', function ($scope, $http, $window, $route) 
     }
     $scope.initialize()
     $scope.findAllFood = function(discount){
-        $scope.discountIdCurrent = discount
         $http.get(`http://localhost:8080/rest/food/findAll`).then(resp => {
             $scope.foods = resp.data
+        })
+        $http.get(`http://localhost:8080/rest/discount`).then(resp => {
+            $scope.discounts = resp.data
         })
         const foodDiscountId = discount.name.replace(/%/g, '')
         console.log("foodDiscountId: ",foodDiscountId)
         $http.get(`http://localhost:8080/rest/discount/findAllFoodDiscount/${foodDiscountId}`).then(resp => {
             $scope.foodDiscount = resp.data
-            for(let i=0; i< resp.data.length; i++){
-                $scope.isChecked = function(f){
-                    return $scope.foodDiscount.includes(f.id)
-                }
-                console.log("d: ",resp.data[i])
-            }
+            // // for(let i=0; i< resp.data.length; i++){
+            // //     $scope.isChecked = function(f){
+            // //         return $scope.foodDiscount.includes(f.id)
+            // //     }
+            // //     console.log("d: ",resp.data[i])
+            // // }
             console.log("foodDiscount: ",resp.data)
         }).catch(err => {
             console.log("Err findAllFoodDiscount: ",err)
         })
-    }
-    $scope.discount_changed = function (f) {
-        let isCheck = $scope.isChecked(f)
-        if (isCheck){
-            $scope.revoke_discount($scope.discountIdCurrent,f)
-        } else {
-            $scope.grant_discount($scope.discountIdCurrent,f)
+        $scope.isChecked = function(f){
+            // return $scope.foodDiscount.includes(f.id)
+            return $scope.foodDiscount.includes(f.id)
         }
-        console.log("discountCurrent discount_changed: ",$scope.discountIdCurrent)
-    }
-    $scope.grant_discount = function (discount,f) {
-        let idDiscount = parseInt(discount.id)
-        console.log("discountCurrent grant_discount: ",discount.id)
-        $http.get(`http://localhost:8080/rest/discount/findById/${idDiscount}`).then(resp => {
-            $scope.findById = resp.data
-            console.log('Success findById: ',resp.data)
 
-            let discount = {
-                name: $scope.findById.name,
-                percentDiscount: $scope.findById.percentDiscount,
-                fixed: $scope.findById.fixed,
-                startDate: $scope.findById.startDate,
-                createDate: $scope.findById.createDate,
-                endDate: $scope.findById.endDate,
-                createBy: sessionStorage.getItem('username'),
-                display: $scope.findById.display,
-                food: f.id,
-                percentDiscount: $scope.findById.percentDiscount
+        $scope.discount_changed = function (f) {
+            let isCheck = $scope.isChecked(f)
+            if (isCheck){
+                $scope.revoke_discount(discount,f)
+            } else {
+                $scope.grant_discount(discount,f)
             }
-            $http.post(`http://localhost:8080/rest/discount`, discount).then(resp => {
-                console.log('Success grant_category: ',resp.data)
-                }).catch(err => {
-                    console.log('Error post grant_category: ', err)
-                })
-        }).catch(err => {
-            console.log('Error grant_category: ', err)
-        })
-    }          
-    $scope.revoke_discount = function (discount,food) {
-        let idDiscount = parseInt(discount.id)
-        console.log("discountCurrent revoke_discount: ",discount.id)
-        $http.delete(`http://localhost:8080/rest/discount/delete/${idDiscount}`).then(resp =>{
-            let index = $scope.allDiscount.findIndex(d => d.id == idDiscount)
-            $scope.allDiscount.splice(index, 1)
+        }
+        $scope.grant_discount = function (dis,f) {
+                let disc = {
+                    name: dis.name,
+                    percentDiscount: dis.percentDiscount,
+                    fixed: dis.fixed,
+                    startDate: dis.startDate,
+                    createDate: dis.createDate,
+                    endDate: dis.endDate,
+                    createBy: sessionStorage.getItem('username'),
+                    display: dis.display,
+                    food: f.id,
+                    percentDiscount: dis.percentDiscount
+                }
+                $http.post(`http://localhost:8080/rest/discount`, disc).then(resp => {
+                    console.log('Success grant_category: ',resp.data)
 
-            console.log('delete success revoke category: ',resp.data)
-            $scope.message = "Delete authority success!"
-            // $scope.liveToastBtn()
-        }).catch(err =>{
-            console.log("Error delete revoke category", err)
-        })
+                    }).catch(err => {
+                        console.log('Error post grant_category: ', err)
+                    })
+        }  
+        $scope.revoke_discount = function (dis,food) {
+            let id = parseInt(dis.food.id)
+            const name = dis.name.replace(/%/g, '')
+            console.log("delete: ",dis) 
+            $http.delete(`http://localhost:8080/rest/discount/delete/${name}/${id}`).then(resp =>{
+                // let index = $scope.allDiscount.findIndex(d => d.id == idDiscount)
+                // $scope.discounts.splice(index, 1)
+    
+                console.log('delete success revoke category: ',resp.data)
+                $scope.message = "Delete authority success!"
+            }).catch(err =>{
+                console.log("Error delete revoke category", err)
+            })
+        } 
     }
+    
+           
+    
+    // $scope.findAllFood = function(discount){
+    //     $http.get(`http://localhost:8080/rest/food/findAll`).then(resp => {
+    //                 $scope.foods = resp.data
+    //     })
+    //     $http.get(`http://localhost:8080/rest/discount`).then(resp => {
+    //         $scope.discounts = resp.data
+    //     })
+    //     $scope.isChecked = function(f){
+    //         return $scope.discounts.find(item => item.food.id===f.id && item.id===discount.id)
+    //     }
+    //     $scope.discount_changed = function(f){
+    //         let checked = $scope.isChecked(f)
+    //         if(checked){
+    //             $scope.deleteDiscountFood(discount)
+    //         }else{
+    //             $scope.addDiscountFood(discount,f)
+    //         }
+    //     }
+    //     $scope.deleteDiscountFood = function(discount){
+    //         $http.delete(`http://localhost:8080/rest/discount/delete/${discount.id}`).then(resp =>{
+    //         let index = $scope.discounts.findIndex(d => d.id == discount.id)
+    //         $scope.discounts.splice(index, 1)
+
+    //         console.log('delete success revoke category: ',resp.data)
+    //         $scope.message = "Delete authority success!"
+
+    //         this.findAllFood(dis)
+    //     }).catch(err =>{
+    //         console.log("Error delete revoke category", err)
+    //     })
+    //     }
+    //     $scope.addDiscountFood = function(discount,f){
+    //         let item = {
+    //             name: discount.name,
+    //             percentDiscount: discount.percentDiscount,
+    //             fixed: discount.fixed,
+    //             startDate: discount.startDate,
+    //             createDate: discount.createDate,
+    //             endDate: discount.endDate,
+    //             createBy: sessionStorage.getItem('username'),
+    //             display: discount.display,
+    //             food: f.id,
+    //             percentDiscount: discount.percentDiscount
+    //         }
+    //         $http.post(`http://localhost:8080/rest/discount`, item).then(resp => {
+                
+    //             console.log('Success grant_category: ',resp.data)
+    //             $scope.findAllFood(dis)
+    //             }).catch(err => {
+    //                 console.log('Error post grant_category: ', err)
+    //         })
+    //     }
+    // }
     $scope.displayChange = function(discount){
         let display = ''
             if(discount.display == true){
                 display = 'false'
                 $http.put(`http://localhost:8080/rest/discount/display/${display}/${discount.id}`, discount).then(resp => {
                     console.log("Display Discount false ok")
-                    $scope.reload()
+                    $scope.load()
                 })
 
                 }
@@ -128,7 +181,7 @@ app.controller('discount-controller', function ($scope, $http, $window, $route) 
                 display = 'true'
                 $http.put(`http://localhost:8080/rest/discount/display/${display}/${discount.id}`, discount).then(resp => {
                     console.log("Display Discount true ok")
-                    $scope.reload()
+                    $scope.load()
                 })
                 }
     }
