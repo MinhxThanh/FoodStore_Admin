@@ -119,10 +119,14 @@ app.controller('coupon-controller', function ($scope, $http, $window,$route) {
             this.page = this.count - 1
         },
         next() {
-            this.incrementLimit(true)
+            this.page++
+            if (this.page >= this.count)
+                this.first()
         },
         prev() {
-            this.incrementLimit(false)
+            this.page--
+            if (this.page < 0)
+                this.last()
         },
         incrementLimit(up) {
             if (up) {
