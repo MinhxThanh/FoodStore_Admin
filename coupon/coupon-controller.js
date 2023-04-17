@@ -138,51 +138,61 @@ app.controller('coupon-controller', function ($scope, $http, $window,$route) {
         $http.get(`http://localhost:8080/rest/coupon/getAll`).then(resp =>{
             $scope.items = resp.data
         })
-        $http.get(`http://localhost:8080/rest/customer/getAll`).then(resp =>{
-                $scope.customerCoupon.customer = resp.data
-        })
+        // $http.get(`http://localhost:8080/rest/customer/getAll`).then(resp =>{
+        //         $scope.customerCoupon.customer = resp.data
+        // })
         $http.get(`http://localhost:8080/rest/customerCoupon/getAll`).then(resp => {
             $scope.customerCoupon.customerCoupon = resp.data
             })
-        }
+    }
     $scope.initialize()
-    $scope.customerCoupon = {
-        customer: [],
-        customerCoupon: [],
-        coupon_of(customer, coupon) {
-            return this.customerCoupon.find(item => item.customer.email === customer.email && item.coupon.id === coupon.id)
-        },
-        coupon_changed(custo,form){
-            let cus = this.coupon_of(custo,form)
-            if(cus){
-                this.revoke_customerCoupon(cus.customer.email,cus.coupon.id)
+    $scope.openModal = function(form){
+        $http.get(`http://localhost:8080/rest/customer/getAll`).then(resp =>{
+                $scope.customer = resp.data
+        })
+        $http.get(`http://localhost:8080/rest/customerCoupon/getAll`).then(resp => {
+            $scope.customerCoupon = resp.data
+            })
+        $scope.isChecked = function(cus){
+            return $scope.customerCoupon.find(item => item.customer.email===cus.email && item.coupon.id===form.id)
+        }
+        $scope.customerCoupon_changed = function(cus){
+            let checked = $scope.isChecked(cus)
+            if(checked){
+                $scope.delete_customerCoupon(cus,form)
             }else{
-                let cusC = {
-                    customerEmail: custo.email,
-                    couponId: form.id,
-                    createDate: new Date(),
-                    status: custo.status
-                }
-                this.grant_customerCoupon(cusC)
+                $scope.add_customerCoupon(cus,form)
             }
-        },
-        revoke_customerCoupon(customer,form){
-            console.log("customer: ",customer)
-            $http.delete(`http://localhost:8080/rest/customerCoupon/delete/${customer}/${form}`).then(resp => {
-                console.log("delete ewvoke_customerCoupon success ")
+        }
+        $scope.delete_customerCoupon = function(cus,form){
+            $http.delete(`http://localhost:8080/rest/customerCoupon/delete/${cus.email}/${form.id}`).then(resp => {
+              console.log("delete ewvoke_customerCoupon success ")
+              this.openModal(form)
             }).catch(err => {
                 console.log("fail customerCoupon: ",err)
             })
-        },
-        grant_customerCoupon(cusC){
             
+        }
+        $scope.add_customerCoupon = function(cus,form){
+            let cusC = {
+                        customerEmail: cus.email,
+                        couponId: form.id,
+                        createDate: new Date(),
+                        status: cus.status
+                        }
             $http.post(`http://localhost:8080/rest/customerCoupon/add`,cusC).then(resp => {
-                this.customerCoupon.push(cusC)
+                $scope.customerCoupon.push(cusC)
                 console.log("post customerCoupon success")
+                this.openModal(form)
             }).catch(err => {
                 console.log("fail grant_customerCoupon: ",err)
             })
         }
+    }
+    $scope.getDeletedCouponId = function() {
+        // Lấy ID sản phẩm đã xóa từ biểu mẫu ẩn
+        // return $scope.deletedCouponId;
+        console.log("getDeletedCouponId: ",$scope.deletedCouponId)
     }
     $scope.load = function(){
         $route.reload();
