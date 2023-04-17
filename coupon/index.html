@@ -168,7 +168,8 @@
                                 class="fas fa-trash-alt"></i></button>
 
                         <!-- Button trigger modal -->
-                        <button ng-disabled="form.id == null" type="button" class="btn btn-primary mt-3"
+                        <!-- ng-disabled="form.id == null"  -->
+                        <button ng-click="openModal(c)" type="button" class="btn btn-primary mt-3"
                             data-toggle="modal" data-target="#exampleModal2">
                             Setting Coupon
                         </button>
@@ -239,7 +240,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg" >
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Setting Coupon For</h5>
@@ -258,15 +259,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- 
-                                    ng-click="change_customerCoupon(cus)"> -->
-                        <tr ng-repeat="cus in customerCoupon.customer">
+                        <!-- ng-checked="customerCoupon.coupon_of(cus,form)"
+                                ng-click="customerCoupon.coupon_changed(cus,form)" -->
+                                <!-- customerCoupon. -->
+                        <tr ng-repeat="cus in customer">
                             <th scope="row">
                                 <input type="checkbox" 
-                                ng-checked="customerCoupon.coupon_of(cus,form)"
-                                ng-click="customerCoupon.coupon_changed(cus,form)"
+                                ng-checked="isChecked(cus,form)"
+                                ng-click="customerCoupon_changed(cus)"
                                 >
                             </th>
+                            <!-- <form name="hiddenForm" style="display:none">
+                                <input type="hidden" ng-model="deletedCouponId">
+                            </form> -->
                             <td>{{cus.email}} </td>
                             <td>{{cus.fullname}} </td>
                             <td>{{cus.gender ? 'Male':'Female'}} </td>
