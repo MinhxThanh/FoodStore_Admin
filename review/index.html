@@ -9,7 +9,7 @@
                 <i>{{error}}</i>
             </div>
         </div> -->
-        <!-- <form>
+    <!-- <form>
             <div class="mb-3">
                 <label for="idCate" class="form-label">ID</label>
                 <input ng-model="form.id" disabled type="number" class="form-control" id="idCate"
@@ -85,45 +85,70 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">id</th>
-                    <th scope="col">food_id</th>
-                    <th scope="col">customer_email</th>
-                    <th scope="col">rating</th>
-                    <th scope="col">create_date</th>
-                    <th scope="col">update_date</th>
-                    <th scope="col">is_favorite</th>
-                    <th scope="col">is_display</th>
-                    <!-- <th scope="col" class="text-center">Create by</th>
-                    <th scope="col" class="text-center">Is display</th> -->
+                    <th scope="col">Food ID</th>
+                    <th scope="col">Food Name</th>
+                    <th scope="col">Rating</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="c in items | limitTo: pager.size : pager.page">
                     <th scope="row">{{$index + 1}}</th>
-                    <td class="text-center">{{c.id}}</td>
+                    <!-- <td>  <img class="product__details__pic__item--large"
+                        ng-src="{{c.food.imageFoods.get(0).imageName}}" alt="main image" style="height: 350px"></td> -->
+                     <td>{{c.food.id}}</td>   
+                    <td>{{c.food.name}}</td>
+                    <td>{{c.average}}</td>
 
-                    <td class="text-center">{{c.food.name}}</td>
+                    <td>
+                        <button ng-click="viewReview(c)" type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#exampleModal1">
+                           View Rating
+                        </button>
 
-                    <td class="text-center">{{c.customer.email}}</td>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header ">
+                                        <h3 class="modal-title" id="exampleModalLabel">View Rating</h3>
+                                        <button ng-click="load()" type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Name </th>
+                                                    <th>Rate </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                    <td class="text-center">{{c.rating}}</td>
+                                                <tr ng-repeat="f in reviewFood">
+                                                    <th scope="row">{{$index + 1}}</th>
+                                                    <td>{{f.customer.fullname}} </td>
+                                                    <td>{{f.rating}} </td>
+                                                    <td><button class="btn btn-warning"
+                                                            ng-click="review.clickDelete(f)" data-toggle="modal"
+                                                            data-target="#exampleModal"><i
+                                                                class="fas fa-trash-alt"></i></button></td>
+                                                </tr>
 
-                    <td class="text-center">{{c.createDate | date:'dd-MM-yyyy'}}</td>
-                    
-                    <td class="text-center">{{c.updateDate | date:'dd-MM-yyyy'}}</td>
+                                    
 
-                    <td class="text-center">{{c.isFavorite?'No':'Yes'}}</td>
-
-                    <td class="text-center">{{c.isDisplay?'No':'Yes'}}</td>
-
-
-
-                    <td class="text-end">
-                        <!-- <button ng-click="blog.edit(c)"><i class="far fa-edit"></i></button> - -->
-                        <button class="btn btn-warning" ng-click="review.clickDelete(c)" data-toggle="modal" data-target="#exampleModal"><i
-                                class="fas fa-trash-alt"></i></button>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                     </td>
+
                 </tr>
             </tbody>
         </table>
@@ -154,7 +179,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Do you want delete this review name <i>{{review.itemDelete.id}}</i>?
+                Do you want delete this review by <i>{{review.itemDelete.customer.fullname}}</i>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
