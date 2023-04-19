@@ -30,12 +30,18 @@
     <!-- tiny form -->
     <script src="https://cdn.tiny.cloud/1/n5qfm0ek1666hud9m5yywbz7p0morh00e2lsq7uvvselg9da/tinymce/6/tinymce.min.js" ></script>
 
+    <!-- moment Js -->
+    <script src="js/moment.js"></script>
+
     <link rel="stylesheet" href="/product/Foods.css">
     <link rel="stylesheet" href="/discount/discount.css">   
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" 
     integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" 
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+       <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
 </head>
 
@@ -65,11 +71,6 @@
                     <span>Dashboard</span></a>
             </li>
             <li ng-if="username != null" class="nav-item">
-                <a class="nav-link" href="/#!/category">
-                    <i class="fas fa-tasks"></i>
-                    <span>Categories Management</span></a>
-            </li>
-            <li ng-if="username != null" class="nav-item">
                 <a class="nav-link" href="/#!/coupon">
                     <i class="fas fa-tasks"></i>
                     <span>Coupons Management</span></a>
@@ -83,29 +84,11 @@
             </li>
 
             <li ng-if="username != null" class="nav-item">
-                <a class="nav-link" href="/#!/customer">
-                    <i class="fas fa-tasks"></i>
-                    <span>Customer Management</span></a>
-            </li>
-
-            <li ng-if="username != null" class="nav-item">
                 <a class="nav-link" href="/#!/review">
                     <i class="fas fa-tasks"></i>
                     <span>Review Management</span></a>
             </li>
 
-            <li ng-if="username != null" class="nav-item">
-                <a class="nav-link" href="/#!/report">
-                    <i class="fas fa-tasks"></i>
-                    <span>Report Management</span></a>
-            </li>
-
-            
-            <li ng-if="username != null" class="nav-item">
-                <a class="nav-link" href="/#!/authority">
-                    <i class="fab fa-autoprefixer"></i>
-                    <span>Authorities Management</span></a>
-            </li>
             <li ng-if="username != null" class="nav-item">
                 <a class="nav-link" href="/#!/food">
                     <i class="fas fa-tasks"></i>
@@ -130,17 +113,19 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+            <li class="nav-item" ng-if="admin == 'true'">
+                <span class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo" style="cursor: pointer;">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
+                    <span>Administration</span>
+                </span>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <h6 class="collapse-header">Admin Components:</h6>
+                        <a class="collapse-item" href="/#!/category"><i class="fas fa-tasks"></i> Categories Management</a>
+                        <a class="collapse-item" href="/#!/customer"><i class="fas fa-users-cog"></i> Customer Management</a>
+                        <a class="collapse-item" href="/#!/report"><i class="fas fa-chart-pie"></i> Report Management</a>
+                        <a class="collapse-item" href="/#!/authority"><i class="fab fa-autoprefixer"></i> Authorities</a>
                     </div>
                 </div>
             </li>
@@ -520,7 +505,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
 </body>
 
 </html>

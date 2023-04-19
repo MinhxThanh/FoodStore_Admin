@@ -162,11 +162,8 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">User Limit</th>
-                    <th scope="col">Percent Coupon</th>
-                    <th scope="col">Money Coupon</th>
                     <th scope="col">Start day</th>
                     <th scope="col">End day</th>
                     <th scope="col" class="text-center">Create by</th>
@@ -178,14 +175,11 @@
                 <tr
                     ng-repeat="c in items | limitTo: pager.size : pager.size*pager.page | filter: searchByName | filter: selectedId ">
                     <th scope="row">{{$index + 1}}</th>
-                    <td class="text-center">{{c.id}}</td>
                     <td class="text-center">{{c.name}}</td>
                     <td class="text-center">{{c.userLimit}}</td>
-                    <td class="text-center">{{c.percentCoupon}}%</td>
-                    <td class="text-center">{{c.amountMoneyCoupon}}k VND</td>
                     <td class="text-center">{{c.startDate | date:'dd-MM-yyyy'}}</td>
                     <td class="text-center">{{c.endDate | date:'dd-MM-yyyy'}}</td>
-                    <td class="text-center">{{c.user.fullname}}</td>
+                    <td class="text-center">{{c.user.username}}</td>
 
                     <td class="text-center">{{c.isDisplay?'Yes':'No'}}</td>
 
@@ -200,7 +194,7 @@
                         <!-- ng-disabled="form.id == null"  -->
                         <button ng-click="openModal(c)" type="button" class="btn btn-primary mt-3" data-toggle="modal"
                             data-target="#exampleModal2">
-                            Setting Coupon
+                            <i class="fas fa-plus"></i> Add Customer
                         </button>
 
 

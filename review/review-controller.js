@@ -98,6 +98,11 @@ app.controller('review-controller', function ($scope, $http, $window) {
 
     }
     $scope.initialize = function () {
+        let accessToken = sessionStorage.getItem('accessToken')
+        if(accessToken == null) {
+            location.href = "#!/security/login"
+        }
+        
         $http.get(`http://localhost:8080/rest/review/getAll`).then(resp => {
             $scope.items = resp.data
             console.log(resp.data)

@@ -1,3 +1,6 @@
+ <!--    list order-->
+
+
 <div class="row border">
 	<div class="col-8">
 			<input ng-model="searchByName" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -25,17 +28,12 @@
 	  <table class="table">
 		<thead>
 		  <tr>
-      <th scope="col">Customer Email</th>
+      <th scope="col">Customer Name</th>
 			<th scope="col">Paymentmethod</th>
-			<th scope="col">Shipmethod</th>
 			<th scope="col">Order Date</th>
-			<th scope="col">Shipped Date</th>
 			<th scope="col">Customer Phone</th>
-			<th scope="col">Customer Address</th>
       <th scope="col">Price</th>
-			<th scope="col">Coupon Name</th>
 			<th scope="col">Status</th>
-			<th scope="col">Display</th>
 			<th scope="col">
 				
 			</th>
@@ -47,29 +45,29 @@
       | filter: searchByName|filter: o.orderDate| limitTo: pager.size : pager.size*pager.page" 
       >
 			<td >
-			  {{o.customer.email}}
+        {{o.customer.lastName}} {{o.customer.firstName}} 
 			</td>
 			<td>{{o.paymentmethod.name}}</td>
-			<td>{{o.shipmethod.name}}</td>
 			<td>{{o.orderDate | date: 'dd-MM-yyyy'}}</td>
-			<td>{{o.shippedDate | date: 'dd-MM-yyyy'}}</td>
 			<td>{{o.customerPhoneAddress.phone}}</td>
-			<td>{{o.customerPhoneAddress.address}}</td>
-      <td>{{o.price}} </td>
-      <td>{{o.coupon.name}} </td>
+      <td>{{o.price | currency:'₫ '}} </td>
 			<td>
-                <p ng-if="o.status == 1">Đang xử lý</p>
-                <p ng-if="o.status ==2">Đã nhận đơn</p>
-                <p ng-if="o.status ==3">Đang vận hàng</p>
-                <p ng-if="o.status ==4">Đã giao hàng</p>
-                <p ng-if="o.status ==5">Hủy đơn</p>
+                <p ng-if="o.status == 1">Processed</p>
+                <p ng-if="o.status ==2">Order received</p>
+                <p ng-if="o.status ==3">Shipping</p>
+                <p ng-if="o.status ==4">Order Shipped</p>
+                <p ng-if="o.status ==5">Finished Order</p>
+                <p ng-if="o.status ==0">Order is Canceled</p>
             </td>
-			      <td>{{o.display}} </td>
             <td>
-                <!-- Button trigger modal -->
-<button ng-click="findById(o)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-    Edit Status 
-  </button>
+              <button ng-click="findById(o)" type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#staticBackdrop">
+                <i class="far fa-edit"></i> Edit Status 
+                </button>
+              <button ng-click="orderDetail.getDetailOrder(o)" type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#orderDetailStaticBackdrop">
+                <i class="fas fa-info"></i> Order Detail
+              </button>
+                              <!-- Button trigger modal -->
+
   
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -121,4 +119,181 @@
             </nav>
             </div>
   
+</div>
+
+
+<!-- order detail item here -->
+<div class="modal fade" id="orderDetailStaticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <img ng-src="{{orderDetail.order.image}}" alt="image" class="mr-2">
+          Order Detail!
+        </h5>
+      </div>
+      <div class="modal-body">
+        <style>
+          .card{z-index: 0;background-color: #ECEFF1;padding-bottom: 20px;margin-bottom: 50px;border-radius: 10px}.top{padding-top: 40px;padding-left: 13% !important;padding-right: 13% !important}#progressbar{margin-bottom: 30px;overflow: hidden;color: #455A64;padding-left: 0px;margin-top: 30px}#progressbar li{list-style-type: none;font-size: 13px;width: 20%;float: left;position: relative;font-weight: 400}#progressbar .step0:before{font-family: FontAwesome;content: "\f10c";color: #fff}#progressbar li:before{width: 40px;height: 40px;line-height: 45px;display: block;font-size: 20px;background: #C5CAE9;border-radius: 50%;margin: auto;padding: 0px}#progressbar li:after{content: '';width: 100%;height: 12px;background: #C5CAE9;position: absolute;left: 0;top: 16px;z-index: -1}#progressbar li:last-child:after{border-top-right-radius: 10px;border-bottom-right-radius: 10px;position: absolute;left: -50%}#progressbar li:nth-child(2):after, #progressbar li:nth-child(3):after , #progressbar li:nth-child(4):after{left: -50%}#progressbar li:first-child:after{border-top-left-radius: 10px;border-bottom-left-radius: 10px;position: absolute;left: 50%}#progressbar li:last-child:after{border-top-right-radius: 10px;border-bottom-right-radius: 10px}#progressbar li:first-child:after{border-top-left-radius: 10px;border-bottom-left-radius: 10px}#progressbar li.active:before, #progressbar li.active:after{background: #9BCA3C}#progressbar li.active:before{font-family: FontAwesome;content: "\f00c"}.icon{width: 60px;height: 60px;margin-right: 15px}.icon-content{padding-bottom: 20px}@media screen and (max-width: 992px){.icon-content{width: 50%}}
+        </style>
+    <div class="my-5 ">
+      <div class="row justify-content-center ">
+        <div class="container-fluid px-1 px-md-4 mx-auto">
+          <div class="card">
+            <div class="row d-flex justify-content-between px-3 top">
+              <div class="info">
+                <h5 class="d-block">Order Id: <span class="text-primary font-weight-bold">#{{orderDetail.order.id}}</span></h5>
+                <h5 class="d-block">
+                  Status: 
+                  <span class="text-primary font-weight-bold" ng-if="orderDetail.order.status == 1">Processed</span>
+                  <span class="text-primary font-weight-bold" ng-if="orderDetail.order.status ==2">Order received</span>
+                  <span class="text-primary font-weight-bold" ng-if="orderDetail.order.status ==3">Shipping</span>
+                  <span class="text-primary font-weight-bold" ng-if="orderDetail.order.status ==4">Order Shipped</span>
+                  <span class="text-primary font-weight-bold" ng-if="orderDetail.order.status ==5">Finished Order</span>
+                  <span class="text-primary font-weight-bold" ng-if="orderDetail.order.status ==0">Order is Canceled</span>
+              </div>
+              <div class="d-flex flex-column text-sm-right">
+                <p class="mb-0">
+                  Shipped Date: 
+                  <span class="font-italic">
+                    {{orderDetail.order.shippedDate}}
+                  </span>
+                </p>
+                <p class="mb-0">
+                  Order Date: 
+                  <span class="font-italic">
+                    {{orderDetail.order.orderDate}}
+                  </span>
+                </p>
+              </div>
+            </div> <!-- Add class 'active' to progress -->
+            <div class="row d-flex justify-content-center">
+              <div class="col-12">
+                <ul id="progressbar" class="text-center">
+                  <li class="{{orderDetail.order.status >= 1 ? 'active step0' : 'step0'}}"></li>
+                  <li class="{{orderDetail.order.status >= 2 ? 'active step0' : 'step0'}}"></li>
+                  <li class="{{orderDetail.order.status >= 3 ? 'active step0' : 'step0'}}"></li>
+                  <li class="{{orderDetail.order.status >= 4 ? 'active step0' : 'step0'}}"></li>
+                  <li class="{{orderDetail.order.status >= 5 ? 'active step0' : 'step0'}}"></li>
+                </ul>
+              </div>
+            </div>
+            <div class="row container-fluid justify-content-around ml-2 mt-n3">
+              <div class="icon-content text-center"> 
+                <!-- <i class="fas fa-clipboard-list icon fa-4x m-2" style="color: #9aca3a;"></i> -->
+                <img class="icon text-success" src="/img/icon1.png">
+                <div class="d-flex flex-column">
+                  <p class="font-weight-bold">Order<br>Processed</p>
+                </div>
+              </div>
+              <div class="icon-content text-center"> <img class="icon" src="/img/icon2.png">
+                <div class="d-flex flex-column">
+                  <p class="font-weight-bold">Order<br>Order received</p>
+                </div>
+              </div>
+              <div class=" icon-content text-center"> <img class="icon" ng-src="/img/icon3.png">
+                <div class="d-flex flex-column">
+                  <p class="font-weight-bold">Order<br>Shipping</p>
+                </div>
+              </div>
+              <div class=" icon-content text-center"> <img class="icon" ng-src="/img/icon4.png">
+                <div class="d-flex flex-column">
+                  <p class="font-weight-bold">Order<br>Order Shipped</p>
+                </div>
+              </div>
+              <div class=" icon-content text-center"> <img class="icon" ng-src="/img/icon5.png">
+                <div class="d-flex flex-column">
+                  <p class="font-weight-bold">Order<br>Finished Order</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="row d-flex justify-content-between px-3 top">
+              <div class="d-flex">
+                <div class="border-right pr-5">
+                  <p class="card-text text-muted">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i> ADDRESS
+                  </p>
+                  <hr class="my-0">
+                  <b class="d-block mt-2">{{orderDetail.address.username}}</b>
+                  <b class="d-block">{{orderDetail.address.phone}}</b>
+                  <p class="my-2">{{orderDetail.address.address}}</p>
+                  <div class="d-flex"></div>
+                  <p class="d-block">{{orderDetail.address.cityProvince}}</p>
+                </div>
+                <div class="pl-5">
+                  <p class="card-text text-muted">
+                    UNIT SHIPPING
+                  </p>
+                  <hr class="my-0">
+
+                  <b class="d-block mt-2">International express shipping</b>
+                  <p class="mb-0">Standard Express</p>
+                  <p>Receive goods in 10 minutes to 1 hour</p>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex justify-content-between px-3 top ">
+              <div class="col-lg-12">
+                <div ng-repeat="item in orderDetail.items" class="row px-2 py-3 border-top my-3">
+                  <div class="col-2">
+                    <img ng-src="{{item.image}}" alt="image">
+                  </div>
+                  <div class="col-10">
+                    <b class="d-block">{{item.food.name}}</b>
+                    <div class="d-flex justify-content-between">
+                      <span>x{{item.quantity}}</span>
+                      <div class="d-inline">
+                        <span class="text-muted" style="text-decoration:line-through">{{item.oldPrice | currency:'₫ '}}</span>
+                        <span class="text-danger">{{item.newPrice | currency:'₫ '}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table">
+                  <tbody>
+                  <tr class="text-right">
+                    <td class="w-70">PRICE</td>
+                    <td class="w-30">{{orderDetail.amount | currency:'₫ '}}</td>
+                  </tr>
+                  <tr class="text-right" ng-if="orderDetail.amount > 50000">
+                    <td class="w-70">SHIPPING</td>
+                    <td class="w-30">đ 0</td>
+                  </tr>
+                  <tr class="text-right" ng-if="orderDetail.amount < 50000">
+                    <td class="w-70">SHIPPING</td>
+                    <td class="w-30">đ 15000</td>
+                  </tr>
+                  <tr class="text-right" th:if="${coupon.id != 1}">
+                    <td class="w-70">COUPON</td>
+                    <td class="w-30 text-uppercase">{{orderDetail.coupon.name}}</td>
+                  </tr>
+                  <tr class="text-right">
+                    <td class="w-70">PRICE TOTAL</td>
+                    <td class="w-30"><h4 class="text-danger">{{orderDetail.order.price | currency:'₫ '}}</h4></td>
+                  </tr>
+                  <tr class="text-right" ng-if="orderDetail.order.paymentmethod.id == 1">
+                    <td class="w-70"><i class="fa fa-money" aria-hidden="true"></i> PAYMENT METHODS</td>
+                    <td class="w-30">Payment on Delivery</td>
+                  </tr>
+                  <tr class="text-right" ng-if="orderDetail.order.paymentmethod.id == 2">
+                    <td class="w-70"><i class="fa fa-money" aria-hidden="true"></i> PAYMENT METHODS</td>
+                    <td class="w-30">Payment on Paypal</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>

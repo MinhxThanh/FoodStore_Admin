@@ -33,6 +33,16 @@ app.controller('report-controller', function ($scope, $http, $window) {
 
 
     $scope.initialize = function () {
+      // security 
+      let accessToken = sessionStorage.getItem('accessToken')
+        let admin = sessionStorage.getItem('admin')
+        if(accessToken == null) {
+            location.href = "#!/security/login"
+        } else if(accessToken != null) {
+            if(admin == 'false') {
+                location.href = "#!/security/login"
+            }
+        }
       //lấy số lượng mặt hàng
       $http.get(`http://localhost:8080/rest/food`).then(resp => {
         $scope.sum_food = resp.data;

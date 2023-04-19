@@ -12711,3 +12711,10 @@ body.sidebar-toggled footer.sticky-footer {
   border: 0;
   background: #FF8118;
 }
+
+.w-70 {
+    width: 70% !important;
+}
+.w-30 {
+    width: 30% !important;
+}

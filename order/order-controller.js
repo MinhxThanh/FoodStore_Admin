@@ -3,13 +3,52 @@ app.controller('order-controller', function($scope, $http, $window, $route){
     $scope.selectedStatus={}
     
     $scope.nameStatus = [
-        {name:'Đang xử lý',id:1},
-        {name:'Đã nhận đơn',id:2}, 
-        {name:'Đang vận chuyển',id:3},
-        {name:'Đã giao hàng',id:4},
-        {name:'Hủy đơn',id:5}
+        {name:'Processed',id:1},
+        {name:'Order received',id:2}, 
+        {name:'Shipping',id:3},
+        {name:'Order Shipped',id:4},
+        {name:'Finished Order',id:5},
     ]
+
+    $scope.orderDetail = {
+        items: [],
+        order: {},
+        address: {},
+        coupon: {},
+        getDetailOrder(order) {
+            $http.get(`http://localhost:8080/rest/orderDetail/getAllByOrderId/${order.id}`).then(resp =>{
+                this.items = resp.data
+                console.log("item:", resp.data )
+            })
+            $http.get(`http://localhost:8080/rest/order/findById/${order.id}`).then(resp =>{
+                resp.data.shippedDate = moment(new Date(resp.data.shippedDate)).fromNow();
+                resp.data.orderDate = moment(new Date(resp.data.orderDate)).fromNow();
+                this.order = angular.copy(resp.data)
+            })
+            $http.get(`http://localhost:8080/rest/customerPhoneAddress/findById/${order.customerPhoneAddress.id}`).then(resp =>{
+                this.address = resp.data
+            }).catch(err => console.log("Error CustomerPhoneAddress: ", err))
+
+            $http.get(`http://localhost:8080/rest/coupon/findById/${order.coupon.id}`).then(resp =>{
+                this.coupon = resp.data
+            }).catch(err => console.log("Error coupon: ", err))
+        },
+        get amount() {
+            const totalAmount = this.items.reduce((total, item) => {
+              return total + (item.quantity * item.newPrice);
+            }, 0);
+            
+            return totalAmount;
+          }
+          
+    }
+
     $scope.initialize = function(){
+        let accessToken = sessionStorage.getItem('accessToken')
+        if(accessToken == null) {
+            location.href = "#!/security/login"
+        }
+        
         $http.get(`http://localhost:8080/rest/order/findAll`).then(resp => {
             $scope.order = resp.data
         })

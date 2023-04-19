@@ -12,7 +12,7 @@ app.controller('blog-controller', function ($scope, $http, $window) {
     $scope.message = ""
     $scope.error = ""
 
-    
+
     $scope.imageUpload = function (event) {
         var files = event.target.files;
 
@@ -23,41 +23,43 @@ app.controller('blog-controller', function ($scope, $http, $window) {
         images: [],
         blog: {},
 
-        findAllByBlogId(blog){
+        findAllByBlogId(blog) {
             this.blog = blog
             console.log('getBlog:', this.blog)
 
-            $http.get(`http://localhost:8080/rest/imageBlog/findAllByBlogId/${blog.id}`).then(resp =>{
+            $http.get(`http://localhost:8080/rest/imageBlog/findAllByBlogId/${blog.id}`).then(resp => {
                 this.images = angular.copy(resp.data)
             })
         },
-        imageChanged(files){
+        imageChanged(files) {
             let dataImage = new FormData()
             dataImage.append('file', files[0])
             $http.post('http://localhost:8080/rest/upload/firebase', dataImage, {
                 transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            }).then(resp =>{
-               this.createImageBlog(resp.data.name)
-            }).catch(err =>{
+                headers: {
+                    'Content-Type': undefined
+                }
+            }).then(resp => {
+                this.createImageBlog(resp.data.name)
+            }).catch(err => {
                 $scope.error = "The field file exceeds its maximum permitted size of 1048576 bytes!"
                 console.log('Error', err)
             })
         },
-        deleteImage(image){
-            $http.delete(`http://localhost:8080/rest/imageBlog/deleteById/${image.id}`).then(resp =>{
+        deleteImage(image) {
+            $http.delete(`http://localhost:8080/rest/imageBlog/deleteById/${image.id}`).then(resp => {
                 let index = this.images.findIndex(item => item.id == image.id)
                 this.images.splice(index, 1)
                 $scope.message = "Delete image blog successfully!"
                 $scope.blog.liveToastBtn()
             })
         },
-        createImageBlog(imageName){
+        createImageBlog(imageName) {
             let item = {
                 imageName: imageName,
                 blog: this.blog
             }
-            $http.post(`http://localhost:8080/rest/imageBlog/create`, item).then(resp =>{
+            $http.post(`http://localhost:8080/rest/imageBlog/create`, item).then(resp => {
                 this.images.push(resp.data)
                 $scope.message = "Add image blog successfully!"
                 $scope.blog.liveToastBtn()
@@ -224,10 +226,24 @@ app.controller('blog-controller', function ($scope, $http, $window) {
     }
 
     $scope.initialize = function () {
-        
-        $http.get(`http://localhost:8080/rest/blog/getAll`).then(resp => {
-            $scope.items = resp.data
-        })
+        let accessToken = sessionStorage.getItem('accessToken')
+        if (accessToken == null) {
+            location.href = "#!/security/login"
+        }
+
+        let email = sessionStorage.getItem('email')
+        let admin = sessionStorage.getItem('admin')
+        if (admin == 'false') {
+            $http.get(`http://localhost:8080/rest/blog/findAllByUserEmail/${email}`).then(resp => {
+                $scope.items = resp.data
+            })
+        } else {
+            $http.get(`http://localhost:8080/rest/blog/getAll`).then(resp => {
+                $scope.items = resp.data
+            })
+        }
+
+
         $http.get(`http://localhost:8080/rest/category/getAll`).then(resp => {
             $scope.categoryFood.categories = resp.data
         })

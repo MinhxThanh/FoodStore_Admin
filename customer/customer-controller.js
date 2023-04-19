@@ -128,6 +128,16 @@ app.controller('customer-controller', function ($scope, $http, $window) {
     }
 
     $scope.initialize = function () {
+        let accessToken = sessionStorage.getItem('accessToken')
+        let admin = sessionStorage.getItem('admin')
+        if(accessToken == null) {
+            location.href = "#!/security/login"
+        } else if(accessToken != null) {
+            if(admin == 'false') {
+                location.href = "#!/security/login"
+            }
+        }
+
         $http.get(`http://localhost:8080/rest/customer/getAll`).then(resp => {
             $scope.items = resp.data
             console.log('list: ', resp.data)
