@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="/product/Foods.css">
     <link rel="stylesheet" href="/discount/discount.css">    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
+    <link rel="stylesheet" href="UserProfile/style.css">
 </head>
 
 <body ng-app="adminApp" ng-controller="mainController" id="page-top">
@@ -408,7 +408,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a ng-if="username != null" class="dropdown-item" href="#">
+                                <a ng-if="username != null" class="dropdown-item" href="#!/user-profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -506,7 +506,7 @@
     <script src="order/order-controller.js"></script>
     <!-- <script src="product/foods-controller.js"></script> -->
     <script src="review/review-controller.js"></script>
-    
+    <script src="UserProfile/userEdit.js"></script>
     <script src="report/report-controller.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -517,7 +517,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
+    
 </body>
 
 </html>

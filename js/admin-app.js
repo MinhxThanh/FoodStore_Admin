@@ -32,6 +32,10 @@ app.config(function ($routeProvider) {
             templateUrl: "security/forgot-password.html?" + Math.random(),
             controller: "security-controller"
         })
+        .when("/user-profile", {
+            templateUrl: "UserProfile/index.html?" + Math.random(),
+            controller: "userEdit"
+        })
         .when("/category", {
             templateUrl: "category/index.html?" + Math.random(),
             controller: "category-controller"
