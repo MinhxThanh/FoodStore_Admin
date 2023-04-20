@@ -1,152 +1,69 @@
 <div class="row mt-5">
-    <!-- <div class="left_body col-lg-4 col-sm-12 border rounded p-3">
-        <h2 class="text-center my-3">Reviews Management</h2>
-        <div class="my-2 mx-5">
-            <div class="alert alert-success" role="alert" ng-if="message != ''">
-                <i>{{message}}</i>
-            </div>
-            <div class="alert alert-danger" role="alert" ng-if="error != ''">
-                <i>{{error}}</i>
-            </div>
-        </div> -->
-    <!-- <form>
-            <div class="mb-3">
-                <label for="idCate" class="form-label">ID</label>
-                <input ng-model="form.id" disabled type="number" class="form-control" id="idCate"
-                    placeholder="ID coupon">
-            </div>
-
-            <div class="mb-3">
-                <label for="nameCoupon" class="form-label">Title</label>
-                <input ng-model="form.title" type="text" class="form-control" id="nameCoupon"
-                    placeholder="Enter title blog here!">
-            </div>
-            <div class="mb-3">
-                <label for="content" class="form-label">Content</label>
-                <textarea ng-model="form.content" class="form-control" id="content"
-                    placeholder="Enter content here!"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="viewCount" class="form-label">View Count </label>
-                <input ng-model="form.viewCount" class="form-control" id="viewCount"
-                    placeholder="Enter viewCount limit!"></input>
-            </div>
-            <div class="mb-3">
-                <label for="status" class="form-label">Status</label>
-                <input ng-model="form.status" class="form-control" id="status"
-                    placeholder="Enter status limit!"></input>
-            </div>
+ <style>
 
 
+.rating-label {
+	font-weight: bold;
+}
 
+/* Rating bar width */
+.rating-bar {
+	width: 300px;
+	padding: 8px;
+	border-radius: 5px;
+}
 
-            <div class="mb-3">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label mr-3" for="inlineRadio1">Is Display</label>
-                    <input ng-model="form.isDisplay" ng-value="true" type="radio" name="inlineRadioOptions"
-                        id="inlineRadio1" value="option1" checked>
-                    <label class="form-check-label" for="inlineRadio1">Yes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input ng-model="form.isDisplay" ng-value="false" class="form-check-input" type="radio"
-                        name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">No</label>
-                </div>
-            </div>
+/* The bar container */
 
+.star-active {
+	color: #FBC02D;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
+.star-active:hover {
+	color: #F9A825;
+	cursor: pointer;
+}
 
-            <div class="mb-3">
-                <label for="createDate" class="form-label">Create day</label>
-                <span class="form-control" id="createDate">
-                    {{form.createDate | date:'dd-MM-yyyy'}}
-                </span>
-            </div>
+.star-inactive {
+	color: #CFD8DC;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
-    
-            <div class="mb-3">
-                <label for="createBy" class="form-label">Create by</label>
-                <span class="form-control" id="createBy">
-                    {{form.createBy}}
-                </span>
-            </div>
+.blue-text {
+	color: #0091EA;
+}
 
-
-            <div class="text-center my-3 mt-4">
-                <button ng-click="blog.create()" class="btn btn-outline-primary">Create</button>
-                <button ng-click="blog.update()" class="btn btn-outline-success">Update</button>
-                <button ng-click="blog.delete(form.id)" class="btn btn-outline-danger">Delete</button>
-                <button ng-click="blog.reset()" class="btn btn-outline-info">Reset</button>
-            </div>
-        </form> -->
-    <!-- </div> -->
+ </style>
     <div class="right_body col-lg-12 col-sm-12">
-        <table class="table table-striped table-hover">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Food ID</th>
                     <th scope="col">Food Name</th>
-                    <th scope="col">Rating</th>
+                    <th scope="col">Price</th>
+                    <th scope="col" class="text-center">Amount Rating</th>
+                    <th scope="col" class="text-center">Average Rating</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="c in items | limitTo: pager.size : pager.page">
                     <th scope="row">{{$index + 1}}</th>
-                    <!-- <td>  <img class="product__details__pic__item--large"
-                        ng-src="{{c.food.imageFoods.get(0).imageName}}" alt="main image" style="height: 350px"></td> -->
-                     <td>{{c.food.id}}</td>   
                     <td>{{c.food.name}}</td>
-                    <td>{{c.average}}</td>
+                    <td>{{c.food.price | currency:'₫ '}}</td>
+                    <td class="text-center">{{c.amount}}</td>
+                    <td class="text-center">{{c.average}}</td>
 
                     <td>
-                        <button ng-click="viewReview(c)" type="button" class="btn btn-primary" data-toggle="modal"
+                        <button ng-click="viewReview.getDetail(c, c.food)" type="button" class="btn btn-outline-primary" data-toggle="modal"
                             data-target="#exampleModal1">
-                           View Rating
+                            <i class="far fa-eye"></i> View Rating
                         </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header ">
-                                        <h3 class="modal-title" id="exampleModalLabel">View Rating</h3>
-                                        <button ng-click="load()" type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Name </th>
-                                                    <th>Rate </th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr ng-repeat="f in reviewFood">
-                                                    <th scope="row">{{$index + 1}}</th>
-                                                    <td>{{f.customer.fullname}} </td>
-                                                    <td>{{f.rating}} </td>
-                                                    <td><button class="btn btn-warning"
-                                                            ng-click="review.clickDelete(f)" data-toggle="modal"
-                                                            data-target="#exampleModal"><i
-                                                                class="fas fa-trash-alt"></i></button></td>
-                                                </tr>
-
-                                    
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                       
                     </td>
 
                 </tr>
@@ -166,6 +83,124 @@
         </nav>
     </div>
 </div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+         <div class="modal-header ">
+             <h3 class="modal-title" id="exampleModalLabel">View Rating: <b>{{viewReview.food.name}}</b></h3>
+             <button ng-click="load()" type="button" class="close" data-dismiss="modal"
+                 aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+             </button>
+         </div>
+         <div class="modal-body">
+             <div class="container-fluid px-1 py-5 mx-auto">
+                 <div class="row justify-content-center">
+                     <div class="text-center mb-5">
+                         <div class="col-12">
+                             <div class="row justify-content-left d-flex">
+                                 <div class="col-md-4 d-flex flex-column">
+                                     <div class="rating-box w-75 m-auto" style="background-color: #FBC02D;">
+                                         <h1 class="pt-4">{{viewReview.review.average}}</h1>
+                                         <p class="">out of 5</p>
+                                     </div>
+                                     <div class="mt-n5">
+                                         <span class="{{viewReview.review.average >= 1 ? 'fa fa-star star-active mx-1':'fa fa-star star-inactive mx-1' }}"></span>
+                                         <span class="{{viewReview.review.average >= 2 ? 'fa fa-star star-active mx-1':'fa fa-star star-inactive mx-1' }}"></span>
+                                         <span class="{{viewReview.review.average >= 3 ? 'fa fa-star star-active mx-1':'fa fa-star star-inactive mx-1' }}"></span>
+                                         <span class="{{viewReview.review.average >= 4 ? 'fa fa-star star-active mx-1':'fa fa-star star-inactive mx-1' }}"></span>
+                                         <span class="{{viewReview.review.average >= 4.5 ? 'fa fa-star star-active mx-1':'fa fa-star star-inactive mx-1' }}"></span>
+                                     </div>
+                                     <span class="d-block text-center">{{viewReview.review.amount}} reviews</span>
+                                 </div>
+                                 <div class="col-md-8">
+                                     <div class="rating-bar0 justify-content-center">
+                                         <table class="text-left mx-auto">
+                                             <tr class="border-0">
+                                                 <td class="rating-label">Excellent</td>
+                                                 <td class="rating-bar">
+                                                    <div class="progress" style="height: 10px;">
+                                                        <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ viewReview.rating.excellentPer }}%" aria-valuenow="{{ viewReview.rating.excellentPer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>                                                      
+                                                 </td>
+                                                 <td class="text-right">{{ viewReview.rating.excellent }}</td>
+                                             </tr>
+                                             <tr>
+                                                 <td class="rating-label">Good</td>
+                                                 <td class="rating-bar">
+                                                    <div class="progress" style="height: 10px;">
+                                                        <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ viewReview.rating.goodPer }}%" aria-valuenow="{{ viewReview.rating.goodPer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                 </td>
+                                                 <td class="text-right">{{ viewReview.rating.good }}</td>
+                                             </tr>
+                                             <tr>
+                                                 <td class="rating-label">Average</td>
+                                                 <td class="rating-bar">
+                                                    <div class="progress" style="height: 10px;">
+                                                        <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ viewReview.rating.averagePer }}%" aria-valuenow="{{ viewReview.rating.averagePer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                 </td>
+                                                 <td class="text-right">{{ viewReview.rating.average }}</td>
+                                             </tr>
+                                             <tr>
+                                                 <td class="rating-label">Poor</td>
+                                                 <td class="rating-bar">
+                                                    <div class="progress" style="height: 10px;">
+                                                        <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ viewReview.rating.poorPer }}%" aria-valuenow="{{ viewReview.rating.poorPer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                 </td>
+                                                 <td class="text-right">{{ viewReview.rating.poor }}</td>
+                                             </tr>
+                                             <tr>
+                                                 <td class="rating-label">Terrible</td>
+                                                 <td class="rating-bar">
+                                                    <div class="progress" style="height: 10px;">
+                                                        <div class="progress-bar bg-warning" role="progressbar" aria-label="Warning example" style="width: {{ viewReview.rating.terriblePer }}%" aria-valuenow="{{ viewReview.rating.terriblePer }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                 </td>
+                                                 <td class="text-right">{{ viewReview.rating.terrible }}</td>
+                                             </tr>
+                                         </table>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     
+                     </div>
+                 </div>
+             </div>
+             <table class="table text-center table-hover">
+                 <thead>
+                     <tr>
+                         <th>#</th>
+                         <th>Name </th>
+                         <th>Rate </th>
+                         <th></th>
+                     </tr>
+                 </thead>
+                 <tbody>
+
+                     <tr ng-repeat="f in reviewFood">
+                         <th scope="row">{{$index + 1}}</th>
+                         <td>{{f.customer.fullname}} </td>
+                         <td>{{f.rating}} </td>
+                         <td><button class="btn btn-warning"
+                                 ng-click="review.clickDelete(f)" data-toggle="modal"
+                                 data-target="#exampleModal"><i
+                                     class="fas fa-trash-alt"></i></button></td>
+                     </tr>
+
+         
+
+                 </tbody>
+             </table>
+         </div>
+     </div>
+ </div>
 
 
 <!-- Modal -->

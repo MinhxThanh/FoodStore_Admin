@@ -12,7 +12,7 @@ app.controller('review-controller', function ($scope, $http, $window) {
 
     $scope.review = {
         itemDelete: {},
-       
+
         clickDelete(item) {
             this.itemDelete = item
         },
@@ -82,34 +82,39 @@ app.controller('review-controller', function ($scope, $http, $window) {
         },
         incrementLimit(up) {
             if (up) {
-                (this.page <= ($scope.items.length - this.size)) ? this.page += 10 : this.page = 0;
+                (this.page <= ($scope.items.length - this.size)) ? this.page += 10: this.page = 0;
             } else {
                 this.page > 10 ? this.page -= 10 : this.page = 0;
 
             }
         }
     }
-    $scope.viewReview = function (review) {
-        $http.get(`http://localhost:8080/rest/review/findById/${review.food.id}`).then(resp => {
-            $scope.reviewFood = resp.data
-            console.log(resp.data)
-
-        })
-
+    $scope.viewReview = {
+        food: {},
+        review: {},
+        rating: {},
+        getDetail(review, food) {
+            this.review = review
+            this.food = food
+            $http.get(`http://localhost:8080/rest/review/findById/${review.food.id}`).then(resp => {
+                $scope.reviewFood = resp.data
+            })
+            $http.get(`http://localhost:8080/rest/review/getRatingByFoodId/${food.id}`).then(resp => {
+                this.rating = resp.data
+            })
+        }
     }
     $scope.initialize = function () {
         let accessToken = sessionStorage.getItem('accessToken')
-        if(accessToken == null) {
+        if (accessToken == null) {
             location.href = "#!/security/login"
         }
-        
+
         $http.get(`http://localhost:8080/rest/review/getAll`).then(resp => {
             $scope.items = resp.data
-            console.log(resp.data)
         })
 
 
     }
     $scope.initialize()
 })
-
