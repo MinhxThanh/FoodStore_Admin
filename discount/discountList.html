@@ -32,11 +32,9 @@
 		<thead>
 		  <tr>
 			<th scope="col">Name</th>
-			<th scope="col">Percent Discount</th>
 			<th scope="col">Create Date</th>
 			<th scope="col">Start Date</th>
 			<th scope="col">End Date</th>
-			<th scope="col">Fixed</th>
 			<th scope="col">Display</th>
 			<th scope="col">Create By</th>
 			<th scope="col">
@@ -47,18 +45,13 @@
 		<tbody>
 		  <tr ng-repeat="d in items| filter: searchByName|filter: selectedOption| limitTo: pager.size : pager.size*pager.page" >
 			<td >
-				<!-- <img class="resize" alt="" data-ng-src="/product/images/{{f.imageName}}"> -->
 			  {{d.name}}
 			</td>
-			<td>{{d.percentDiscount}} </td>
 			<td>{{d.createDate}}</td>
 			<td>{{d.startDate}}</td>
 			<td>{{d.endDate}}</td>
 			<td>
-			  {{d.fixed ?'Fixed':'Not Fixed'}}
-			</td>
-			<td>
-				{{d.display ?'Hoạt động':'Kết thúc'}}
+				{{d.display ?'YES':'NO'}}
 			</td>
 			<td>{{d.user.username}}</td>
 			<td>
@@ -144,12 +137,12 @@
 									<th>Creator</th>
 									<td>{{discountId.user.username}} </td>
 								  </tr>
-								  <tr>
+								  <!-- <tr>
 									<th>Image</th>
 									<td ng-repeat="im in imageFoodId" class="container box col-6">
 										<img class="mb-3" alt="" src="{{im.imageName}}">
 									</td>
-								  </tr> 
+								  </tr>  -->
 								</tbody>
 							  </table>
 						</div>
@@ -167,7 +160,7 @@
 					  <div class="modal-content">
 						<div class="modal-header ">
 						  <h3 class="modal-title" id="exampleModalLabel">Settings Discount For</h3>
-						  <button ng-click="reloadPage()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+						  <button ng-click="load()" type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						  </button>
 						</div>
@@ -184,16 +177,18 @@
 								<tbody>
 										<!-- <tr ng-repeat="d in items"> -->
 								  <tr ng-repeat="f in foods">
-											
 									<td><input type="checkbox" aria-label="Checkbox for following text input"
 										ng-checked="isChecked(f)"
 										ng-click="discount_changed(f)"
 										> </td>
 									<td>{{f.name}} </td>
 									<td>{{f.price}} </td>
-									<td ng-repeat="im in imageByFoodId[f.id]" class="container box col-3">
-										<img class="mb-3" alt="" src="{{im.imageName}}"
+									<!-- <td ng-repeat="im in imageByFoodId[f.id]" class="container box col-3">
+										<img class="mb-3" alt="" src="{{im.imageName}}" src="{{imageByFoodId[f.id].get(0).imageName}}"
 										>
+									</td> -->
+									<td class="container box col-3">
+										<img class="mb-3" alt="" src="{{imageByFoodId[f.id][0].imageName}}">
 									</td>
 								  </tr>
 

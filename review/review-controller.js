@@ -1,4 +1,5 @@
 app.controller('review-controller', function ($scope, $http, $window) {
+    $scope.imageFoodId = {}
     $scope.form = {
         isDisplay: true,
         createDate: new Date(),
@@ -11,47 +12,22 @@ app.controller('review-controller', function ($scope, $http, $window) {
 
     $scope.review = {
         itemDelete: {},
-        // create(){
-        //     let item = angular.copy($scope.form)
-        //     console.log("item: ", item)
-        //     $http.post(`http://localhost:8080/rest/review/create`, item).then(resp =>{
-        //         $scope.items.push(resp.data)
-        //         this.reset()
-        //         console.log("category1", resp.data)
-        //         $scope.message = "Create blog successfully!"
-        //     }).catch(err => {
-        //         $scope.error = "Error create blog!"
-        //         console.log("create error:", err)
-        //     })
-        //     this.liveToastBtn()
-        // },
-        // update(){
-        //     let item = angular.copy($scope.form)
-
-        //     $http.put(`http://localhost:8080/rest/blog/update`, item).then(resp =>{
-        //         let index = $scope.items.findIndex(item => item.id == resp.data.id)
-        //         $scope.items[index] = item
-        //         this.reset()
-        //         $scope.message = "Update blog successfully!"
-        //         $window.location.reset()
-        //     }).catch(err => $scope.error = "Error blog category!")
-        //     this.liveToastBtn()
-        // },
-        clickDelete(item){
+       
+        clickDelete(item) {
             this.itemDelete = item
         },
         confirmDelete() {
-            $http.delete(`http://localhost:8080/rest/review/delete/${this.itemDelete.id}`).then(resp =>{
+            $http.delete(`http://localhost:8080/rest/review/delete/${this.itemDelete.id}`).then(resp => {
                 let index = $scope.items.findIndex(item => item.id == this.itemDelete.id)
                 $scope.items.splice(index, 1)
                 this.reset()
-                $scope.message = "Delete blog successfully!"
-            }).catch(err => $scope.error = "Error blog category!")
+                $scope.message = "Delete review successfully!"
+            }).catch(err => $scope.error = "Error review category!")
             this.liveToastBtn()
         },
-        edit(review){
+        edit(review) {
             this.reset()
-            $scope.form= {}
+            $scope.form = {}
             let item = {
                 id: blog.id,
 
@@ -63,28 +39,10 @@ app.controller('review-controller', function ($scope, $http, $window) {
                 createDate: new Date(blog.createDate), // can format
                 status: blog.status,
 
-
-                // <th scope="row">{{$index + 1}}</th>
-                
-                //     <td class="text-center">{{c.id}}</td>
-
-                //     <td class="text-center">{{c.food.name}}</td>
-
-                //     <td class="text-center">{{c.customer.email}}</td>
-
-                //     <td class="text-center">{{c.rating}}</td>
-
-                //     <td class="text-center">{{c.createDate | date:'dd-MM-yyyy'}}</td>
-                    
-                //     <td class="text-center">{{c.updateDate | date:'dd-MM-yyyy'}}</td>
-
-                //     <td class="text-center">{{c.isFavorite?'No':'Yes'}}</td>
-
-                //     <td class="text-center">{{c.isDisplay?'No':'Yes'}}</td>
             }
             $scope.form = angular.copy(item)
         },
-        reset(){
+        reset() {
             $scope.form = {
                 isDisplay: true,
                 isFixed: true,
@@ -95,7 +53,7 @@ app.controller('review-controller', function ($scope, $http, $window) {
             $scope.message = ""
             $scope.error = ""
         },
-        liveToastBtn(){
+        liveToastBtn() {
             var lastMessage = document.querySelector('.toast:last-child');
             new window.bootstrap.Toast(lastMessage).show();
         }
@@ -104,16 +62,16 @@ app.controller('review-controller', function ($scope, $http, $window) {
     $scope.pager = {
         page: 0,
         size: 10,
-        get count(){
+        get count() {
             return Math.ceil(1.0 * $scope.items.length / this.size)
         },
-        get length(){
+        get length() {
             return $scope.items.length
         },
-        first(){
+        first() {
             this.page = 0
         },
-        last(){
+        last() {
             this.page = this.count - 1
         },
         next() {
@@ -124,19 +82,32 @@ app.controller('review-controller', function ($scope, $http, $window) {
         },
         incrementLimit(up) {
             if (up) {
-              (this.page <= ($scope.items.length - this.size)) ? this.page += 10: this.page = 0;
+                (this.page <= ($scope.items.length - this.size)) ? this.page += 10 : this.page = 0;
             } else {
-              this.page > 10 ? this.page -= 10 : this.page = 0;
-        
+                this.page > 10 ? this.page -= 10 : this.page = 0;
+
             }
         }
     }
+    $scope.viewReview = function (review) {
+        $http.get(`http://localhost:8080/rest/review/findById/${review.food.id}`).then(resp => {
+            $scope.reviewFood = resp.data
+            console.log(resp.data)
 
-    $scope.initialize = function (){
-        $http.get(`http://localhost:8080/rest/review/getAll`).then(resp =>{
-            $scope.items = resp.data
-            console.log('list: ', resp.data)
         })
+
+    }
+    $scope.initialize = function () {
+        let accessToken = sessionStorage.getItem('accessToken')
+        if(accessToken == null) {
+            location.href = "#!/security/login"
+        }
+        
+        $http.get(`http://localhost:8080/rest/review/getAll`).then(resp => {
+            $scope.items = resp.data
+            console.log(resp.data)
+        })
+
 
     }
     $scope.initialize()

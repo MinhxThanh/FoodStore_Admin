@@ -2,9 +2,15 @@ const app = angular.module('adminApp', ['ngRoute', 'ngAnimate'])
 app.controller('mainController', function ($scope, $location, $window) {
     $scope.username = sessionStorage.getItem('username')
     $scope.avatar = sessionStorage.getItem('avatar')
+    $scope.admin = sessionStorage.getItem('admin')
 
     $scope.logout = function () {
+        sessionStorage.removeItem('email')
+        sessionStorage.removeItem('accessToken')
         sessionStorage.removeItem('username')
+        sessionStorage.removeItem('avatar')
+        sessionStorage.removeItem('user')
+        sessionStorage.removeItem('admin')
         $scope.username = ''
         $window.location.reload();
         location.href = "index.html"
@@ -102,7 +108,7 @@ app.config(function ($routeProvider) {
         })
 
         .otherwise({
-            templateUrl: "/404.html?" + Math.random(),
+            templateUrl: "home/index.html?" + Math.random(),
             controller: 'home-controller'
         })
 })

@@ -10,7 +10,8 @@ app.controller('security-controller', function ($scope, $http, $window) {
                 sessionStorage.setItem('accessToken', resp.data.accessToken)
                 sessionStorage.setItem('username', resp.data.username)
                 sessionStorage.setItem('avatar', resp.data.avatar)
-                sessionStorage.setItem('user', resp.data.user)
+                sessionStorage.setItem('user', resp.data.user)                
+                sessionStorage.setItem('admin', resp.data.admin)
                 $scope.message = "Login success!!"
                 await $scope.sleep(1000)
                 $window.location.reload();

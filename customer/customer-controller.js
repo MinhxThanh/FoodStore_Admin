@@ -35,7 +35,7 @@ app.controller('customer-controller', function ($scope, $http, $window) {
                 $scope.items[index] = item
                 this.reset()
                 $scope.message = "Update customer successfully!"
-                $window.reset()
+                // $window.reset()
             }).catch(err => $scope.error = "Error customer update!")
             this.liveToastBtn()
         },
@@ -108,10 +108,14 @@ app.controller('customer-controller', function ($scope, $http, $window) {
             this.page = this.count - 1
         },
         next() {
-            this.incrementLimit(true)
+            this.page++
+            if (this.page >= this.count)
+                this.first()
         },
         prev() {
-            this.incrementLimit(false)
+            this.page--
+            if (this.page < 0)
+                this.last()
         },
         incrementLimit(up) {
             if (up) {
@@ -124,6 +128,16 @@ app.controller('customer-controller', function ($scope, $http, $window) {
     }
 
     $scope.initialize = function () {
+        let accessToken = sessionStorage.getItem('accessToken')
+        let admin = sessionStorage.getItem('admin')
+        if(accessToken == null) {
+            location.href = "#!/security/login"
+        } else if(accessToken != null) {
+            if(admin == 'false') {
+                location.href = "#!/security/login"
+            }
+        }
+
         $http.get(`http://localhost:8080/rest/customer/getAll`).then(resp => {
             $scope.items = resp.data
             console.log('list: ', resp.data)

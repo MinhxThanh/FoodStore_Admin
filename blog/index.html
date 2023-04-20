@@ -17,7 +17,7 @@
                 </div>
             </div>
     
-            <form class="row">
+            <form class="row" name="formCate">
                 <div class="col-lg-8 col-sm-12">
                     <div class="mb-3">
                         <label for="idCate" class="form-label">ID</label>
@@ -26,15 +26,22 @@
                     </div>
         
                     <div class="mb-3">
-                        <label for="nameCoupon" class="form-label">Title</label>
+                        <label for="title" class="form-label">Title</label>
+                
                         <input ng-model="form.title" type="text" class="form-control" id="nameCoupon"
-                            placeholder="Enter title blog here!">
+                            placeholder="Enter title blog here!"  ng-required="true" name="title" ng-minlength="4" ng-maxlength="100">
+
+                        <span class="text-danger  ml-3" ng-show="formCate.title.$error.required"> Please enter title!</span>
+                        <span class="text-danger  ml-3" ng-show="formCate.title.$error.minlength">words must be more than 4</span>
+                        <span class="text-danger  ml-3" ng-show="formCate.title.$error.maxlength">words must be less than 100</span>
                     </div>
                     <div class="mb-3">
                         <label for="content" class="form-label">Content</label>
-                        <textarea id="myTextarea"></textarea>
-                        <!-- <textarea ng-model="form.content" class="form-control" id="content"
-                            placeholder="Enter content here!"></textarea> -->
+                        <textarea id="myTextarea" name="content"  ng-required="true"></textarea>
+
+                        <span class="text-danger  ml-3" ng-show="formCate.content.$error.required">
+                            Please enter content!
+                        </span>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-12">

@@ -256,9 +256,24 @@ app.controller('foods-controller', function ($scope, $http, $window, $route, $lo
     }
 
     $scope.initialize = function () {
-        $http.get(`http://localhost:8080/rest/food/findAll`).then(resp => {
-            $scope.items = resp.data
-        })
+        let accessToken = sessionStorage.getItem('accessToken')
+        if(accessToken == null) {
+            location.href = "#!/security/login"
+        }
+        
+        let email = sessionStorage.getItem('email')
+        let admin = sessionStorage.getItem('admin')
+        if (admin == 'false') {
+            $http.get(`http://localhost:8080/rest/food/findAllByUserEmail/${email}`).then(resp => {
+                $scope.items = resp.data
+            })
+        } else {
+            $http.get(`http://localhost:8080/rest/food/findAll`).then(resp => {
+                $scope.items = resp.data
+            })
+        }
+
+       
         tinymce.init({
             selector: "#foodDescription",
             menubar: false,

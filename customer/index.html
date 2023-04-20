@@ -11,34 +11,66 @@
         </div>
 
 
-        <form>
+        <form name="formVal">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input ng-model="form.email" type="text" class="form-control" id="email" placeholder="Email">
+                <input ng-model="form.email" type="email"  name="email" class="form-control" id="email" placeholder="Email" ng-pattern="/^.+@gmail\.com$/" ng-required="true">
+                
+                <span class="text-danger  ml-3" ng-show="formVal.email.$error.required">
+                    Please enter email !
+                </span>
+                <span class="text-danger  ml-3" ng-show="formVal.email.$error.pattern">
+                    gmail address is required!
+                </span>
+
+                
             </div>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="avatar" class="form-label">Avatar</label>
                 <input ng-model="form.avatar" type="text" class="form-control" id="avatar"
                     placeholder="Enter avatar here!">
-            </div>
+            </div> -->
 
             <div class="mb-3">
                 <label for="firstName" class="form-label">FirstName</label>
-                <input ng-model="form.firstName" class="form-control" id="firstName"
-                    placeholder="Enter firstName here!"></input>
+                <input ng-model="form.firstName" class="form-control" id="firstName" name="firstName"
+                    placeholder="Enter firstName here!"  ng-required="true"  ng-minlength="4" ng-maxlength="20"></input> 
+                     <span class="text-danger  ml-3" ng-show="formVal.firstName.$error.required">
+                        Please enter first name !
+                    </span>
+                    <span class="text-danger  ml-3" ng-show="formVal.firstName.$error.minlength">words must be more than 4</span>
+                    <span class="text-danger  ml-3" ng-show="formVal.firstName.$error.maxlength">words must be less than
+                        20</span>
+                    
             </div>
 
             <div class="mb-3">
                 <label for="fullname" class="form-label"> Fullname </label>
-                <input ng-model="form.fullname" class="form-control" id="fullname"
-                    placeholder="Enter fullname !"></input>
+                <input ng-model="form.fullname" class="form-control" id="fullname" name="fullname"
+                    placeholder="Enter fullname !" ng-required="true" ng-minlength="4" ng-maxlength="20"></input> 
+
+                    <span class="text-danger  ml-3" ng-show="formVal.fullname.$error.required">
+                        Please enter  full name !
+                    </span>
+
+                    <span class="text-danger  ml-3" ng-show="formVal.fullname.$error.minlength">words must be more than 4</span>
+                    <span class="text-danger  ml-3" ng-show="formVal.fullname.$error.maxlength">words must be less than
+                        20</span>
             </div>
 
             <div class="mb-3">
                 <label for="lastName" class="form-label">LastName</label>
-                <input ng-model="form.lastName" class="form-control" id="lastName"
-                    placeholder="Enter lastName !"></input>
+                <input ng-model="form.lastName" class="form-control" id="lastName" name="lastName"
+                    placeholder="Enter lastName !"ng-required="true" ng-minlength="4" ng-maxlength="20"></input> 
+
+                    <span class="text-danger  ml-3" ng-show="formVal.lastName.$error.required">
+                        Please enter  last Name  !
+                    </span>
+
+                    <span class="text-danger  ml-3" ng-show="formVal.lastName.$error.minlength">words must be more than 4</span>
+                    <span class="text-danger  ml-3" ng-show="formVal.lastName.$error.maxlength">words must be less than
+                        20</span>
             </div>
 
 
@@ -74,21 +106,13 @@
 
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
-                <input ng-model="form.status" class="form-control" id="status"
+                <input ng-model="form.status" class="form-control" id="status" type="number" name="status"  ng-required="true"
                     placeholder="Enter status limit!"></input>
+                    <span class="text-danger  ml-3" ng-show="formVal.status.$error.required">
+                        Please enter status!
+                    </span>
             </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input ng-model="form.password" class="form-control" id="password"
-                    placeholder="Enter password limit!"></input>
-            </div>
-
-            <div class="mb-3">
-                <label for="rememberToken" class="form-label">rememberToken</label>
-                <input ng-model="form.rememberToken" class="form-control" id="rememberToken"
-                    placeholder="Enter rememberToken limit!"></input>
-            </div>
+          
 
 
 
@@ -107,12 +131,12 @@
 
 
             <div class="text-center my-3 mt-4">
-                <button ng-click="customer.create()" class="btn btn-outline-primary">Create</button>
-                <button ng-click="customer.update()" class="btn btn-outline-success">Update</button>
+                <!-- <button ng-disabled="formVal.$invalid" ng-click="customer.create()" class="btn btn-outline-primary">Create</button> -->
+                <button ng-disabled="formVal.$invalid" ng-click="customer.update()" class="btn btn-outline-success">Update</button>
 
                 <!-- <button ng-click="customer.delete(form.email)" class="btn btn-outline-danger">Delete</button> -->
 
-                <button ng-click="customer.clickDelete(form)" data-toggle="modal" data-target="#exampleModal"
+                <button ng-disabled="formVal.$invalid" ng-click="customer.clickDelete(form)" data-toggle="modal" data-target="#exampleModal"
                     class="btn btn-outline-danger">Delete</button>
 
                 <button ng-click="customer.reset()" class="btn btn-outline-info">Reset</button>
@@ -122,6 +146,21 @@
     <div class="right_body col-lg-8 col-sm-12">
         <!-- tim kiem -->
         <div class="row">
+
+            <div class="dataTables_length d-flex mt-2" id="dataTable_length">
+                <label class="d-flex">Show
+                    <select ng-model="pager.size" name="dataTable_length" aria-controls="dataTable"
+                        class="custom-select custom-select-sm form-control form-control mx-1 mt-n1">
+                        <option ng-value="5">5</option>
+                        <option ng-value="10">10</option>
+                        <option ng-value="25">25</option>
+                        <option ng-value="50">50</option>
+                        <option ng-value="100">100</option>
+                    </select>
+                    entries</label>
+            </div>
+
+
             <div class="col-8">
                 <input ng-model="searchByName" class="form-control mr-sm-2" type="search" placeholder="Search"
                     aria-label="Search">
@@ -139,8 +178,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Email</th>
-                    <!-- <th scope="col">First_name</th>
-                    <th scope="col">Last_name</th> -->
                     <th scope="col">Fullname</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Birthday</th>
@@ -148,17 +185,13 @@
                     <th scope="col">Create_date</th>
                     <th scope="col">Is_display</th>
 
-                    <!-- <th scope="col" class="text-center">Create by</th>
-                    <th scope="col" class="text-center">Is display</th> -->
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="c in items | filter: searchByName|filter: selectedOption| limitTo: pager.size : pager.page">
+                <tr ng-repeat="c in items | filter: searchByName|filter: selectedOption| limitTo: pager.size : pager.size*pager.page ">
                     <th scope="row">{{$index + 1}}</th>
                     <td class="text-center">{{c.email}}</td>
-                    <!-- <td class="text-center">{{c.firstName}}</td>
-                    <td class="text-center">{{c.lastName}}</td> -->
                     <td class="text-center">{{c.fullname}}</td>
                     <td class="text-center">{{c.gender?'Male':'Female'}}</td>
                     <td class="text-center">{{c.birthday | date:'dd-MM-yyyy'}}</td>
@@ -166,8 +199,8 @@
                     <td class="text-center">{{c.createDate | date:'dd-MM-yyyy'}}</td>
                     <td class="text-center">{{c.isDisplay?'Yes':'No'}}</td>
                     <td class="text-end">
-                        <button ng-click="customer.edit(c)"><i class="far fa-edit"></i></button> -
-                        <button ng-click="customer.clickDelete(c)" data-toggle="modal" data-target="#exampleModal"><i
+                        <button class="btn btn-success mb-2" ng-click="customer.edit(c)"><i class="far fa-edit"></i></button> -
+                        <button class="btn btn-warning" ng-click="customer.clickDelete(c)" data-toggle="modal" data-target="#exampleModal"><i
                                 class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>

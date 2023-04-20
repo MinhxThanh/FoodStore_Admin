@@ -19,21 +19,43 @@
         <hr>
       </div>
 
-      <div class="mb-3 row mt-5">
+      <form class="mb-3 row mt-5" name="formVal">
         <div class="col-8">
           <div class="mb-3">
             <label>Name</label>
             <input type="text" ng-model="form.name" class="form-control" id="exampleFormControlInput1"
-              placeholder="Name">
+              placeholder="Name" name="name" ng-minlength="4" ng-maxlength="100"
+              ng-required="true">
+
+
+              
+              <span class="text-danger  ml-3" ng-show="formVal.name.$error.required"> Please enter name!</span>
+              <span class="text-danger  ml-3" ng-show="formVal.name.$error.minlength">words must be more than 4</span>
+              <span class="text-danger  ml-3" ng-show="formVal.name.$error.maxlength">words must be less than
+                  100</span>
           </div>
           <div class="mb-3">
             <label>Price (VND)</label>
-            <input type="number" ng-model="form.price" class="form-control" id="exampleFormControlInput1"
+            <input type="number" ng-model="form.price" class="form-control" id="exampleFormControlInput1" name="price" ng-min="1000"  ng-required="true" 
               placeholder="Price">
+
+              <span class="text-danger  ml-3" ng-show="formVal.price.$error.required">
+                Please enter price!
+            </span>
+            <span class="text-danger  ml-3" ng-show="formVal.price.$error.min">
+              Price more than 1000!
+          </span>
           </div>
           <div class="mb-3">
             <label>Description</label>
-            <textarea id="foodDescription"></textarea>
+            <textarea id="foodDescription"name="Description" ></textarea>
+        <!-- ng-required="true" ng-minlength="4" ng-maxlength="1000" -->
+            
+              
+            <!-- <span class="text-danger  ml-3" ng-show="formVal.Description.$error.required"> Please enter name!</span>
+            <span class="text-danger  ml-3" ng-show="formVal.Description.$error.minlength">words must be more than 4</span>
+            <span class="text-danger  ml-3" ng-show="formVal.Description.$error.maxlength">words must be less than
+                1000</span> -->
           </div>
         </div>
         <div class="col-4">
@@ -72,7 +94,7 @@
             <i class="fas fa-list"></i> Add Categories
           </button>
         </div>
-      </div>
+      </form>
       <hr>
       <div class="my-lg-4">
         <div class="text-muted text-center">
