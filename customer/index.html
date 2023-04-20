@@ -180,8 +180,6 @@
                     <th scope="col">Email</th>
                     <th scope="col">Fullname</th>
                     <th scope="col">Gender</th>
-                    <th scope="col">Birthday</th>
-                    <th scope="col">Status</th>
                     <th scope="col">Create_date</th>
                     <th scope="col">Is_display</th>
 
@@ -194,8 +192,6 @@
                     <td class="text-center">{{c.email}}</td>
                     <td class="text-center">{{c.fullname}}</td>
                     <td class="text-center">{{c.gender?'Male':'Female'}}</td>
-                    <td class="text-center">{{c.birthday | date:'dd-MM-yyyy'}}</td>
-                    <td class="text-center">{{c.status}}</td>
                     <td class="text-center">{{c.createDate | date:'dd-MM-yyyy'}}</td>
                     <td class="text-center">{{c.isDisplay?'Yes':'No'}}</td>
                     <td class="text-end">
