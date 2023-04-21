@@ -1,4 +1,4 @@
-app.controller('userEdit', function ($scope, $http, $window) {
+app.controller('user-controller', function ($scope, $http, $window) {
     $scope.form = {};
     $scope.user = {};
         $scope.profile = [];
