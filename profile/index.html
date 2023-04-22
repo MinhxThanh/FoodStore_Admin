@@ -409,97 +409,76 @@
                     </div>
                     {{user.username}} |
                     {{user.email}}
+
+                    <div class="ml-5">
+                        <span ng-if="user.display == true" class="badge badge-success px-2 mt-2 d-block w-50">Active</span>
+                        <span ng-if="user.display == false" class="badge badge-danger px-2 mt-2 d-block w-50">Inactive</span>
+                    </div>
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
                     <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span
                                 class="label label-warning pull-right r-activity">9</span></a></li>
-                    <li><button ng-click="update()"> <i class="fa fa-edit"></i> Edit profile</button></li>
+                    <li class="col-12 text-center mt-3"><button ng-click="update()" class="btn btn-outline-success px-5"> <i class="fa fa-edit"></i> Edit profile</button></li>
                 </ul>
             </div>
         </div>
         <div class="profile-info col-md-9">
-            <div class="panel">
+            <div class="panel mb-3">
                 <form>
-                    <textarea placeholder="Whats in your mind today?" rows="2"
+                    <textarea ng-model="user.slogan" placeholder="Whats in your mind today?" rows="2"
                         class="form-control input-lg p-text-area"></textarea>
                 </form>
-                <footer class="panel-footer">
-                    <button class="btn btn-warning pull-right">Post</button>
-                    <ul class="nav nav-pills">
-                        <li>
-                            <a href="#"><i class="fa fa-map-marker"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-camera"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class=" fa fa-film"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-microphone"></i></a>
-                        </li>
-                    </ul>
-                </footer>
             </div>
             <div class="panel">
-                <div class="bio-graph-heading">
-                    Aliquam ac magna metus. Nam sed arcu non tellus fringilla fringilla ut vel ispum. Aliquam ac magna
-                    metus.
+                <div class="bio-graph-heading mb-3">
+                    <span ng-if="user.slogan == null" class="">Start a new Slogan for your shop now!</span>
+                    <span ng-if="user.slogan != null" class="">{{user.slogan}}</span>
                 </div>
                 <div class="panel-body bio-graph-info">
-                    <h1>Bio Graph</h1>
+                    <h1>User Info</h1>
                     <div class="row">
                         <div class="bio-row">
-                            <p class="d-flex"><span>Create By </span>: {{user.createBy}}
+                            <p class="d-flex"><span>Create Date </span>: <span class="ml-4 ">{{user.createDate}}</span>
                             </p>
                         </div>
+                        
                         <div class="bio-row">
-                            <p class="d-flex"><span>Create Date </span>: {{user.createDate}}
-                            </p>
-                        </div>
-                        <div class="bio-row">
-                            <p class="d-flex"><span>Create Date </span>: {{user.status}}
-                            </p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Display </span>: {{user.display}}</p>
-                        </div>
-                        <div class="bio-row">
-                            <p class="d-flex"><span>Remember Token </span>: {{user.rememberToken}}</p>
-                        </div>
-                        <div class="bio-row">
-                            <p class="d-flex"><span>Full Name </span>: <input ng-model="user.fullname" type="text"
-                                    class="p-1">
+                            <p class="d-flex"><span>Full Name </span>: <input ng-model="user.fullname" type="text" class="ml-4 form-control-sm p-1">
                             </p>
                         </div>
 
                         <div class="bio-row">
-                            <p><span>Password</span>: <input ng-model="user.password" type="password" class="p-1"></p>
+                            <p><span>Password</span>: <input ng-model="user.password" type="password" class="p-1 ml-4 form-control-sm"></p>
+                        </div>
+                
+                        <div class="bio-row">
+                            <p><span>Phone </span>: <input ng-model="user.phone" type="text" class="p-1 ml-4 form-control-sm"></p>
                         </div>
                         <div class="bio-row">
-                            <p><span>Gender </span>: <div class="form-check form-check-inline">
-                                    <label class="form-check-label mr-3" for="inlineRadio1">Is Display</label>
-                                    <input ng-model="user.gender" ng-value="true" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio1" value="option1" checked>
-                                    <label class="form-check-label" for="inlineRadio1">Yes</label>
-                                    <div class="form-check form-check-inline">
-                                        <input ng-model="user.gender" ng-value="false" class="form-check-input"
-                                            type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">No</label>
-                                    </div>
-                                </div>
+                            <p><span>Birthday </span>: <input ng-model="user.birthday" type="date" class="p-1 ml-4 form-control-sm"></p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Address </span>: <input ng-model="user.address" type="text" class="p-1 ml-4 form-control-sm"></p>
+                        </div>
+                        <div class="bio-row">
+                            <p class="d-flex">
+                                <span>City Province </span>:
+                                <select ng-model="user.cityProvince" class="form-control-sm ml-4 mt-n2">
+                                    <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
+                                    <option value="TP Hà Nội">TP Hà Nội</option>
+                                    <option value="TP Hải Phòng">TP Hải Phòng</option>
+                                    <option value="TP Đà Nẵng">TP Đà Nẵng</option>
+                                    <option value="TP Cần Thơ">TP Cần Thơ</option>
+                                </select>
                             </p>
                         </div>
                         <div class="bio-row">
-                            <p><span>Phone </span>: <input ng-model="user.phone" type="text" class="p-1"></p>
+                            <p><span>Open Time </span>: <input ng-model="user.openTime" type="text" class="p-1 ml-4 form-control-sm"></p>
                         </div>
                         <div class="bio-row">
-                            <p><span>Birthday </span>: <input ng-model="user.birthday" type="text" class="p-1"></p>
-                        </div>
-                        <div class="bio-row">
-                            <p><span>Address </span>: <input ng-model="user.address" type="text" class="p-1"></p>
+                            <p><span>Cost Restaurant </span>: <input ng-model="user.costRestaurant" type="text" class="p-1 ml-4 form-control-sm"></p>
                         </div>
                     </div>
                 </div>
@@ -528,6 +507,27 @@
 
 
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Notification -->
+<div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+            <img src="/img/logo.png" class="rounded mr-2" alt="logo" width="30%">
+            <strong class="mr-auto">Notification SUNFOOD</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            <div class="alert alert-success" role="alert" ng-if="message != ''">
+                {{message}}
+            </div>
+            <div class="alert alert-danger" role="alert" ng-if="error != ''">
+                {{error}}
             </div>
         </div>
     </div>

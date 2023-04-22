@@ -48,10 +48,19 @@ app.controller('order-controller', function($scope, $http, $window, $route){
         if(accessToken == null) {
             location.href = "#!/security/login"
         }
+
+        let email = sessionStorage.getItem('email')
+        let admin = sessionStorage.getItem('admin')
+        if (admin == 'false') {
+            $http.get(`http://localhost:8080/rest/order/findAllOrderByUserEmail/${email}`).then(resp => {
+                $scope.order = resp.data
+            })
+        } else {
+            $http.get(`http://localhost:8080/rest/order/findAll`).then(resp => {
+                $scope.order = resp.data
+            })
+        }
         
-        $http.get(`http://localhost:8080/rest/order/findAll`).then(resp => {
-            $scope.order = resp.data
-        })
         $http.get(`http://localhost:8080/rest/paymentmethod/findAll`).then(resp => {
             $scope.paymentmethod = resp.data
         })
