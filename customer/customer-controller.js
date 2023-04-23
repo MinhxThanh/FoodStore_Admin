@@ -145,5 +145,29 @@ app.controller('customer-controller', function ($scope, $http, $window) {
 
     }
     $scope.initialize()
+    $scope.exportCustomer = function(){
+        var wb = XLSX.utils.table_to_book(document.getElementById('exportCustomer'), {sheet:"Sheet JS"})
+        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'array'})
+
+        saveAs(new Blob([wbout], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"}), "Customers.xlsx")
+    }
+    $scope.exportPdfCustomer = function(){
+        // element.querySelectorAll('*').forEach(el => {
+        //     el.style.fontFamily = 'Arial';
+        //     el.style.fontSize = '12px';
+        // }) 
+        const element = document.getElementById('exportCustomer');
+        html2pdf()
+        .from(element)
+        .set({
+            margin: [0.5, 0.5],
+            pagebreak: {
+            mode: ['avoid-all']
+            },
+            filename: 'Customer.pdf',
+            image: { type: 'jpeg', quality: 0.98 }
+        })
+        .save();
+    }
 })
 

@@ -1,4 +1,9 @@
-
+<style>
+    .overflow-y-auto {
+   max-height: 500px;
+   overflow-y: auto;
+}
+</style>
 <div class="row border">
 	<div class="col-8">
 			<input ng-model="searchByName" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -39,6 +44,68 @@
 			<th scope="col">Create By</th>
 			<th scope="col">
 				<a class="btn btn-primary" href="/#!/createDiscount">Create</a>
+
+				<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+				<i class="fa fa-file" aria-hidden="true"></i>
+			</button>
+			
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Hãy click vào biểu tượng Excel hoặc PDF nếu muốn lưu file</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+						<button ng-click="exportDiscount()" type="button" class="btn btn-success">
+							<i class="fa fa-file-excel fa-2x" aria-hidden="true"></i>
+						</button>
+
+						<button class="btn btn-warning mb-2" type="button" value="Export to Excel" id="btnexport" ng-click="exportPdfDiscount()">
+							<i class="fa fa-file-pdf fa-2x" aria-hidden="true"></i>
+						  </button>
+
+						  <div class="overflow-y-auto">
+						<table class="table" id="exportDiscount" style="color:black;font-size:15px">
+							<thead>
+								<tr>
+									<th colspan="14" style="color:red;text-align: center;font-size:28px">DISCOUNT</th>
+								</tr>
+							  <tr>
+								<th scope="col">Name</th>
+								<th scope="col">Percent Discount</th>
+								<th scope="col" colspan="2">Create Day</th>
+								<th scope="col" colspan="2">Start Day</th>
+								<th scope="col" colspan="2">End Day</th>
+								<th scope="col" colspan="2">Display</th>
+								<th scope="col" colspan="2">Create By</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr ng-repeat="dis in items">
+								<th scope="row">{{dis.name}} </th>
+								<td>{{dis.percentDiscount}} </td>
+								<td colspan="2">{{dis.createDate | date: 'dd/MM/yyyy'}} </td>
+								<td colspan="2">{{dis.startDate | date: 'dd/MM/yyyy'}} </td>
+								<td colspan="2">{{dis.endDate | date: 'dd/MM/yyyy'}} </td>
+								<td colspan="2">{{dis.display ? 'Hoạt động':'Hủy'}} </td>
+								<td colspan="2">{{dis.user.username}} </td>
+							  </tr>
+							</tbody>
+						  </table>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				</div>
+			</div>
 			</th>
 		  </tr>
 		</thead>

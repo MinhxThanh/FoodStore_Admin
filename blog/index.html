@@ -148,7 +148,68 @@
                         <th scope="col">Is Display</th>
                         <!-- <th scope="col" class="text-center">Create by</th>
                         <th scope="col" class="text-center">Is display</th> -->
-                        <th scope="col"></th>
+                        <th scope="col">
+
+                            <!------------- ------------------------------------------ -->
+                                                      <!-- Button trigger modal -->
+                                                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+                                                          <i class="fa fa-file" aria-hidden="true"></i>
+                                                      </button>
+                                                      
+                                                      <!-- Modal -->
+                                                      <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                          <div class="modal-dialog modal-lg">
+                                                          <div class="modal-content">
+                                                              <div class="modal-header">
+                                                              <h5 class="modal-title" id="exampleModalLabel">Hãy click biểu tượng Excel hoặc PDF nếu muốn lưu file</h5>
+                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                              </button>
+                                                              </div>
+                                                              <div class="modal-body">
+                                                                  <button ng-click="exportBlog()" type="button" class="btn btn-success">
+                                                                      <i class="fa fa-file-excel fa-2x" aria-hidden="true"></i>
+                                                                  </button>
+                          
+                                                                  <button class="btn btn-warning mb-2" type="button" value="Export to Excel" id="btnexport" ng-click="exportPdfBlog()">
+                                                                      <i class="fa fa-file-pdf fa-2x" aria-hidden="true"></i>
+                                                                    </button>
+                                                                  <table class="table" id="exportBlog" style="color:black">
+                                                                      <thead>
+                                                                          <tr>
+                                                                              <th scope="col" colspan="13" style="color:red;text-align: center;font-size: 28px;">Blogs</th>
+                                                                          </tr>
+                                                                        <tr>
+                                                                          <th>ID</th>
+                                                                          <th scope="col" colspan="2">Title</th>
+                                                                          <th scope="col" colspan="2">Create Day</th>
+                                                                          <th scope="col" colspan="2">View Count</th>
+                                                                          <th scope="col" colspan="2">Status</th>
+                                                                          <th scope="col" colspan="2">Create By</th>
+                                                                          <th scope="col" colspan="2">Is Display</th>
+                                                                        </tr>
+                                                                      </thead>
+                                                                      <tbody>
+                                                                        <tr ng-repeat="blog in items">
+                                                                          <th scope="row">{{$index +1}} </th>
+                                                                          <td colspan="2">{{blog.title}} </td>
+                                                                          <td colspan="2">{{blog.createDate | date: 'dd/MM/yyyy'}} </td>
+                                                                          <td colspan="2">{{blog.viewCount}} </td>
+                                                                          <td colspan="2">{{blog.status == 1 ? 'Hoạt động':'Hủy'}} </td>
+                                                                          <td colspan="2">{{blog.user.username}} </td>
+                                                                          <td colspan="2">{{blog.isDisplay ? 'Hoạt động':'Hủy'}} </td>
+                                                                        </tr>
+                                                                      </tbody>
+                                                                    </table>
+                                                              </div>
+                                                              <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              </div>
+                                                          </div>
+                                                          </div>
+                                                      </div>
+                          
+                                                  </th>
                     </tr>
                 </thead>
                 <tbody>

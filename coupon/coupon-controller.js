@@ -160,7 +160,7 @@ app.controller('coupon-controller', function ($scope, $http, $window, $route) {
         //         $scope.customerCoupon.customer = resp.data
         // })
         $http.get(`http://localhost:8080/rest/customerCoupon/getAll`).then(resp => {
-            $scope.customerCoupon.customerCoupon = resp.data
+            $scope.customerCoupon = resp.data
         })
     }
     $scope.initialize()
@@ -214,5 +214,45 @@ app.controller('coupon-controller', function ($scope, $http, $window, $route) {
     }
     $scope.load = function () {
         $route.reload();
+    }
+    
+    $scope.isDisabledupdate = true	
+    $scope.excelCoupons = function(){	
+        var wb = XLSX.utils.table_to_book(document.getElementById('export'), {sheet:"Sheet JS"})	
+        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'array'})	
+        saveAs(new Blob([wbout], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"}), "coupons.xlsx")	
+    }	
+    $scope.excelCustomerCoupon = function(){	
+        var wb = XLSX.utils.table_to_book(document.getElementById('exportCustomerCoupon'), {sheet:"Sheet JS"})	
+        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'array'})	
+        saveAs(new Blob([wbout], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"}), "CustomerCoupon.xlsx")	
+    }	
+    $scope.exportPdfCustomerCoupon = function(){	
+        const element = document.getElementById('exportCustomerCoupon');	
+        html2pdf()	
+        .from(element)	
+        .set({	
+            margin: [0.5, 0.5],	
+            pagebreak: {	
+            mode: ['avoid-all']	
+            },	
+            filename: 'CustomerCoupon.pdf',	
+            image: { type: 'jpeg', quality: 0.98 }	
+        })	
+        .save();	
+    }	
+    $scope.exportPdfCoupon = function(){	
+        const element = document.getElementById('export');	
+        html2pdf()	
+        .from(element)	
+        .set({	
+            margin: [0.5, 0.5],	
+            pagebreak: {	
+            mode: ['avoid-all']	
+            },	
+            filename: 'Coupons.pdf',	
+            image: { type: 'jpeg', quality: 0.98 }	
+        })	
+        .save();	
     }
 })

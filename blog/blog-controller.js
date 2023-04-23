@@ -263,5 +263,28 @@ app.controller('blog-controller', function ($scope, $http, $window) {
             toolbar: "bold italic strikethrough link numlist bullist blockquote emoticons image"
         });
     }
+    $scope.isDisabledupdate = true
+    $scope.exportBlog = function(){
+         // chuyển đổi dữ liệu dạng bảng sang dạng book
+         var wb = XLSX.utils.table_to_book(document.getElementById('exportBlog'), {sheet:"Sheet JS"})
+        // chuyển một mảng byte của file excel 
+        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'array'})
+
+        saveAs(new Blob([wbout], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"}), "Blogs.xlsx")
+    }
     $scope.initialize()
+    $scope.exportPdfBlog = function(){
+        const element = document.getElementById('exportBlog');
+        html2pdf()
+        .from(element)
+        .set({
+            margin: [0.5, 0.5],
+            pagebreak: {
+            mode: ['avoid-all']
+            },
+            filename: 'Blogs.pdf',
+            image: { type: 'jpeg', quality: 0.98 }
+        })
+        .save();
+    }
 })

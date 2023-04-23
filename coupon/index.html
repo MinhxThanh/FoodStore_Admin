@@ -1,3 +1,9 @@
+<style>	
+    .overflow-y-auto {	
+   max-height: 500px;	
+   overflow-y: auto;	
+}	
+</style>
 <div class="row mt-5">
     <div class="left_body col-lg-4 col-sm-12 border rounded p-3">
         <h2 class="text-center my-3">Coupon Management</h2>
@@ -156,6 +162,17 @@
                     aria-label="Search">
             </div>
 
+            <div class="col-4">	
+                <!-- ng-options="i as i.id for i in items"	
+            ng-init="discountSelected = items[0]" 	
+            ng-options="i as i.id for i in items"	
+            -->	
+                <select class="custom-select" ng-model="selectedId" ng-options="i as i.id for i in items">	
+                    <option ng-value="">all</option>	
+                    <!-- <option ng-repeat="i in items" ng-value="i.id"> {{i.title}}</option> -->	
+                </select>	
+            </div>
+
         </div>
 
         <table class="table table-striped table-hover">
@@ -168,7 +185,129 @@
                     <th scope="col">End day</th>
                     <th scope="col" class="text-center">Create by</th>
                     <th scope="col" class="text-center">Is display</th>
-                    <th scope="col"></th>
+                    <th scope="col">
+                        	
+                            <!-- Button trigger modal coupons -->	
+                            <button type="button" class="btn btn-info mb-2" data-toggle="modal" data-target="#exampleModal">	
+                                Coupons	
+                            </button>	
+                                
+                            <!-- Modal -->	
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">	
+                                <div class="modal-dialog modal-xl">	
+                                <div class="modal-content">	
+                                    <div class="modal-header">	
+                                    <h5 class="modal-title" id="exampleModalLabel">Hãy click vào biểu tượng Excel hoặc PDF nếu bạn muốn tải về</h5>                                	
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">	
+                                        <span aria-hidden="true">&times;</span>	
+                                    </button>
+                                </div>	
+                                <div class="modal-body">	
+                                    <button ng-click="excelCoupons()" type="button" class="btn btn-success" >	
+                                        <i class="fa fa-file-excel fa-2x" aria-hidden="true"></i>	
+                                    </button>	
+                                    	
+                                    <button class="btn btn-warning mb-2" type="button" value="Export to Excel" id="btnexport" ng-click="exportPdfCoupon()">	
+                                        <i class="fa fa-file-pdf fa-2x" aria-hidden="true"></i>	
+                                      </button>	
+                                    <div class="overflow-y-auto">	
+                                    <table class="table"id="export" style="color:black">	
+                                        <thead>	
+                                            <tr>	
+                                                <th scope="col" colspan="17" style="color:red;font-size:28px;text-align:center">Coupons</th>	
+                                            </tr>	
+                                          <tr>	
+                                            <th scope="col">ID</th>	
+                                            <th scope="col" colspan="2">Name</th>	
+                                            <th scope="col" colspan="2">User Limit</th>	
+                                            <th scope="col" colspan="2">Percent Coupon</th>
+                                            <th scope="col" colspan="2">Money Coupon</th>	
+                                            <th scope="col" colspan="2">Start Day</th>	
+                                            <th scope="col" colspan="2">End Day</th>	
+                                            <th scope="col" colspan="2">Create By</th>	
+                                            <th scope="col" colspan="2">Is Display</th>	
+                                          </tr>	
+                                        </thead>	
+                                        <tbody>	
+                                          <tr ng-repeat="coupon in items">	
+                                            <th scope="row">{{coupon.id}} </th>	
+                                            <td colspan="2">{{coupon.name}} </td>	
+                                            <td colspan="2">{{coupon.userLimit}} </td>	
+                                            <td colspan="2">{{coupon.percentCoupon}} </td>	
+                                            <th colspan="2">{{coupon.amountMoneyCoupon}} </th>	
+                                            <td colspan="2">{{coupon.startDate | date:'dd/MM/yyyy'}} </td>	
+                                            <td colspan="2">{{coupon.endDate | date:'dd/MM/yyyy'}} </td>
+                                            <td colspan="2">{{coupon.user.username}} </td>	
+                                            <td colspan="2">{{coupon.isDisplay?'Yes':'No'}} </td>	
+                                          </tr>	
+                                        </tbody>	
+                                      </table>	
+                                    </div>	
+                                </div>	
+                                <div class="modal-footer">	
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
+                                </div>	
+                            </div>	
+                            </div>	
+                        </div>	
+                        <!-- Button trigger modal -->	
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal3">	
+                            Customer Coupon	
+                        </button>	
+                        	
+                        <!-- Modal -->	
+                        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">	
+                            <div class="modal-dialog modal-lg">	
+                            <div class="modal-content">	
+                                <div class="modal-header">	
+                                <h5 class="modal-title" id="exampleModalLabel">Hãy click vào biểu tượng Excel hoặc PDF nếu muốn lưu file</h5>	
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">	
+                                    <span aria-hidden="true">&times;</span>	
+                                </button>	
+                                </div>	
+                                <div class="modal-body">	
+                                    <button ng-click="excelCustomerCoupon()" type="button" class="btn btn-success" >	
+                                        <i class="fa fa-file-excel fa-2x" aria-hidden="true"></i>	
+                                    </button>	
+                                    <button class="btn btn-warning mb-2" type="button" value="Export to Excel" id="btnexport" ng-click="exportPdfCustomerCoupon()">	
+                                        <i class="fa fa-file-pdf fa-2x" aria-hidden="true"></i>	
+                                      </button>	
+                                    <div class="overflow-y-auto">	
+                                        <table class="table" id="exportCustomerCoupon" style="color:black">	
+                                            <thead>	
+                                                <tr>
+                                                    <th scope="col" colspan="12" style="color:red;font-size:28px;text-align:center">Customer Coupon</th>	
+                                                </tr>	
+                                              <tr>	
+                                                <th scope="col">ID</th>	
+                                                <th scope="col" colspan="3">Customer Email</th>	
+                                                <th scope="col" colspan="2">Coupon ID</th>	
+                                                <th scope="col" colspan="2">Coupon Name</th>	
+                                                <th scope="col" colspan="2">Create Day</th>	
+                                                <th scope="col" colspan="2">Status</th>	
+                                              </tr>	
+                                            </thead>	
+                                            <tbody>	
+                                              <tr ng-repeat="cusC in customerCoupon">	
+                                                <th scope="row">{{cusC.id}} </th>	
+                                                <td colspan="3">{{cusC.customer.email}} </td>	
+                                                <td colspan="2">{{cusC.coupon.id}} </td>	
+                                                <td colspan="2">{{cusC.coupon.name}} </td>	
+                                                <td colspan="2">{{cusC.createDate | date: 'dd/MM/yyyy'}} </td>	
+                                                <td colspan="2">{{cusC.status == 1 ? 'Hoạt động':'Hủy'}} </td>	
+                                              </tr>
+                                            </tbody>	
+                                        </table>	
+                                  </div>	
+                              </div>	
+                              <div class="modal-footer">	
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
+                              </div>	
+                          </div>	
+                          </div>	
+                      </div>	
+                  </th>
+
                 </tr>
             </thead>
             <tbody>

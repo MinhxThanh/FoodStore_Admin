@@ -157,5 +157,39 @@ app.controller('category-controller', function ($scope, $http, $window) {
 
     }
     $scope.initialize()
+
+    $scope.isDisabledupdate = true
+    
+    $scope.exportData = function () {
+
+        // var blob = new Blob([document.getElementById('export').innerHTML], {
+        //     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+        // })
+        // saveAs(blob, "Employeereport.xls")
+
+        // sử dụng XLSX.utils.table_to_book() để chuyển đổi dữ liệu bảng sang định dạng book và 
+        // sử dụng XLSX.write() để tạo một mảng byte của file Excel. Cuối cùng, 
+        // chúng tôi sử dụng thư viện saveAs để tạo và tải xuống file Excel
+
+        var wb = XLSX.utils.table_to_book(document.getElementById('export'), {sheet:"Sheet JS"})
+        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'array'})
+
+        saveAs(new Blob([wbout], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"}), "Categories.xlsx")
+    }
+
+    $scope.exportPdf = function(){
+        const element = document.getElementById('export');
+        html2pdf()
+        .from(element)
+        .set({
+            margin: [35, 35],
+            pagebreak: {
+            mode: ['avoid-all']
+            },
+            filename: 'Categories.pdf',
+            image: { type: 'jpeg', quality: 0.98 }
+        })
+        .save();
+    }
 })
 

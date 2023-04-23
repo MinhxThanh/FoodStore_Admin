@@ -287,4 +287,25 @@ app.controller('foods-controller', function ($scope, $http, $window, $route, $lo
     }
 
     $scope.initialize()
+    $scope.isDisabledupdate = true
+    $scope.exportFood = function(){
+        var wb = XLSX.utils.table_to_book(document.getElementById('exportFood'), {sheet:"Sheet JS"})
+        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'array'})
+
+        saveAs(new Blob([wbout], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"}), "Foods.xlsx")
+    }
+    $scope.exportPdfFood = function(){
+        const element = document.getElementById('exportFood');
+        html2pdf()
+        .from(element)
+        .set({
+            margin: [3, 3],
+            pagebreak: {
+            mode: ['avoid-all']
+            },
+            filename: 'Foods.pdf',
+            image: { type: 'jpeg', quality: 0.98 }
+        })
+        .save();
+    }
 })

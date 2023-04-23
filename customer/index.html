@@ -1,3 +1,9 @@
+<style>
+    .overflow-y-auto {
+   max-height: 500px;
+   overflow-y: auto;
+}
+</style>
 <div class="row mt-5">
     <div class="left_body col-lg-4 col-sm-12 border rounded p-3">
         <h2 class="text-center my-3">Customer Management</h2>
@@ -183,7 +189,70 @@
                     <th scope="col">Create_date</th>
                     <th scope="col">Is_display</th>
 
-                    <th scope="col"></th>
+                    <th scope="col">
+
+                        <!-- ----------------------------------- -->
+                                    <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Hãy click biểu tượng Excel hoặc PDF khi muốn lưu file</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <button ng-click="exportCustomer()" type="button" class="btn btn-success">
+                                                <i class="fa fa-file-excel fa-2x" aria-hidden="true"></i>
+                                            </button>
+                
+                                            <button class="btn btn-warning mb-2" type="button" value="Export to Excel" ng-click="exportPdfCustomer()">
+                                                <i class="fa fa-file-pdf fa-2x" aria-hidden="true"></i>
+                                              </button>
+                                        <div class="overflow-y-auto">
+                                            <table class="table" id="exportCustomer" style="font-size:12px;color:black" >
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" colspan="16" style="color: red;font-size:28px;text-align: center;">Customers</th>
+                                                    </tr>
+                                                  <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col" colspan="3">Email</th>
+                                                    <th scope="col" colspan="2">Fullname</th>
+                                                    <th scope="col" colspan="2">Gender</th>
+                                                    <th scope="col" colspan="2">Birthday</th>
+                                                    <th scope="col" colspan="2">Create Day</th>
+                                                    <th scope="col" colspan="2">Is Display</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr ng-repeat="customer in items">
+                                                    <th scope="row" >{{$index +1}} </th>
+                                                    <td colspan="3">{{customer.email}} </td>
+                                                    <td colspan="2">{{customer.fullname}} </td>
+                                                    <td colspan="2">{{customer.gender ? 'Male':'Female'}} </td>
+                                                    <td colspan="2">{{customer.birthday | date: 'dd/MM/yyyy'}} </td>
+                                                    <td colspan="2">{{customer.createDate}} </td>
+                                                    <td colspan="2">{{customer.display ? 'Hủy':'Hoạt động'}} </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                
+                                    </th>
                 </tr>
             </thead>
             <tbody>

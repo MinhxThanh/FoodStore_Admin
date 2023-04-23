@@ -1,3 +1,9 @@
+<style>
+    .overflow-y-auto {
+   max-height: 500px;
+   overflow-y: auto;
+}
+</style>
 <div class="row mt-5">
     <div class="left_body col-lg-4 col-sm-12 border rounded p-3">
         <h2 class="text-center my-3">Categories Management</h2>
@@ -87,7 +93,65 @@
                     <th scope="col">Name</th>
                     <th scope="col" class="text-center">Create by</th>
                     <th scope="col" class="text-center">Is display</th>
-                    <th scope="col"></th>
+                    <th scope="col">
+
+                        <!-- Phần tử nút mở modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+    <i class="fa fa-file" aria-hidden="true"></i>
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Hãy click vào biểu tượng Excel hoặc PDF nếu bạn muốn tải về </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="overflow-y-auto">
+              <!-- Nội dung của bạn ở đây -->
+              <!-- <button class="btn btn-primary" accept=".xlsx,.csv" type="button" value="Export to Excel" id="btnexport" ng-click="exportData()" >
+                  <i class="fa fa-file-excel fa-2x" aria-hidden="true"></i>
+              </button> -->
+              <button class="btn btn-success mb-2" type="button" value="Export to Excel" id="btnexport" ng-click="exportData()">
+                  <i class="fa fa-file-excel fa-2x" aria-hidden="true"></i>
+              </button>
+  
+              <button class="btn btn-warning mb-2" type="button" value="Export to Excel" id="btnexport" ng-click="exportPdf()">
+                <i class="fa fa-file-pdf fa-2x" aria-hidden="true"></i>
+              </button>
+  
+              <table class="table" id="export" style="color:black">
+                  <thead>
+                    <tr>
+                      <th scope="col" colspan="7" style="color: red; font-size:28px;text-align:center">Categories</th>
+                    </tr>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col" colspan="2">Name</th>
+                      <th scope="col" colspan="2">Create By</th>
+                      <th scope="col" colspan="2">Is Display</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in items">
+                      <th scope="row">{{item.id}} </th>
+                      <td colspan="2">{{item.name}} </td>
+                      <td colspan="2">{{item.user.username}} </td>
+                      <td colspan="2">{{item.isDisplay?'Hủy':'Hoạt động'}} </td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+                    </th>
                 </tr>
             </thead>
             <tbody>

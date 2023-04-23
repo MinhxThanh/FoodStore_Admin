@@ -406,4 +406,25 @@ app.controller('discount-controller', function ($scope, $http, $window, $route) 
 
         }
     }
+    $scope.isDisabledupdate = true
+    $scope.exportDiscount = function(){
+        var wb = XLSX.utils.table_to_book(document.getElementById('exportDiscount'), {sheet:"Sheet JS"})
+        var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'array'})
+
+        saveAs(new Blob([wbout], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"}), "Discounts.xlsx")
+    }
+    $scope.exportPdfDiscount = function(){
+        const element = document.getElementById('exportDiscount');
+        html2pdf()
+        .from(element)
+        .set({
+            margin: [0.5, 0.5],
+            pagebreak: {
+            mode: ['avoid-all']
+            },
+            filename: 'Discounts.pdf',
+            image: { type: 'jpeg', quality: 0.98 }
+        })
+        .save();
+    }
 })
