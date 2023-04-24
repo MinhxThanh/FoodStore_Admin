@@ -179,7 +179,6 @@ app.controller('discount-controller', function ($scope, $http, $window, $route) 
             display = 'false'
             $http.put(`http://localhost:8080/rest/discount/display/${display}/${discount.id}`, discount).then(resp => {
                 console.log("Display Discount false ok")
-                $scope.load()
             })
 
         }
@@ -187,7 +186,6 @@ app.controller('discount-controller', function ($scope, $http, $window, $route) 
             display = 'true'
             $http.put(`http://localhost:8080/rest/discount/display/${display}/${discount.id}`, discount).then(resp => {
                 console.log("Display Discount true ok")
-                $scope.load()
             })
         }
     }
