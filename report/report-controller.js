@@ -88,7 +88,7 @@ app.controller('report-controller', function ($scope, $http, $window) {
             }
           }
           //mảng kết quả của report 3( doanh thu sản phẩm)
-          console.log(report2)
+          // console.log(report2)
 
 
           //vẽ bảng report3
@@ -189,7 +189,8 @@ app.controller('report-controller', function ($scope, $http, $window) {
           };
 
           var chart = new google.visualization.AreaChart(document.getElementById('chart_div1'));
-
+          var formatter3 = new google.visualization.DateFormat({ pattern: "MM / yyyy" });
+          formatter3.format(data, 0);
           chart.draw(data, options);
           //load table doanh thu
           google.charts.load('current', { 'packages': ['table'] });
@@ -303,7 +304,7 @@ app.controller('report-controller', function ($scope, $http, $window) {
             'containerId': 'chart_div',
             'options': {
               'width': 1200,
-              'height': 500,
+              'height': 600,
               'pieSliceText': 'value',
               'legend': 'right'
             }
