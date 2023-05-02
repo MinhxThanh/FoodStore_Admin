@@ -89,7 +89,7 @@ app.controller('blog-controller', function ($scope, $http, $window) {
         grant_cate(item) {
             $http.post('http://localhost:8080/rest/categoryBlog/create', item).then(resp => {
                 this.categoryFood.push(resp.data)
-                $scope.message = "Give authority success!"
+                $scope.message = "Add category success!"
                 $scope.blog.liveToastBtn()
             }).catch(err => {
                 console.log("Error", err)

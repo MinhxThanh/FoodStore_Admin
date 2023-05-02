@@ -77,33 +77,60 @@ app.controller('category-controller', function ($scope, $http, $window) {
     $scope.pager = {
         page: 0,
         size: 10,
-        get count(){
+        get count() {
             return Math.ceil(1.0 * $scope.items.length / this.size)
         },
-        get length(){
+        get length() {
             return $scope.items.length
         },
-        first(){
+        first() {
             this.page = 0
         },
-        last(){
-            this.page = this.count - 1
+        prev() {
+            this.page--
+            if (this.page < 0)
+                this.last()
         },
         next() {
-            this.incrementLimit(true)
+            this.page++
+            if (this.page >= this.count)
+                this.first()
         },
-        prev() {
-            this.incrementLimit(false)
-        },
-        incrementLimit(up) {
-            if (up) {
-              (this.page <= ($scope.items.length - this.size)) ? this.page += 10: this.page = 0;
-            } else {
-              this.page > 10 ? this.page -= 10 : this.page = 0;
-        
-            }
+        last() {
+            this.page = this.count - 1
         }
     }
+
+    // $scope.pager = {
+    //     page: 0,
+    //     size: 10,
+    //     get count(){
+    //         return Math.ceil(1.0 * $scope.items.length / this.size)
+    //     },
+    //     get length(){
+    //         return $scope.items.length
+    //     },
+    //     first(){
+    //         this.page = 0
+    //     },
+    //     last(){
+    //         this.page = this.count - 1
+    //     },
+    //     next() {
+    //         this.incrementLimit(true)
+    //     },
+    //     prev() {
+    //         this.incrementLimit(false)
+    //     },
+    //     incrementLimit(up) {
+    //         if (up) {
+    //           (this.page <= ($scope.items.length - this.size)) ? this.page += 10: this.page = 0;
+    //         } else {
+    //           this.page > 10 ? this.page -= 10 : this.page = 0;
+        
+    //         }
+    //     }
+    // }
 
     $scope.imageUpload = function (event) {
         var files = event.target.files;

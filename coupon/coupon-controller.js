@@ -37,7 +37,7 @@ app.controller('coupon-controller', function ($scope, $http, $window, $route) {
                 $scope.items[index] = item
                 this.reset()
                 $scope.message = "Update coupon successfully!"
-                $window.location.reset()
+                // $window.location.reset()
             }).catch(err => $scope.error = "Error coupon category!")
             this.liveToastBtn()
         },

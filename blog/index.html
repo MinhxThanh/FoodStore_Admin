@@ -49,7 +49,7 @@
                         <label for="viewCount" class="form-label">View Count </label>
                         <span class="form-control">{{form.viewCount}}</span>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" style="display: none;">
                         <label for="status" class="form-label">Status</label>
                         <span class="form-control">{{form.status}}</span>
                         <!-- <input ng-model="form.status" class="form-control" id="status" ng-value="1"
@@ -143,7 +143,6 @@
                         <th scope="col">Title</th>
                         <th scope="col">Create Date</th>
                         <th scope="col">View Count</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Create By</th>
                         <th scope="col">Is Display</th>
                         <!-- <th scope="col" class="text-center">Create by</th>
@@ -223,9 +222,7 @@
                         <td class="text-center">{{c.createDate | date:'dd-MM-yyyy'}}</td>
     
                         <td class="text-center">{{c.viewCount}}</td>
-    
-                        <td class="text-center">{{c.status }}</td>
-    
+        
                         <td class="text-center">{{c.user.username}}</td>
     
                         <td class="text-center">{{c.isDisplay?'Yes':'No'}}</td>
@@ -274,7 +271,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="cate in categoryFood.categories ">
-                    <th scope="row">{{cate.name}}</th>
+                    <th scope="row" class="text-uppercase">{{cate.name}}</th>
                     <td class="text-center">
                         <input ng-checked="categoryFood.cate_of(cate, form)" ng-click="categoryFood.cate_changed(cate, form)" type="checkbox">
                     </td>

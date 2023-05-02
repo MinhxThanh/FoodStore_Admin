@@ -110,10 +110,17 @@ app.controller('review-controller', function ($scope, $http, $window) {
             location.href = "#!/security/login"
         }
 
-        $http.get(`http://localhost:8080/rest/review/getAll`).then(resp => {
-            $scope.items = resp.data
-        })
-
+        let email = sessionStorage.getItem('email')
+        let admin = sessionStorage.getItem('admin')
+        if (admin == 'false') {
+            $http.get(`http://localhost:8080/rest/review/findAllByUserEmail/${email}`).then(resp => {
+                $scope.items = resp.data
+            })
+        } else {
+            $http.get(`http://localhost:8080/rest/review/getAll`).then(resp => {
+                $scope.items = resp.data
+            })
+        }
 
     }
     $scope.initialize()
